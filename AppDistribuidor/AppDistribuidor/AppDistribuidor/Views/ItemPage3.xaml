@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppDistribuidor.Views.ItemPage3"
+             Title="Gastos"
+             xmlns:local="clr-namespace:AppDistribuidor.ViewModels"
+             xmlns:model="clr-namespace:AppDistribuidor.Models"
+             x:Name="BrowseItemsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text=""
+                     Command="{Binding AddProductoCommand}" />
+    </ContentPage.ToolbarItems>
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    
+    <StackLayout>
+      
+        <RefreshView x:DataType="local:ItemsViewModel"
+                     Command="{Binding LoadProductosCommand}"
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="ItemsListView"
+                            ItemsSource="{Binding Productos}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10"
+                                     x:DataType="model:Item">
+                            <Label Text="{Binding Text}"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemTextStyle}"
+                                   FontSize="16" />
+                            <Label Text="{Binding Description}"
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ProductoTapped}"
+                                                      CommandParameter="{Binding .}"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+      
+    </StackLayout>
+-->
+
+
+
+    <Grid BackgroundColor="#1465bb"
+          Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Frame Grid.Row="0" CornerRadius="0"
+               OutlineColor="#1465bb"
+               BackgroundColor="#1465bb"
+               Padding="5">
+            <StackLayout Orientation="Horizontal"
+                         BackgroundColor="Transparent">
+                <Label Text="#"
+                       FontSize="15"
+                       TextColor="White"
+                       TranslationX="5"  />
+                <Label Text="Gasto"
+                       FontSize="18"
+                       TextColor="White"
+                       TranslationX="35" />
+                <Label Text="Precio"
+                       FontSize="17" 
+                       TextColor="White"
+                       TranslationX="150" />
+                <Label Text="Cantidad"
+                       FontSize="17"
+                       TextColor="White"
+                       TranslationX="160" />
+                <Label Text="Borrar"
+                       FontSize="18"
+                       TextColor="White"
+                       HorizontalOptions="EndAndExpand" />
+
+            </StackLayout>
+        </Frame>
+
+
+        <RefreshView Grid.Row="1"
+                     x:DataType="local:GastoViewModel"    Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="ItemsListView"
+                          
+                            ItemsSource="{Binding Items}"
+                            SelectionMode="None" 
+                            BackgroundColor="#1465bb">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <Frame Opacity="0.7"  
+                               CornerRadius="15"
+                               OutlineColor="#003785"
+                               BackgroundColor="#003785"
+                                   Margin="2,5,2,5"
+                                   Padding="7"
+                             >
+                                <StackLayout    
+                                    Padding="0"
+                                    x:DataType="model:EGasto"
+                                     Orientation="Horizontal">
+                                    <Label Text="{Binding Cont}" 
+                            LineBreakMode="NoWrap" 
+                           
+                            FontSize="16" FontAttributes="Bold"
+                              TextColor="Wheat" 
+                              />
+                                    <Label Text="{Binding NombreTipoGasto}" 
+                            LineBreakMode="TailTruncation"   WidthRequest="150"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="15" FontAttributes="Bold"
+                              TextColor="White"  TranslationX="15"
+                              />
+                                    <Label Text="{Binding Precio}" 
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="15"  FontAttributes="Bold"
+                                       TextColor="White"
+                                       TranslationX="60"
+                               />
+                                    <Label Text="{Binding Cantidad}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="15" TranslationX="110"
+                              TextColor="White" FontAttributes="Bold"
+                              />
+                                    <Button  
+                                        x:Name="Borrar"
+                                        ImageSource="https://i.ibb.co/4RTRttK/dele.png"
+                                        BorderColor="Transparent"
+                                        BorderWidth="1"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="Transparent"
+                                        BorderRadius="10"
+                                        TextColor="White"
+                                        HorizontalOptions="EndAndExpand"
+                                        WidthRequest="30"
+                                        HeightRequest="30"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:GastoViewModel}}, Path=ItemTappedd}"
+                                            CommandParameter="{Binding .}" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="8"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:GastoViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <Button Grid.Row="1"
+                Text=""
+                ImageSource="https://i.ibb.co/rffFHtq/add2.png"
+                BorderColor="#2196f3"
+                BorderWidth="1"
+                FontAttributes="Bold"
+                BackgroundColor="#2196f3"
+                BorderRadius="35"
+                TextColor="#2196f3"
+                HorizontalOptions="End"
+                WidthRequest="70"
+                HeightRequest="70"
+                Command="{Binding AddItemCommand}"
+                Margin="0,0,20,22"
+                VerticalOptions="End" />
+    </Grid>
+</ContentPage>

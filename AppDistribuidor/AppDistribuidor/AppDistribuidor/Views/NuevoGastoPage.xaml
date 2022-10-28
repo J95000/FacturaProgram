@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppDistribuidor.Views.NuevoGastoPage"
+              Title="New Item"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="#1465bb">
+    
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="3"
+                     Padding="15"
+                     BackgroundColor="#1465bb">
+            
+            
+            <Label Text="Gasto:"
+                   FontSize="Medium"
+                   TextColor="White"/>
+            <Picker x:Name="DdlstGasto"
+                    Title="Seleccionar gasto"
+                    TextColor="#b9ffff"
+                    TitleColor="#C1DFF7"
+                    SelectedIndexChanged="DdlstGasto_SelectedIndexChanged" />
+            <Label x:Name="TxtTipo" 
+                   Text="{Binding TipoGasto, Mode=TwoWay}"
+                    IsVisible="false"/>
+
+            
+            
+            <Label Text="Precio"
+                   FontSize="Medium"
+                   TextColor="White" />
+            <Entry Text="{Binding Precio, Mode=TwoWay}"
+                   TextColor="#b9ffff"
+                   FontSize="Medium"
+                   Placeholder="Precio"
+                   PlaceholderColor="#C1DFF7"/>
+
+          
+            
+            
+            <Label Text="Cantidad"
+                   FontSize="Medium"
+                   TextColor="White" />
+            <Entry Text="{Binding Cantidad, Mode=TwoWay}"
+                   TextColor="#b9ffff"
+                   FontSize="Medium"
+                   Placeholder="Cantidad"
+                   PlaceholderColor="#C1DFF7"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancelar"
+                        CornerRadius="8" TextColor="White"
+                        Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Guardar"
+                        CornerRadius="8"
+                        TextColor="White"
+                        Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

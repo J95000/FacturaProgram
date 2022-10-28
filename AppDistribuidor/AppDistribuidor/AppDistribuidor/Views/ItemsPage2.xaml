@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppDistribuidor.Views.ItemsPage2"
+             Title="Prestamos"
+             xmlns:local="clr-namespace:AppDistribuidor.ViewModels"
+             xmlns:model="clr-namespace:AppDistribuidor.Models"
+             x:DataType="local:ItemsViewModelPrestamo"
+             x:Name="BrowseItemsPage2">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Borrar Todo"
+                     Command="{Binding BorrarTodoCommand}" />
+    </ContentPage.ToolbarItems>
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+    <Grid BackgroundColor="#1465bb"
+          Padding="9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+        <StackLayout Grid.Row="0" HeightRequest="200">
+        <Label Text="Cliente"
+               FontAttributes="Bold" TextColor="White"/>
+        <SearchBar x:Name="busca" Text="{Binding NombreCliente}"
+                   Placeholder="Buscar nombre cliente"
+                   TextChanged="SearchBar_TextChanged"   TextColor="Black"
+                       PlaceholderColor="Silver" FontSize="21"/>
+            <ListView x:Name="searchResults" x:DataType="local:ItemsViewModelPrestamo"  ItemsSource="{Binding Clientess}"
+                  IsVisible="False"  Margin="0,2,0,0"
+                  CachingStrategy="RecycleElement"
+                  ItemTapped="searchResults_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+               
+                            <ViewCell>
+
+                                <StackLayout HorizontalOptions="FillAndExpand"
+                    Margin="0"
+                    Padding="0"
+                    Spacing="0"
+                    VerticalOptions="Fill"  x:DataType="model:EClienteNombres">
+
+
+                                    <Label 
+                    BackgroundColor="#2196f3"
+                        FontSize="Medium"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Start"
+                        Margin="1" 
+                                    
+                        Text="{Binding NombreCompleto}" 
+                        TextColor="Black"  
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Start"/>
+                                </StackLayout>
+
+                            </ViewCell>
+                    </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </StackLayout>
+        <Frame Grid.Row="1"
+               CornerRadius="0"
+               OutlineColor="#1465bb"
+               BackgroundColor="#2196f3"
+               Padding="5">
+
+                <StackLayout Orientation="Horizontal"
+                         BackgroundColor="Transparent">
+
+                    <Label Text="Producto"
+                       FontSize="18"
+                       TextColor="White"
+                       TranslationX="15" />
+                    <Label Text="Cantidad"
+                       FontSize="18"
+                       TextColor="White"
+                       TranslationX="100" />
+                <Label Text="Precio"
+                       FontSize="18"
+                       TextColor="White"
+                       TranslationX="130" />
+                <Label Text="Borrar"
+                       FontSize="18"
+                       TextColor="White"
+                       HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </Frame>
+
+
+
+            <StackLayout Grid.Row="2">
+
+                <RefreshView x:DataType="local:ItemsViewModelPrestamo"
+                     Command="{Binding LoadProductosCommand}"
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                    <CollectionView x:Name="ItemsListView"
+                            ItemsSource="{Binding Productos}"
+                            SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <ContentView>
+                                    <Frame Opacity="0.7"
+                                   CornerRadius="15"
+                                   OutlineColor="#003785"
+                                   BackgroundColor="#003785"
+                                   Margin="2,5,2,5"
+                                   Padding="7">
+                                        <StackLayout Padding="0"
+                                                 Orientation="Horizontal"
+                                                 x:DataType="model:ProductoPrestamo">
+                                            <Label Text="{Binding NombreProducto}"
+                                               LineBreakMode="TailTruncation"
+                                               FontSize="14"
+                                               TextColor="White"
+                                                 WidthRequest="180"
+                                     />
+                                            <Label Text="{Binding Cantidad}"
+                                   LineBreakMode="NoWrap"
+                                               Style="{DynamicResource ListItemDetailTextStyle}"
+                                               FontSize="16"
+                                               TextColor="White"
+                                               TranslationX="50" />
+                                        <Label Text="{Binding Precio}"
+                                               LineBreakMode="NoWrap"
+                                               Style="{DynamicResource ListItemDetailTextStyle}"
+                                               FontSize="16"
+                                               TextColor="White"
+                                               TranslationX="110" />
+                                        <Button x:Name="Borrar"
+                                                ImageSource="https://i.ibb.co/4RTRttK/dele.png"
+                                                BorderColor="Transparent"
+                                                BorderWidth="1"
+                                                FontAttributes="Bold"
+                                                BackgroundColor="Transparent"
+                                                BorderRadius="10"
+                                                TextColor="White"
+                                                HorizontalOptions="EndAndExpand"
+                                                WidthRequest="30"
+                                                HeightRequest="30"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModelPrestamo}}, Path=ProductoEliminar}"
+                                                CommandParameter="{Binding .}" />
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer NumberOfTapsRequired="5"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModelPrestamo}}, Path=ProductoTapped}"
+                                                      CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </Frame>
+                                </ContentView>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            <Label Text="{Binding Total}"
+                   LineBreakMode="NoWrap"
+                   FontSize="16"
+                   x:Name="TxtTotal"
+                   TextColor="White"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+            <Button Text="GENERAR PRESTAMO"
+                    FontAttributes="Bold"
+                    BackgroundColor="#003785"
+                    BorderRadius="15"
+                    Clicked="Button_Clicked"
+                    TextColor="White"
+                    Margin="10,1,10,1"
+                    WidthRequest="220"
+                    HeightRequest="50"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand" />
+                <Button Grid.Row="0"
+                Text=""
+                    ImageSource="https://i.ibb.co/rffFHtq/add2.png"
+                BorderColor="#27AE61"
+                BorderWidth="1"
+               
+                FontAttributes="Bold"
+                BackgroundColor="#27AE61"
+                BorderRadius="35"
+                TextColor="White"
+                HorizontalOptions="End"
+                WidthRequest="70"
+                HeightRequest="70"
+                Margin="0,0,20,22"
+                    VerticalOptions="End"
+                    Command="{Binding AddProductoCommand}" />
+
+            </StackLayout>
+            <!-- LISTA DE PRODUCTOS FIN-->
+    </Grid>
+</ContentPage>
+

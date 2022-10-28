@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3307e821cd6b4016a86495167a555c39" Name="Diagram1" ZoomLevel="65">
+        <EntityTypeShape EntityType="aquacorpbddModel.Articulo" Width="1.5" PointX="8" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Calificacion" Width="1.5" PointX="8.25" PointY="40.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Cargo" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Categoria" Width="1.5" PointX="5.75" PointY="47.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.CategoriaCliente" Width="1.5" PointX="0.75" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Ciudad" Width="1.5" PointX="0.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Cliente" Width="1.5" PointX="3" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.ControlEntrada" Width="1.5" PointX="6" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.ControlSanitario" Width="1.5" PointX="6" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Conyugue" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Despido" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.DetalleMovimiento" Width="1.5" PointX="10.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Empleado" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.ExceptionLog" Width="1.5" PointX="6" PointY="43.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Existencia" Width="1.5" PointX="6" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Gasto" Width="1.5" PointX="11" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Habilidad" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Pago" Width="1.5" PointX="13.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Persona" Width="1.5" PointX="0.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.PrecioSugerido" Width="1.5" PointX="6" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.PuntoZona" Width="1.5" PointX="3" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.ReferenciaLaboral" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.ReferenciaPersonal" Width="1.5" PointX="5.25" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Usuario" Width="1.5" PointX="3.75" PointY="37.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Zona" Width="1.5" PointX="0.75" PointY="28.875" IsExpanded="true" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Articulo_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Articulo_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Calificacion_ControlSanitario" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Empleado_TipoEmpleado" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Cliente_CategoriaCliente" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Empleado_Ciudad" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Empleado_Ciudad1" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Cliente_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Cliente_Zona" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_ControlEntrada_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_ControlEntrada_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_ControlSanitario_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Conyugue_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Despido_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Empleado_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Habilidad_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_ReferenciaLaboral_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_ReferenciaPersonal_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Exception_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Existencia_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Existencia_Usuario2" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Gastos_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Gastos_Usuario1" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Pago_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="aquacorpbddModel.FK_PuntoZona_Zona" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="aquacorpbddModel.TipoGasto" Width="1.5" PointX="0.75" PointY="7" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Gasto_TipoGasto" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Producto" Width="1.5" PointX="0.75" PointY="12.5" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Saldo" Width="1.5" PointX="8.25" PointY="51.125" />
+        <AssociationConnector Association="aquacorpbddModel.FK_DetalleMovimiento_Producto" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Saldo_Empleado" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Stock_Producto" />
+        <AssociationConnector Association="aquacorpbddModel.FK_PrecioSugerido_Producto" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Movimiento" Width="1.5" PointX="8" PointY="29.375" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Movimiento_Cliente" />
+        <AssociationConnector Association="aquacorpbddModel.FK_DetalleMovimiento_Movimiento" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Movimiento_Usuario" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Pago_Movimiento" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Arqueo" Width="1.5" PointX="11" PointY="29.25" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Arqueo_Persona" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Arqueo_Usuario" />
+        <EntityTypeShape EntityType="aquacorpbddModel.UbicacionDistribuidor" Width="1.5" PointX="6" PointY="50.375" />
+        <AssociationConnector Association="aquacorpbddModel.FK_UbicacionDistribuidor_Usuario" />
+        <EntityTypeShape EntityType="aquacorpbddModel.ExistenciaMateriaPrima" Width="1.5" PointX="10.625" PointY="8.25" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Material" Width="1.5" PointX="13.625" PointY="29.75" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Produccion" Width="1.5" PointX="10.625" PointY="11.75" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Produccion_Producto" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Proveedor" Width="1.5" PointX="3" PointY="25.625" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Material_Proveedor" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Proveedor_Persona" />
+        <EntityTypeShape EntityType="aquacorpbddModel.MateriaPrima" Width="1.5" PointX="8.375" PointY="16.75" />
+        <AssociationConnector Association="aquacorpbddModel.FK_ExistenciaMateriaPrima_MateriaPrima" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Material_MateriaPrima" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Produccion_MateriaPrima" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Provision" Width="1.5" PointX="10.625" PointY="24.75" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Provision_MateriaPrima" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Provision_Proveedor" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

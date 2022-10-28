@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32510.428
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SWNegocioMovil", "SWNegocioMovil\", "{03A6E48F-55EA-4AE8-8559-91BCD70CE765}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_63372"
+		Debug.AspNetCompiler.PhysicalPath = "SWNegocioMovil\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63372\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_63372"
+		Release.AspNetCompiler.PhysicalPath = "SWNegocioMovil\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63372\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "63372"
+		SlnRelativePath = "SWNegocioMovil\"
+		DefaultWebSiteLanguage = "Visual C#"
+		StartServerOnDebug = "false"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03A6E48F-55EA-4AE8-8559-91BCD70CE765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A6E48F-55EA-4AE8-8559-91BCD70CE765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FE20598-11A6-4651-8611-E36A385AD37D}
+	EndGlobalSection
+EndGlobal

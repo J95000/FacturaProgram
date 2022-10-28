@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppDistribuidor.Views.AboutPage"
+             xmlns:vm="clr-namespace:AppDistribuidor.ViewModels"
+             Shell.PresentationMode="ModalAnimated"
+             Title="                   CLIENTES"  >
+    
+    <ContentPage.BindingContext>
+        <vm:FotoViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView BackgroundColor="#1465bb">
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         Orientation="Vertical"
+                         VerticalOptions="Start">
+            <Grid BackgroundColor="#1465bb"
+                 >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="260" />
+                 
+                  
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="*" />
+                
+                </Grid.ColumnDefinitions>
+                <Label x:Name="locatddionLabel"
+                       Text="      Nombres:"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       TextColor="White"
+                       FontSize="Micro"
+                       HorizontalOptions="Start"
+                       TranslationY="10"
+                       />
+                <Entry x:Name="TxtNombres"
+                       TextColor="White"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       WidthRequest="380"
+                       HeightRequest="50"
+                       PlaceholderColor="#73879D"
+                       Placeholder="Ingrese Nombres"></Entry>
+
+                <Label x:Name="locatdisdonLabel"
+                       Text="   Primer Ap.:"
+                       TextColor="White"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       FontSize="Micro"
+                       HorizontalOptions="Start" 
+                       TranslationY="10"/>
+                <Entry x:Name="TxtPrimerApellido"
+                       TextColor="White"
+                       WidthRequest="100"
+                       HeightRequest="50"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       PlaceholderColor="#73879D"
+                       Placeholder="Ingrese Primer Ap."></Entry>
+                
+                <Label  
+                       Text="Segundo Ap.:"
+                       TextColor="White"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       FontSize="Micro"
+                       HorizontalOptions="Start" 
+                       TranslationY="10"/>
+                <Entry x:Name="TxtSegundoApellido"
+                       TextColor="White"
+                       WidthRequest="100"
+                       HeightRequest="50"
+                       Grid.Row="3"
+                       Grid.Column="1"
+                       PlaceholderColor="#73879D"
+                       Placeholder="Ingrese Segundo Ap."></Entry>
+                <Label Text="      Dirección:"
+                       TextColor="White"
+                       Grid.Row="4"
+                       Grid.Column="0"
+                       FontSize="Micro"
+                       HorizontalOptions="Start" 
+                       TranslationY="10"/>
+                <Entry x:Name="TxtDireccion"
+                       TextColor="White"
+                       WidthRequest="100"
+                       HeightRequest="50"
+                       Grid.Row="4"
+                       Grid.Column="1"
+                       PlaceholderColor="#73879D"
+                       Placeholder="Ingrese Dirección"></Entry>
+                
+                
+                <Label Text="       Teléfono:"
+                       TextColor="White"
+                       Grid.Row="5"
+                       Grid.Column="0"
+                       FontSize="Micro"
+                       HorizontalOptions="Start" 
+                       TranslationY="10"/>
+                <Entry x:Name="TxtTelefono"
+                       TextColor="White"
+                       WidthRequest="100"
+                       HeightRequest="50"
+                       Grid.Row="5"
+                       Keyboard="Numeric"
+                       Grid.Column="1"
+                       PlaceholderColor="#73879D"
+                       Placeholder="Ingrese Teléfono"></Entry>
+                
+                
+                <Label Text=" Correo Elec.:"
+                       TextColor="White"
+                       Grid.Row="6"
+                       Grid.Column="0"
+                       FontSize="Micro"
+                       HorizontalOptions="Start" 
+                       TranslationY="10"/>
+                <Entry x:Name="TxtCorreo"
+                       TextColor="White"
+                       WidthRequest="100"
+                       HeightRequest="50"
+                       Keyboard="Email"
+                       Grid.Row="6"
+                       Grid.Column="1"
+                       PlaceholderColor="#73879D"
+                       Placeholder="Ingrese Correo Elec."></Entry>
+                
+                
+                
+                
+                <Label Text="   Categoria:"
+                       TextColor="White"
+                       Grid.Row="7"
+                       Grid.Column="0"
+                       FontSize="Micro"
+                       HorizontalOptions="Start"
+                       TranslationY="10" />
+          
+                    <Picker x:Name="DdlstCategoria"
+                        Grid.Column="1"
+                        TextColor="White"
+                        HeightRequest="50"
+                             FontSize="Body"
+                        Grid.Row="7"
+                        TitleColor="#73879D"
+                        Title="Seleccione categoria"
+                         />
+
+                <Label Text="           Zona:"
+                       TextColor="White"
+                       Grid.Row="8"
+                       Grid.Column="0"
+                       FontSize="Micro"
+                       HorizontalOptions="Start"
+                       TranslationY="10" />
+                <Picker x:Name="DdlstZona"
+                        Grid.Column="1"
+                        Grid.Row="8"
+                        TextColor="White"
+                         FontSize="Body"
+                        HeightRequest="50"
+                        TitleColor="#73879D"
+                        Title="Seleccione zona" />
+                <Label Text="  Fotografia:"
+                       TextColor="White"
+                       Grid.Row="10"
+                       Grid.Column="0"
+                       FontSize="Micro"
+                       HorizontalOptions="Start"
+                       TranslationY="10" />
+                <Button  x:Name="BtnCamara"
+                         Text="Activar Camara"
+                         Grid.Row="10"
+                         ImageSource="https://i.ibb.co/j8nWdHQ/Nuevo-proyecto.png"
+                         CornerRadius="10"
+                         Command="{Binding CapturarComando}"
+                         Grid.Column="1"
+                         HeightRequest="30"
+                         WidthRequest="30"
+                         FontSize="Micro"
+                         BackgroundColor="#043e80"
+                          />
+                <Image Source="{Binding Fotico}"
+                       x:Name="fotito"
+                       Grid.Row="11"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       ></Image>
+             
+              
+            </Grid>
+            <Button  x:Name="BtnRegistrar"
+                     Text="REGISTRAR"
+                     IsVisible="true"
+                     TextColor="White"
+                     FontSize="Body"
+                     Margin="40, 20,40,30"
+                     CornerRadius="10"
+                     Padding="10,10,10,10"
+                     VerticalOptions="CenterAndExpand"
+                     BackgroundColor="#043e80"
+                     Clicked="BtnRegistrar_Clicked" />
+            <Button  x:Name="BtnConectar"
+                     IsVisible="false"
+                     Text="Conectar"
+                     BackgroundColor="#0499d9"
+                     Clicked="BtnConectar_Clicked" />
+            <Button  x:Name="BtnInicio"
+                     Text="REGISTRAR"
+                     IsVisible="false"
+                     FontSize="Large"
+                     BackgroundColor="#0499d9"
+                     Clicked="Button_Clicked" />
+            <Button  x:Name="BtnNotificacion"
+                     Text="REGISTRAR"
+                     IsVisible="false"
+                     FontSize="Large"
+                     BackgroundColor="#0499d9"
+                     Clicked="BtnNotificacion_Clicked" />
+            <Label x:Name="locationLabel"
+                        
+                        />
+            
+        </StackLayout>
+        </ScrollView>
+
+
+</ContentPage>

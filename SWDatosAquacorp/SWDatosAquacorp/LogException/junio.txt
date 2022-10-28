@@ -1,0 +1,5 @@
+﻿
+20/06/2022 21:53:19|1|StringToNumber|La cadena de entrada no tiene el formato correcto.|   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Int32.Parse(String s)
+   en CPersona.Obtener_Ultimo_Id_Empleado() en c:\Users\Gamer\Desktop\OFFICIAL AQUACORP 2022\V2\QUENTA\SWDatosAquacorp\SWDatosAquacorp\App_Code\Controlador\CPersona.cs:línea 135

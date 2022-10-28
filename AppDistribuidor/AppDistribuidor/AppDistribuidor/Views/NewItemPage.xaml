@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppDistribuidor.Views.NewItemPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="Nuevo producto"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout Spacing="3"
+                     Padding="15"
+                     BackgroundColor="#1465bb">
+            <Label Text="Producto"
+                   FontSize="Medium"
+                   TextColor="White" />
+            <Picker x:Name="DdlstProducto"
+                    Title="Seleccionar producto"
+                    TextColor="#b9ffff"
+                    TitleColor="#C1DFF7"
+                    SelectedIndexChanged="DdlstProducto_SelectedIndexChanged" />
+            <Label x:Name="TxtProducto"
+                   Text="{Binding Producto, Mode=TwoWay}"
+                   IsVisible="false" />
+            <Label Text="Precio"
+                   FontSize="Medium"
+                   TextColor="White" />
+            <Picker x:Name="DdlstPrecio"
+                    Title="Seleccionar precio"
+                    TextColor="#b9ffff"
+                    TitleColor="#C1DFF7"
+                    SelectedIndexChanged="DdlstPrecio_SelectedIndexChanged" />
+            <Label x:Name="TxtPrecio"
+                   Text="{Binding Precio, Mode=TwoWay}"
+                   IsVisible="false" />
+            <Label x:Name="TxtIdProdu"
+                   Text="{Binding IdProdu, Mode=TwoWay}"
+                   IsVisible="false" />
+            <Label Text="Cantidad"
+                   FontSize="Medium"
+                   TextColor="White" />
+            <Entry Text="{Binding Cantidad, Mode=TwoWay}"
+                   FontSize="Medium"
+                   TextColor="#b9ffff"
+                   PlaceholderColor="#C1DFF7" />
+            <StackLayout Orientation="Horizontal">
+                <Button CornerRadius="8"
+                        TextColor="White"
+                        Text="Cancelar" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button  CornerRadius="8"
+                         TextColor="White"
+                         Text="Agregar" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

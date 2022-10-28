@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="EMovimientoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdCliente" type="xs:int" />
+      <xs:element minOccurs="0" name="IdMovimiento" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TipoMovimiento" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EMovimientoSimple" nillable="true" type="tns:EMovimientoSimple" />
+  <xs:complexType name="ArrayOfERepMovimientoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ERepMovimientoSimple" nillable="true" type="tns:ERepMovimientoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfERepMovimientoSimple" nillable="true" type="tns:ArrayOfERepMovimientoSimple" />
+  <xs:complexType name="ERepMovimientoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cliente" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaFinal" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaInicio" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Personal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tipo" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ERepMovimientoSimple" nillable="true" type="tns:ERepMovimientoSimple" />
+  <xs:complexType name="ArrayOfEArqueoMovimientoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EArqueoMovimientoSimple" nillable="true" type="tns:EArqueoMovimientoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEArqueoMovimientoSimple" nillable="true" type="tns:ArrayOfEArqueoMovimientoSimple" />
+  <xs:complexType name="EArqueoMovimientoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cont" type="xs:int" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdCliente" type="xs:int" />
+      <xs:element minOccurs="0" name="IdMovimiento" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="NombreCliente" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreUsuario" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoMovimiento" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EArqueoMovimientoSimple" nillable="true" type="tns:EArqueoMovimientoSimple" />
+  <xs:complexType name="ArrayOfEArqueoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EArqueoSimple" nillable="true" type="tns:EArqueoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEArqueoSimple" nillable="true" type="tns:ArrayOfEArqueoSimple" />
+  <xs:complexType name="EArqueoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="IdProducto" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EArqueoSimple" nillable="true" type="tns:EArqueoSimple" />
+  <xs:complexType name="EDetalleMovimientoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdDetalleMovimiento" type="xs:int" />
+      <xs:element minOccurs="0" name="IdMovimiento" type="xs:int" />
+      <xs:element minOccurs="0" name="IdProducto" type="xs:int" />
+      <xs:element minOccurs="0" name="PrecioUnitario" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EDetalleMovimientoSimple" nillable="true" type="tns:EDetalleMovimientoSimple" />
+  <xs:complexType name="ArrayOfEDetalleMovimientoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EDetalleMovimientoSimple" nillable="true" type="tns:EDetalleMovimientoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEDetalleMovimientoSimple" nillable="true" type="tns:ArrayOfEDetalleMovimientoSimple" />
+  <xs:complexType name="EProductoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Consumible" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FotoProducto" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="IdProducto" type="xs:int" />
+      <xs:element minOccurs="0" name="NombreProducto" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EProductoSimple" nillable="true" type="tns:EProductoSimple" />
+  <xs:complexType name="ArrayOfEProductoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EProductoSimple" nillable="true" type="tns:EProductoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEProductoSimple" nillable="true" type="tns:ArrayOfEProductoSimple" />
+  <xs:complexType name="EPrecioSugeridoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdPrecioSugerido" type="xs:int" />
+      <xs:element minOccurs="0" name="IdProducto" type="xs:int" />
+      <xs:element minOccurs="0" name="Precio" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EPrecioSugeridoSimple" nillable="true" type="tns:EPrecioSugeridoSimple" />
+  <xs:complexType name="ArrayOfEPrecioSugeridoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EPrecioSugeridoSimple" nillable="true" type="tns:EPrecioSugeridoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEPrecioSugeridoSimple" nillable="true" type="tns:ArrayOfEPrecioSugeridoSimple" />
+  <xs:complexType name="EControlSanitarioSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdControlSanitario" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EControlSanitarioSimple" nillable="true" type="tns:EControlSanitarioSimple" />
+  <xs:complexType name="ArrayOfEControlSanitarioSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EControlSanitarioSimple" nillable="true" type="tns:EControlSanitarioSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEControlSanitarioSimple" nillable="true" type="tns:ArrayOfEControlSanitarioSimple" />
+  <xs:complexType name="ArrayOfERepControlSanitarioSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ERepControlSanitarioSimple" nillable="true" type="tns:ERepControlSanitarioSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfERepControlSanitarioSimple" nillable="true" type="tns:ArrayOfERepControlSanitarioSimple" />
+  <xs:complexType name="ERepControlSanitarioSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Pregunta" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Puntaje" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ERepControlSanitarioSimple" nillable="true" type="tns:ERepControlSanitarioSimple" />
+  <xs:complexType name="ECalificacionSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdCalificacion" type="xs:int" />
+      <xs:element minOccurs="0" name="IdControlSanitario" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Pregunta" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Puntaje" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ECalificacionSimple" nillable="true" type="tns:ECalificacionSimple" />
+  <xs:complexType name="ArrayOfECalificacionSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ECalificacionSimple" nillable="true" type="tns:ECalificacionSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfECalificacionSimple" nillable="true" type="tns:ArrayOfECalificacionSimple" />
+  <xs:complexType name="EExistenciaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdExistencia" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPersona" type="xs:int" />
+      <xs:element minOccurs="0" name="IdProducto" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="TipoExistencia" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EExistenciaSimple" nillable="true" type="tns:EExistenciaSimple" />
+  <xs:complexType name="ArrayOfEExistenciaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EExistenciaSimple" nillable="true" type="tns:EExistenciaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEExistenciaSimple" nillable="true" type="tns:ArrayOfEExistenciaSimple" />
+  <xs:complexType name="ArrayOfERepExistenciaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ERepExistenciaSimple" nillable="true" type="tns:ERepExistenciaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfERepExistenciaSimple" nillable="true" type="tns:ArrayOfERepExistenciaSimple" />
+  <xs:complexType name="ERepExistenciaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaFinal" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaInicio" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NombrePersonal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Producto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tipo" type="xs:int" />
+      <xs:element minOccurs="0" name="TipoExistencia" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ERepExistenciaSimple" nillable="true" type="tns:ERepExistenciaSimple" />
+  <xs:complexType name="ArrayOfEArqueoExistenciaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EArqueoExistenciaSimple" nillable="true" type="tns:EArqueoExistenciaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEArqueoExistenciaSimple" nillable="true" type="tns:ArrayOfEArqueoExistenciaSimple" />
+  <xs:complexType name="EArqueoExistenciaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="Cont" type="xs:int" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdExistencia" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPersona" type="xs:int" />
+      <xs:element minOccurs="0" name="IdProducto" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="NombreCompletoPersonaRegistra" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreCompletoUsuarioValida" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreProducto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoExistencia" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EArqueoExistenciaSimple" nillable="true" type="tns:EArqueoExistenciaSimple" />
+  <xs:complexType name="EPagoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CantidadPago" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdMovimiento" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPago" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EPagoSimple" nillable="true" type="tns:EPagoSimple" />
+  <xs:complexType name="ArrayOfEPagoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EPagoSimple" nillable="true" type="tns:EPagoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEPagoSimple" nillable="true" type="tns:ArrayOfEPagoSimple" />
+  <xs:complexType name="ArrayOfERepDeudasSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ERepDeudasSimple" nillable="true" type="tns:ERepDeudasSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfERepDeudasSimple" nillable="true" type="tns:ArrayOfERepDeudasSimple" />
+  <xs:complexType name="ERepDeudasSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdMovimiento" type="xs:int" />
+      <xs:element minOccurs="0" name="NombrePersonal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pago" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Saldo" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Tipo" type="xs:int" />
+      <xs:element minOccurs="0" name="Total" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ERepDeudasSimple" nillable="true" type="tns:ERepDeudasSimple" />
+  <xs:complexType name="ArrayOfEArqueoPagoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EArqueoPagoSimple" nillable="true" type="tns:EArqueoPagoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEArqueoPagoSimple" nillable="true" type="tns:ArrayOfEArqueoPagoSimple" />
+  <xs:complexType name="EArqueoPagoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CantidadPago" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdPago" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EArqueoPagoSimple" nillable="true" type="tns:EArqueoPagoSimple" />
+  <xs:complexType name="ESaldoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdEmpleado" type="xs:int" />
+      <xs:element minOccurs="0" name="IdSaldo" type="xs:int" />
+      <xs:element minOccurs="0" name="Tipo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ESaldoSimple" nillable="true" type="tns:ESaldoSimple" />
+  <xs:complexType name="ArrayOfESaldoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ESaldoSimple" nillable="true" type="tns:ESaldoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfESaldoSimple" nillable="true" type="tns:ArrayOfESaldoSimple" />
+  <xs:complexType name="ArrayOfERepSaldoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ERepSaldoSimple" nillable="true" type="tns:ERepSaldoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfERepSaldoSimple" nillable="true" type="tns:ArrayOfERepSaldoSimple" />
+  <xs:complexType name="ERepSaldoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaFinal" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaInicio" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NombrePersonal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tipo" type="xs:int" />
+      <xs:element minOccurs="0" name="TipoMovimiento" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ERepSaldoSimple" nillable="true" type="tns:ERepSaldoSimple" />
+  <xs:complexType name="EArticuloSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contenido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdArticulo" type="xs:int" />
+      <xs:element minOccurs="0" name="IdCategoria" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Imagen" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Titulo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EArticuloSimple" nillable="true" type="tns:EArticuloSimple" />
+  <xs:complexType name="ArrayOfEArticuloSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EArticuloSimple" nillable="true" type="tns:EArticuloSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEArticuloSimple" nillable="true" type="tns:ArrayOfEArticuloSimple" />
+  <xs:complexType name="ECategoriaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdCategoria" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Imagen" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreCategoria" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ECategoriaSimple" nillable="true" type="tns:ECategoriaSimple" />
+  <xs:complexType name="ArrayOfECategoriaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ECategoriaSimple" nillable="true" type="tns:ECategoriaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfECategoriaSimple" nillable="true" type="tns:ArrayOfECategoriaSimple" />
+  <xs:complexType name="EArqueoTSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdArqueo" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPersona" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Ingreso" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OtroIngreso" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalEfectivo" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalGasto" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalIngreso" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EArqueoTSimple" nillable="true" type="tns:EArqueoTSimple" />
+  <xs:complexType name="ArrayOfEArqueoTSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EArqueoTSimple" nillable="true" type="tns:EArqueoTSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEArqueoTSimple" nillable="true" type="tns:ArrayOfEArqueoTSimple" />
+  <xs:complexType name="ArrayOfERepAsistenciaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ERepAsistenciaSimple" nillable="true" type="tns:ERepAsistenciaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfERepAsistenciaSimple" nillable="true" type="tns:ArrayOfERepAsistenciaSimple" />
+  <xs:complexType name="ERepAsistenciaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HoraEntrada" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HoraSalida" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Modificado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreCompleto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="num" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ERepAsistenciaSimple" nillable="true" type="tns:ERepAsistenciaSimple" />
+  <xs:complexType name="ArrayOfERepClientesZonaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ERepClientesZonaSimple" nillable="true" type="tns:ERepClientesZonaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfERepClientesZonaSimple" nillable="true" type="tns:ArrayOfERepClientesZonaSimple" />
+  <xs:complexType name="ERepClientesZonaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contrato" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Direccion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mapa" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreCompleto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreZona" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ERepClientesZonaSimple" nillable="true" type="tns:ERepClientesZonaSimple" />
+  <xs:complexType name="ArrayOfERepClientesCategoriaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ERepClientesCategoriaSimple" nillable="true" type="tns:ERepClientesCategoriaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfERepClientesCategoriaSimple" nillable="true" type="tns:ArrayOfERepClientesCategoriaSimple" />
+  <xs:complexType name="ERepClientesCategoriaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contrato" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Direccion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreCategoriaCliente" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreCompleto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="num" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ERepClientesCategoriaSimple" nillable="true" type="tns:ERepClientesCategoriaSimple" />
+  <xs:complexType name="EUbicacionSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Latitud" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Longitud" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NombreCelu" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EUbicacionSimple" nillable="true" type="tns:EUbicacionSimple" />
+  <xs:complexType name="EUbicacionDistribuidorSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdUbicacion" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Latitud" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Longitud" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NombreCompleto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreDispositivo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EUbicacionDistribuidorSimple" nillable="true" type="tns:EUbicacionDistribuidorSimple" />
+  <xs:complexType name="EPersonaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Direccion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdPersona" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombres" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimerApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SegundoApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EPersonaSimple" nillable="true" type="tns:EPersonaSimple" />
+  <xs:complexType name="ArrayOfEPersonaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EPersonaSimple" nillable="true" type="tns:EPersonaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEPersonaSimple" nillable="true" type="tns:ArrayOfEPersonaSimple" />
+  <xs:complexType name="ECargoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdCargo" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="NombreCargo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ECargoSimple" nillable="true" type="tns:ECargoSimple" />
+  <xs:complexType name="ArrayOfECargoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ECargoSimple" nillable="true" type="tns:ECargoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfECargoSimple" nillable="true" type="tns:ArrayOfECargoSimple" />
+  <xs:complexType name="EUsuarioSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contrasena" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EUsuarioSimple" nillable="true" type="tns:EUsuarioSimple" />
+  <xs:complexType name="ArrayOfEUsuarioSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EUsuarioSimple" nillable="true" type="tns:EUsuarioSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEUsuarioSimple" nillable="true" type="tns:ArrayOfEUsuarioSimple" />
+  <xs:complexType name="ECiudadSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdCiudad" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="NombreCiudad" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ECiudadSimple" nillable="true" type="tns:ECiudadSimple" />
+  <xs:complexType name="ArrayOfECiudadSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ECiudadSimple" nillable="true" type="tns:ECiudadSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfECiudadSimple" nillable="true" type="tns:ArrayOfECiudadSimple" />
+  <xs:complexType name="EEmpleadoSimple">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EPersonaSimple">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Ci" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ColegioUnidadEducativa" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EstadoCivil" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FechaInicioTrabajo" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="FechaNacimiento" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Fotografia" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="Garantia" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IdCargo" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="IdCiudad" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="IdEmpleado" type="xs:int" />
+          <xs:element minOccurs="0" name="LugarNacimiento" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="NombresMadre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NombresPadre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OcupacionMadre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OcupacionPadre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrimerApellidoMadre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrimerApellidoPadre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SegundoApellidoMadre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SegundoApellidoPadre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TelefonoRespaldo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UltimoCurso" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EEmpleadoSimple" nillable="true" type="tns:EEmpleadoSimple" />
+  <xs:complexType name="ArrayOfEEmpleadoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EEmpleadoSimple" nillable="true" type="tns:EEmpleadoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEEmpleadoSimple" nillable="true" type="tns:ArrayOfEEmpleadoSimple" />
+  <xs:complexType name="EReferenciaPersonalSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Direccion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdEmpleado" type="xs:int" />
+      <xs:element minOccurs="0" name="IdReferenciaPersonal" type="xs:int" />
+      <xs:element minOccurs="0" name="NombresFamiliar" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Parentesco" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimerApellidoFamiliar" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SegundoApellidoFamiliar" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EReferenciaPersonalSimple" nillable="true" type="tns:EReferenciaPersonalSimple" />
+  <xs:complexType name="ArrayOfEReferenciaPersonalSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EReferenciaPersonalSimple" nillable="true" type="tns:EReferenciaPersonalSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEReferenciaPersonalSimple" nillable="true" type="tns:ArrayOfEReferenciaPersonalSimple" />
+  <xs:complexType name="EReferenciaLaboralSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FuncionTrabajo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdEmpleado" type="xs:int" />
+      <xs:element minOccurs="0" name="IdReferenciaLaboral" type="xs:int" />
+      <xs:element minOccurs="0" name="NombreEmpresa" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombresJefe" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimerApellidoJefe" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SegundoApellidoJefe" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TiempoTrabajo" type="xs:unsignedByte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EReferenciaLaboralSimple" nillable="true" type="tns:EReferenciaLaboralSimple" />
+  <xs:complexType name="ArrayOfEReferenciaLaboralSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EReferenciaLaboralSimple" nillable="true" type="tns:EReferenciaLaboralSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEReferenciaLaboralSimple" nillable="true" type="tns:ArrayOfEReferenciaLaboralSimple" />
+  <xs:complexType name="EConyugueSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdConyugue" type="xs:int" />
+      <xs:element minOccurs="0" name="IdEmpleado" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombres" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumeroHijos" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="PrimerApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SegundoApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TelefonoRespaldo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EConyugueSimple" nillable="true" type="tns:EConyugueSimple" />
+  <xs:complexType name="ArrayOfEConyugueSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EConyugueSimple" nillable="true" type="tns:EConyugueSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEConyugueSimple" nillable="true" type="tns:ArrayOfEConyugueSimple" />
+  <xs:complexType name="EDespidoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaDespido" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdDespido" type="xs:int" />
+      <xs:element minOccurs="0" name="IdEmpleado" type="xs:int" />
+      <xs:element minOccurs="0" name="Motivo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EDespidoSimple" nillable="true" type="tns:EDespidoSimple" />
+  <xs:complexType name="ArrayOfEDespidoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EDespidoSimple" nillable="true" type="tns:EDespidoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEDespidoSimple" nillable="true" type="tns:ArrayOfEDespidoSimple" />
+  <xs:complexType name="EHabilidadSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Detalle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdEmpleado" type="xs:int" />
+      <xs:element minOccurs="0" name="IdHabilidad" type="xs:int" />
+      <xs:element minOccurs="0" name="TipoHabilidad" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EHabilidadSimple" nillable="true" type="tns:EHabilidadSimple" />
+  <xs:complexType name="ArrayOfEHabilidadSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EHabilidadSimple" nillable="true" type="tns:EHabilidadSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEHabilidadSimple" nillable="true" type="tns:ArrayOfEHabilidadSimple" />
+  <xs:complexType name="EProveedorSimple">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EPersonaSimple">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CatalogoDescripcion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IdProveedor" type="xs:int" />
+          <xs:element minOccurs="0" name="TelefonoRespaldo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EProveedorSimple" nillable="true" type="tns:EProveedorSimple" />
+  <xs:complexType name="ArrayOfEProveedorSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EProveedorSimple" nillable="true" type="tns:EProveedorSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEProveedorSimple" nillable="true" type="tns:ArrayOfEProveedorSimple" />
+  <xs:complexType name="EMaterialSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdMaterial" type="xs:int" />
+      <xs:element minOccurs="0" name="IdProveedor" type="xs:int" />
+      <xs:element minOccurs="0" name="NombreMaterial" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EMaterialSimple" nillable="true" type="tns:EMaterialSimple" />
+  <xs:complexType name="ArrayOfEMaterialSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EMaterialSimple" nillable="true" type="tns:EMaterialSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEMaterialSimple" nillable="true" type="tns:ArrayOfEMaterialSimple" />
+  <xs:complexType name="EClienteSimple">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EPersonaSimple">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Contrato" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FotoUbicacion" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="IdCategoriaCliente" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="IdCliente" type="xs:int" />
+          <xs:element minOccurs="0" name="IdZona" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="Latitud" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Longitud" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EClienteSimple" nillable="true" type="tns:EClienteSimple" />
+  <xs:complexType name="ArrayOfEClienteSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EClienteSimple" nillable="true" type="tns:EClienteSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEClienteSimple" nillable="true" type="tns:ArrayOfEClienteSimple" />
+  <xs:complexType name="ECategoriaClienteSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdCategoriaCliente" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="NombreCategoriaCliente" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ECategoriaClienteSimple" nillable="true" type="tns:ECategoriaClienteSimple" />
+  <xs:complexType name="ArrayOfECategoriaClienteSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ECategoriaClienteSimple" nillable="true" type="tns:ECategoriaClienteSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfECategoriaClienteSimple" nillable="true" type="tns:ArrayOfECategoriaClienteSimple" />
+  <xs:complexType name="EControlEntradaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaHoraEntrada" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaHoraSalida" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdControlEntrada" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPersona" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EControlEntradaSimple" nillable="true" type="tns:EControlEntradaSimple" />
+  <xs:complexType name="ArrayOfEControlEntradaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EControlEntradaSimple" nillable="true" type="tns:EControlEntradaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEControlEntradaSimple" nillable="true" type="tns:ArrayOfEControlEntradaSimple" />
+  <xs:complexType name="EZonaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdZona" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="NombreZona" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EZonaSimple" nillable="true" type="tns:EZonaSimple" />
+  <xs:complexType name="ArrayOfEZonaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EZonaSimple" nillable="true" type="tns:EZonaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEZonaSimple" nillable="true" type="tns:ArrayOfEZonaSimple" />
+  <xs:complexType name="EPuntoZonaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdPuntoZona" type="xs:int" />
+      <xs:element minOccurs="0" name="IdZona" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="LatitudZona" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LongitudZona" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EPuntoZonaSimple" nillable="true" type="tns:EPuntoZonaSimple" />
+  <xs:complexType name="ArrayOfEPuntoZonaSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EPuntoZonaSimple" nillable="true" type="tns:EPuntoZonaSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEPuntoZonaSimple" nillable="true" type="tns:ArrayOfEPuntoZonaSimple" />
+  <xs:complexType name="EExceptionSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExceptionMensaje" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdException" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Mensaje" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreMetodo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EExceptionSimple" nillable="true" type="tns:EExceptionSimple" />
+  <xs:complexType name="ArrayOfEExceptionSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EExceptionSimple" nillable="true" type="tns:EExceptionSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEExceptionSimple" nillable="true" type="tns:ArrayOfEExceptionSimple" />
+  <xs:complexType name="EGastoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdAprovador" type="xs:int" />
+      <xs:element minOccurs="0" name="IdGasto" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoGasto" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Precio" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EGastoSimple" nillable="true" type="tns:EGastoSimple" />
+  <xs:complexType name="ArrayOfEGastoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EGastoSimple" nillable="true" type="tns:EGastoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEGastoSimple" nillable="true" type="tns:ArrayOfEGastoSimple" />
+  <xs:complexType name="ArrayOfEArqueoGastoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EArqueoGastoSimple" nillable="true" type="tns:EArqueoGastoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEArqueoGastoSimple" nillable="true" type="tns:ArrayOfEArqueoGastoSimple" />
+  <xs:complexType name="EArqueoGastoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="Cont" type="xs:int" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdAprovador" type="xs:int" />
+      <xs:element minOccurs="0" name="IdGasto" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoGasto" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="NombreAprobador" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreTipoGasto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreUsuario" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Precio" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EArqueoGastoSimple" nillable="true" type="tns:EArqueoGastoSimple" />
+  <xs:complexType name="ETipoGastoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdTipoGasto" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="NombreTipoGasto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tipo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ETipoGastoSimple" nillable="true" type="tns:ETipoGastoSimple" />
+  <xs:complexType name="ArrayOfETipoGastoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ETipoGastoSimple" nillable="true" type="tns:ETipoGastoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfETipoGastoSimple" nillable="true" type="tns:ArrayOfETipoGastoSimple" />
+  <xs:complexType name="ArrayOfEMovimientoSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EMovimientoSimple" nillable="true" type="tns:EMovimientoSimple" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEMovimientoSimple" nillable="true" type="tns:ArrayOfEMovimientoSimple" />
+</xs:schema>

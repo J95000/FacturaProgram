@@ -266,6 +266,7 @@ namespace AppDistribuidor.Views
                                 //int idMovi = sWNegocioAquacorpClient.Obtener_Ultimo_IdMovimiento();
 
                                 var itt = _viewModel.Productos;
+                                var indice = 1;
                                 foreach (var item in itt)
                                 {
                                     EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
@@ -288,12 +289,18 @@ namespace AppDistribuidor.Views
                                     //  sWNegocioAquacorpClient.Insertar_DetalleMovimiento(eDetalleMovimientoCompleja);
                                     if (ress)
                                     {
-                                        await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
+                                        if(itt.Count == indice)
+                                        {
+                                            await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
+                                            byte[] pdf = _viewModel.GenerarPdf(eMovimientoCompleja, eDetalleMovimientoCompleja);
+                                            _viewModel.EnviarCorreo("axel20ayalam@gmail.com", "eddymartinez2022@gmail.com", pdf);
+                                        }
                                     }
                                     else
                                     {
                                         new Exception();
                                     }
+                                    indice++;
                                 }
 
 

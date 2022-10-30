@@ -269,7 +269,7 @@ namespace AppDistribuidor.ViewModels
                 PdfFont font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.HELVETICA);
 
                 //LOGO EMPRESA
-                ImageData imageData = ImageDataFactory.Create("https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg");
+                ImageData imageData = ImageDataFactory.Create("https://i.pinimg.com/564x/e6/2a/60/e62a60c30bfeca030d9fbaecf1b0bbca.jpg");
                 Image image = new Image(imageData);
 
                 //DATOS A MOSTRAR EN LA FACTURA
@@ -280,7 +280,7 @@ namespace AppDistribuidor.ViewModels
                 Paragraph codigoControl = new Paragraph("CÓDIGO DE CONTROL: "+codigoControlGenerado).SetFontSize(10);
                 
                 //LINE BREAK
-                Paragraph saltoLinea = new Paragraph(new Text("\n\n"));
+                Paragraph saltoLinea = new Paragraph(new Text("\n"));
                 
                 //CABECERA
                 float[] pointColumnWidths = { 80F, 150F, 200F, 150F };
@@ -342,7 +342,6 @@ namespace AppDistribuidor.ViewModels
                 document.Add(tablaArticulosVenta);
                 document.Add(saltoLinea);
                 document.Add(total);
-                document.Add(saltoLinea);
                 document.Add(totalEnLetras);
                 document.Add(saltoLinea);
                 document.Add(codigoControl);
@@ -361,9 +360,9 @@ namespace AppDistribuidor.ViewModels
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
             mail.From = new MailAddress(emisor);
             mail.To.Add(receptor);
-            mail.Subject = "Hello My Nigga";
-            mail.Body = "Gaaa";
-            mail.Attachments.Add(new Attachment(new MemoryStream(document), "statement.pdf", "application/pdf"));
+            mail.Subject = "Factura - San Antonio";
+            mail.Body = "Estimado cliente, a continuación se le adjunta la factura de la compra realizada.\nGracias por su preferencia.";
+            mail.Attachments.Add(new Attachment(new MemoryStream(document), "factura.pdf", "application/pdf"));
 
 
             SmtpServer.Port = 587;

@@ -274,10 +274,10 @@ namespace AppDistribuidor.ViewModels
 
                 //DATOS A MOSTRAR EN LA FACTURA
                 Paragraph datosEmpresa = new Paragraph("San Antonio\nCASA MATRIZ: Avenida Perú #349\nTeléfono: 44378234\nCochabamba - Bolivia").SetFontSize(9);
-                Paragraph datosFactura = new Paragraph("NIT: 7456347832\nNo FACTURA: 2361176\nNo AUTORIZACIÓN: 296401900006126\nFEC EMISIÓN: "+ eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(9);
-                Paragraph datosCliente = new Paragraph(" NOMBRE / RAZÓN SOCIAL: IRIARTE\n NIT/CI: 5748345").SetFontSize(10);
-                string codigoControlGenerado = CodigoControl.generateControlCode("29040011007","1503","4189179011",eMovimientoCompleja.FechaRegistro.ToString("yyyyMMdd"),"2500","9rCB7Sv4X29d)5k7N%3ab89p-3(5[A");
-                Paragraph codigoControl = new Paragraph("CÓDIGO DE CONTROL: "+codigoControlGenerado).SetFontSize(10);
+                Paragraph datosFactura = new Paragraph("NIT: 7456347832\nNo FACTURA: "+eMovimientoCompleja.NroMovimiento.ToString()+ "\nNo AUTORIZACIÓN: 296401900006126\nFEC EMISIÓN: " + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(9);
+                Paragraph datosCliente = new Paragraph(" NOMBRE / RAZÓN SOCIAL: "+eMovimientoCompleja.RazonSocial+"\n NIT/CI: "+eMovimientoCompleja.NitCi).SetFontSize(10);
+                
+                Paragraph codigoControl = new Paragraph("CÓDIGO DE CONTROL: "+eMovimientoCompleja.CodigoControl).SetFontSize(10);
                 
                 //LINE BREAK
                 Paragraph saltoLinea = new Paragraph(new Text("\n"));
@@ -310,26 +310,24 @@ namespace AppDistribuidor.ViewModels
                     tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph(indice.ToString())).SetBorder(Border.NO_BORDER).SetPadding(2).SetFontSize(10).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
                     tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph(item.NombreProducto).SetMarginLeft(10)).SetBorder(Border.NO_BORDER).SetFontSize(10).SetPadding(2));
                     tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph(item.Cantidad.ToString())).SetPadding(2).SetBorder(Border.NO_BORDER).SetFontSize(10).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
-                    tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph(item.Precio.ToString())).SetPadding(2).SetBorder(Border.NO_BORDER).SetFontSize(10).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
-                    tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph((item.Cantidad*item.Precio).ToString())).SetPadding(2).SetBorder(Border.NO_BORDER).SetFontSize(10).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT));
+                    tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph(item.Precio.ToString("0.00"))).SetPadding(2).SetBorder(Border.NO_BORDER).SetFontSize(10).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
+                    tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph((item.Cantidad*item.Precio).ToString("0.00"))).SetPadding(2).SetBorder(Border.NO_BORDER).SetFontSize(10).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT));
                     indice++;
                 }
                 
 
                 //TOTAL
-                Paragraph total = new Paragraph("Total: 16.00").SetFontSize(12).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
-                double totalNumeros = 3.20;
-                string totalNumeroALetras = NumeroALetras((decimal)totalNumeros);
+                Paragraph total = new Paragraph("TOTAL EN BOLIVIANOS: " +eMovimientoCompleja.PrecioTotal.ToString("0.00")).SetFontSize(11).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
+                string totalNumeroALetras = NumeroALetras(eMovimientoCompleja.PrecioTotal);
                 Paragraph totalEnLetras = new Paragraph("Son: " + totalNumeroALetras).SetFontSize(11);
 
 
                 //PIE
-                
-                string dataQR = "7456347832 | 2361176 | 296401900006126 | "+ eMovimientoCompleja.FechaRegistro.ToString("yyyyMMdd") + " | "+ codigoControlGenerado + " | 5748345";
+                string dataQR = "7456347832|"+eMovimientoCompleja.NroMovimiento+"|296401900006126|"+ eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy") + "|"+eMovimientoCompleja.PrecioTotal.ToString("0.00")+"|"+ eMovimientoCompleja.PrecioTotal.ToString("0.00")+"|"+ eMovimientoCompleja.CodigoControl + "|"+eMovimientoCompleja.NitCi+"|0|0|0|0";
                 byte[] qr = generaQR(dataQR);
                 ImageData imageDataQR = ImageDataFactory.Create(qr);
                 Image imageQR = new Image(imageDataQR).ScaleToFit(80f, 80f);
-
+                
                 Table tablaPie = new Table(2).UseAllAvailableWidth();
                 tablaPie.AddCell(new Cell().Add(imageQR)).SetPadding(2);
                 tablaPie.AddCell(new Cell().Add(new Paragraph("\"ESTA FACTURA CONTRIBUYE AL DESARROLLO DEL PAÍS, EL USO ÍLICITO DE ÉSTA SERÁ SANCIONADO DE ACUERDO A LA LEY\"\n" +

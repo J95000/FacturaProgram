@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Modelo;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Modelo;
 /// <summary>
 /// Descripción breve de CCliente
 /// </summary>
@@ -18,8 +16,21 @@ public class CCliente
         {
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
-                db.Proc_Persona_Cliente_I(eClienteSimple.Nombres, eClienteSimple.PrimerApellido, eClienteSimple.SegundoApellido, eClienteSimple.Telefono, eClienteSimple.Direccion, eClienteSimple.FechaRegistro, eClienteSimple.FechaModificacion, eClienteSimple.Estado, eClienteSimple.IdCategoriaCliente, eClienteSimple.CorreoElectronico, eClienteSimple.Latitud, eClienteSimple.Longitud, eClienteSimple.IdZona, eClienteSimple.FotoUbicacion, eClienteSimple.Contrato);
-
+                db.Proc_Persona_Cliente_I(
+                    eClienteSimple.Nombres,
+                    eClienteSimple.PrimerApellido,
+                    eClienteSimple.SegundoApellido,
+                    eClienteSimple.Telefono,
+                    eClienteSimple.FechaRegistro,
+                    eClienteSimple.FechaModificacion,
+                    eClienteSimple.Estado,
+                    eClienteSimple.RazonSocial,
+                    eClienteSimple.NitCi,
+                    eClienteSimple.CorreoElectronico,
+                    eClienteSimple.FotoUbicacion,
+                    eClienteSimple.Direccion,
+                    eClienteSimple.Latitud,
+                    eClienteSimple.Longitud);
             }
         }
         catch (Exception ex)
@@ -39,7 +50,20 @@ public class CCliente
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
 
-                db.Proc_Persona_Cliente_A(eClienteSimple.IdPersona, eClienteSimple.Nombres, eClienteSimple.PrimerApellido, eClienteSimple.SegundoApellido, eClienteSimple.Telefono, eClienteSimple.Direccion, eClienteSimple.FechaRegistro, eClienteSimple.FechaModificacion, eClienteSimple.Estado, eClienteSimple.IdCliente, eClienteSimple.IdCategoriaCliente, eClienteSimple.CorreoElectronico, eClienteSimple.Latitud, eClienteSimple.Longitud, eClienteSimple.IdZona, eClienteSimple.FotoUbicacion, eClienteSimple.Contrato);
+                db.Proc_Persona_Cliente_A(
+                    eClienteSimple.IdPersona,
+                    eClienteSimple.Nombres,
+                    eClienteSimple.PrimerApellido,
+                    eClienteSimple.SegundoApellido,
+                    eClienteSimple.Telefono,
+                    eClienteSimple.FechaRegistro,
+                    eClienteSimple.FechaModificacion,
+                    eClienteSimple.Estado,
+                    eClienteSimple.IdCliente,
+                    eClienteSimple.RazonSocial,
+                    eClienteSimple.NitCi,
+                    eClienteSimple.CorreoElectronico,
+                    eClienteSimple.FotoUbicacion);
             }
         }
         catch (Exception ex)

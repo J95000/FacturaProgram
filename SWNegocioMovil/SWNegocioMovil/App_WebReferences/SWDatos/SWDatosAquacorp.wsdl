@@ -7,6 +7,138 @@
       <xsd:import schemaLocation="http://www.swdatosaquacorp.somee.com/SWDatosAquacorp.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Ubicacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Ubicacion" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Ubicacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_UbicacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_UbicacionDistribuidor_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_UbicacionDistribuidor" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_UbicacionDistribuidor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_UbicacionDistribuidorResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_UbicacionDistribuidor_IdUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_UbicacionDistribuidor_IdUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_UbicacionDistribuidor_IdUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_UbicacionDistribuidor_IdUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Provision_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_Provision" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Provision_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_ProvisionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Provision_IdProvision_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Provision_IdProvision" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Provision_IdProvision_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Provision_IdProvisionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Provision_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Provision" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Provision_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_ProvisionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Exception_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Exception" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Exception_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_ExceptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Exception_Id_Exception_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Exception_Id_Exception" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Exception_Id_Exception_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Exception_Id_ExceptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Exception_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Exception" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Exception_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_ExceptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Gasto_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Gasto" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Gasto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_GastoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Gasto_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_Gasto" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Gasto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_GastoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Gasto_Id_Gasto_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Gasto_Id_Gasto" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Gasto_Id_Gasto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Gasto_Id_GastoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Gasto_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Gasto" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Gasto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_GastoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Arqueo_Gasto_InputMessage">
+    <wsdl:part name="parameters" element="tns:Arqueo_Gasto" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Arqueo_Gasto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Arqueo_GastoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_TipoGasto_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_TipoGasto" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_TipoGasto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_TipoGastoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_TipoGasto_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_TipoGasto" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_TipoGasto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_TipoGastoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_TipoGasto_Id_TipoGasto_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_TipoGasto_Id_TipoGasto" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_TipoGasto_Id_TipoGasto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_TipoGasto_Id_TipoGastoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_TipoGasto_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_TipoGasto" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_TipoGasto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_TipoGastoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Movimiento" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_MovimientoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Movimiento_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_Movimiento" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Movimiento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_MovimientoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_Id_Movimiento_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Movimiento_Id_Movimiento" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_Id_Movimiento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Movimiento_Id_MovimientoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Movimiento" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_MovimientoResponse" />
+  </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_Codigo_InputMessage">
     <wsdl:part name="parameters" element="tns:Obtener_Movimiento_Codigo" />
   </wsdl:message>
@@ -31,6 +163,24 @@
   <wsdl:message name="ISWDatosAquacorp_Arqueo_Retorno_OutputMessage">
     <wsdl:part name="parameters" element="tns:Arqueo_RetornoResponse" />
   </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_O_Pedido_IdUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Movimiento_O_Pedido_IdUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_O_Pedido_IdUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Movimiento_O_Pedido_IdUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_ConFactura_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Movimiento_ConFactura" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_ConFactura_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Movimiento_ConFacturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_SinFactura_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Movimiento_SinFactura" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_SinFactura_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Movimiento_SinFacturaResponse" />
+  </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Insertar_DetalleMovimiento_InputMessage">
     <wsdl:part name="parameters" element="tns:Insertar_DetalleMovimiento" />
   </wsdl:message>
@@ -54,6 +204,18 @@
   </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Obtener_DetalleMovimiento_OutputMessage">
     <wsdl:part name="parameters" element="tns:Obtener_DetalleMovimientoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_Cancelado_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Movimiento_Cancelado" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_Cancelado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Movimiento_CanceladoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_DetalleMovimiento_Pedido_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_DetalleMovimiento_Pedido" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_DetalleMovimiento_Pedido_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_DetalleMovimiento_PedidoResponse" />
   </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Insertar_Producto_InputMessage">
     <wsdl:part name="parameters" element="tns:Insertar_Producto" />
@@ -373,24 +535,6 @@
   <wsdl:message name="ISWDatosAquacorp_Reporte_Cliente_Categoria_OutputMessage">
     <wsdl:part name="parameters" element="tns:Reporte_Cliente_CategoriaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_Ubicacion_InputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_Ubicacion" />
-  </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_Ubicacion_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_UbicacionResponse" />
-  </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_UbicacionDistribuidor_InputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_UbicacionDistribuidor" />
-  </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_UbicacionDistribuidor_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_UbicacionDistribuidorResponse" />
-  </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_UbicacionDistribuidor_IdUsuario_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_UbicacionDistribuidor_IdUsuario" />
-  </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_UbicacionDistribuidor_IdUsuario_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_UbicacionDistribuidor_IdUsuarioResponse" />
-  </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Insertar_Persona_InputMessage">
     <wsdl:part name="parameters" element="tns:Insertar_Persona" />
   </wsdl:message>
@@ -420,6 +564,12 @@
   </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Obtener_Ultimo_Id_Empleado_OutputMessage">
     <wsdl:part name="parameters" element="tns:Obtener_Ultimo_Id_EmpleadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Ultimo_Id_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Ultimo_Id" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Ultimo_Id_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Ultimo_IdResponse" />
   </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Insertar_Cargo_InputMessage">
     <wsdl:part name="parameters" element="tns:Insertar_Cargo" />
@@ -667,11 +817,11 @@
   <wsdl:message name="ISWDatosAquacorp_Actualizar_Material_OutputMessage">
     <wsdl:part name="parameters" element="tns:Actualizar_MaterialResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Material_Id_Material_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Material_Id_Material" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Material_IdMaterial_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Material_IdMaterial" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Material_Id_Material_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Material_Id_MaterialResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Material_IdMaterial_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Material_IdMaterialResponse" />
   </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Obtener_Material_InputMessage">
     <wsdl:part name="parameters" element="tns:Obtener_Material" />
@@ -708,6 +858,12 @@
   </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Obtener_Cliente_Buscador_OutputMessage">
     <wsdl:part name="parameters" element="tns:Obtener_Cliente_BuscadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Cliente_Corta_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_Cliente_Corta" />
+  </wsdl:message>
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Cliente_Corta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_Cliente_CortaResponse" />
   </wsdl:message>
   <wsdl:message name="ISWDatosAquacorp_Insertar_CategoriaCliente_InputMessage">
     <wsdl:part name="parameters" element="tns:Insertar_CategoriaCliente" />
@@ -805,103 +961,179 @@
   <wsdl:message name="ISWDatosAquacorp_Obtener_PuntoZona_OutputMessage">
     <wsdl:part name="parameters" element="tns:Obtener_PuntoZonaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_Exception_InputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_Exception" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_PuntoZona_Puntos_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_PuntoZona_Puntos" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_Exception_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_ExceptionResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_PuntoZona_Puntos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_PuntoZona_PuntosResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Exception_Id_Exception_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Exception_Id_Exception" />
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Produccion_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Produccion" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Exception_Id_Exception_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Exception_Id_ExceptionResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Produccion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_ProduccionResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Exception_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Exception" />
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Produccion_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_Produccion" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Exception_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_ExceptionResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_Produccion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_ProduccionResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_Gasto_InputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_Gasto" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Produccion_IdProduccion_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Produccion_IdProduccion" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_Gasto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_GastoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Produccion_IdProduccion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Produccion_IdProduccionResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Actualizar_Gasto_InputMessage">
-    <wsdl:part name="parameters" element="tns:Actualizar_Gasto" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Produccion_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_Produccion" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Actualizar_Gasto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Actualizar_GastoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_Produccion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_ProduccionResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Gasto_Id_Gasto_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Gasto_Id_Gasto" />
+  <wsdl:message name="ISWDatosAquacorp_Insertar_MateriaPrima_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_MateriaPrima" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Gasto_Id_Gasto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Gasto_Id_GastoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Insertar_MateriaPrima_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_MateriaPrimaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Gasto_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Gasto" />
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_MateriaPrima_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_MateriaPrima" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Gasto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_GastoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_MateriaPrima_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_MateriaPrimaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Arqueo_Gasto_InputMessage">
-    <wsdl:part name="parameters" element="tns:Arqueo_Gasto" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_MateriaPrima_IdMateriaPrima_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_MateriaPrima_IdMateriaPrima" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Arqueo_Gasto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Arqueo_GastoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_MateriaPrima_IdMateriaPrima_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_MateriaPrima_IdMateriaPrimaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_TipoGasto_InputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_TipoGasto" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_MateriaPrima_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_MateriaPrima" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_TipoGasto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_TipoGastoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_MateriaPrima_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_MateriaPrimaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Actualizar_TipoGasto_InputMessage">
-    <wsdl:part name="parameters" element="tns:Actualizar_TipoGasto" />
+  <wsdl:message name="ISWDatosAquacorp_Insertar_ExistenciaMateriaPrima_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_ExistenciaMateriaPrima" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Actualizar_TipoGasto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Actualizar_TipoGastoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Insertar_ExistenciaMateriaPrima_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_ExistenciaMateriaPrimaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_TipoGasto_Id_TipoGasto_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_TipoGasto_Id_TipoGasto" />
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_ExistenciaMateriaPrima_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_ExistenciaMateriaPrima" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_TipoGasto_Id_TipoGasto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_TipoGasto_Id_TipoGastoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Actualizar_ExistenciaMateriaPrima_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar_ExistenciaMateriaPrimaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_TipoGasto_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_TipoGasto" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrima_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrima" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_TipoGasto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_TipoGastoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrima_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrimaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_InputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_Movimiento" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_ExistenciaMateriaPrima_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_ExistenciaMateriaPrima" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Insertar_Movimiento_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Insertar_MovimientoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Obtener_ExistenciaMateriaPrima_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener_ExistenciaMateriaPrimaResponse" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Actualizar_Movimiento_InputMessage">
-    <wsdl:part name="parameters" element="tns:Actualizar_Movimiento" />
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Provision_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_Provision" />
   </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Actualizar_Movimiento_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Actualizar_MovimientoResponse" />
-  </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_Id_Movimiento_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Movimiento_Id_Movimiento" />
-  </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_Id_Movimiento_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Movimiento_Id_MovimientoResponse" />
-  </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_InputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_Movimiento" />
-  </wsdl:message>
-  <wsdl:message name="ISWDatosAquacorp_Obtener_Movimiento_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Obtener_MovimientoResponse" />
+  <wsdl:message name="ISWDatosAquacorp_Insertar_Provision_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insertar_ProvisionResponse" />
   </wsdl:message>
   <wsdl:portType name="ISWDatosAquacorp">
+    <wsdl:operation name="Insertar_Ubicacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Ubicacion" message="tns:ISWDatosAquacorp_Insertar_Ubicacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_UbicacionResponse" message="tns:ISWDatosAquacorp_Insertar_Ubicacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_UbicacionDistribuidor">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_UbicacionDistribuidor" message="tns:ISWDatosAquacorp_Insertar_UbicacionDistribuidor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_UbicacionDistribuidorResponse" message="tns:ISWDatosAquacorp_Insertar_UbicacionDistribuidor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_UbicacionDistribuidor_IdUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_UbicacionDistribuidor_IdUsuario" message="tns:ISWDatosAquacorp_Obtener_UbicacionDistribuidor_IdUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_UbicacionDistribuidor_IdUsuarioResponse" message="tns:ISWDatosAquacorp_Obtener_UbicacionDistribuidor_IdUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_Provision">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_Provision" message="tns:ISWDatosAquacorp_Actualizar_Provision_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_ProvisionResponse" message="tns:ISWDatosAquacorp_Actualizar_Provision_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Provision_IdProvision">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Provision_IdProvision" message="tns:ISWDatosAquacorp_Obtener_Provision_IdProvision_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Provision_IdProvisionResponse" message="tns:ISWDatosAquacorp_Obtener_Provision_IdProvision_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Provision">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Provision" message="tns:ISWDatosAquacorp_Obtener_Provision_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_ProvisionResponse" message="tns:ISWDatosAquacorp_Obtener_Provision_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Exception">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Exception" message="tns:ISWDatosAquacorp_Insertar_Exception_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_ExceptionResponse" message="tns:ISWDatosAquacorp_Insertar_Exception_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Exception_Id_Exception">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception_Id_Exception" message="tns:ISWDatosAquacorp_Obtener_Exception_Id_Exception_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception_Id_ExceptionResponse" message="tns:ISWDatosAquacorp_Obtener_Exception_Id_Exception_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Exception">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception" message="tns:ISWDatosAquacorp_Obtener_Exception_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_ExceptionResponse" message="tns:ISWDatosAquacorp_Obtener_Exception_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Gasto">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Gasto" message="tns:ISWDatosAquacorp_Insertar_Gasto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_GastoResponse" message="tns:ISWDatosAquacorp_Insertar_Gasto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_Gasto">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_Gasto" message="tns:ISWDatosAquacorp_Actualizar_Gasto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_GastoResponse" message="tns:ISWDatosAquacorp_Actualizar_Gasto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Gasto_Id_Gasto">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto_Id_Gasto" message="tns:ISWDatosAquacorp_Obtener_Gasto_Id_Gasto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto_Id_GastoResponse" message="tns:ISWDatosAquacorp_Obtener_Gasto_Id_Gasto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Gasto">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto" message="tns:ISWDatosAquacorp_Obtener_Gasto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_GastoResponse" message="tns:ISWDatosAquacorp_Obtener_Gasto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Arqueo_Gasto">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Arqueo_Gasto" message="tns:ISWDatosAquacorp_Arqueo_Gasto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Arqueo_GastoResponse" message="tns:ISWDatosAquacorp_Arqueo_Gasto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_TipoGasto">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_TipoGasto" message="tns:ISWDatosAquacorp_Insertar_TipoGasto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_TipoGastoResponse" message="tns:ISWDatosAquacorp_Insertar_TipoGasto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_TipoGasto">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_TipoGasto" message="tns:ISWDatosAquacorp_Actualizar_TipoGasto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_TipoGastoResponse" message="tns:ISWDatosAquacorp_Actualizar_TipoGasto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_TipoGasto_Id_TipoGasto">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto_Id_TipoGasto" message="tns:ISWDatosAquacorp_Obtener_TipoGasto_Id_TipoGasto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto_Id_TipoGastoResponse" message="tns:ISWDatosAquacorp_Obtener_TipoGasto_Id_TipoGasto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_TipoGasto">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto" message="tns:ISWDatosAquacorp_Obtener_TipoGasto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGastoResponse" message="tns:ISWDatosAquacorp_Obtener_TipoGasto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Movimiento">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento" message="tns:ISWDatosAquacorp_Insertar_Movimiento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_MovimientoResponse" message="tns:ISWDatosAquacorp_Insertar_Movimiento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_Movimiento">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_Movimiento" message="tns:ISWDatosAquacorp_Actualizar_Movimiento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_MovimientoResponse" message="tns:ISWDatosAquacorp_Actualizar_Movimiento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Movimiento_Id_Movimiento">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_Id_Movimiento" message="tns:ISWDatosAquacorp_Obtener_Movimiento_Id_Movimiento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_Id_MovimientoResponse" message="tns:ISWDatosAquacorp_Obtener_Movimiento_Id_Movimiento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Movimiento">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento" message="tns:ISWDatosAquacorp_Obtener_Movimiento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_MovimientoResponse" message="tns:ISWDatosAquacorp_Obtener_Movimiento_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Obtener_Movimiento_Codigo">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_Codigo" message="tns:ISWDatosAquacorp_Obtener_Movimiento_Codigo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_CodigoResponse" message="tns:ISWDatosAquacorp_Obtener_Movimiento_Codigo_OutputMessage" />
@@ -918,6 +1150,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Arqueo_Retorno" message="tns:ISWDatosAquacorp_Arqueo_Retorno_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Arqueo_RetornoResponse" message="tns:ISWDatosAquacorp_Arqueo_Retorno_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="Obtener_Movimiento_O_Pedido_IdUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_O_Pedido_IdUsuario" message="tns:ISWDatosAquacorp_Obtener_Movimiento_O_Pedido_IdUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_O_Pedido_IdUsuarioResponse" message="tns:ISWDatosAquacorp_Obtener_Movimiento_O_Pedido_IdUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Movimiento_ConFactura">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento_ConFactura" message="tns:ISWDatosAquacorp_Insertar_Movimiento_ConFactura_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento_ConFacturaResponse" message="tns:ISWDatosAquacorp_Insertar_Movimiento_ConFactura_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Movimiento_SinFactura">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento_SinFactura" message="tns:ISWDatosAquacorp_Insertar_Movimiento_SinFactura_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento_SinFacturaResponse" message="tns:ISWDatosAquacorp_Insertar_Movimiento_SinFactura_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Insertar_DetalleMovimiento">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_DetalleMovimiento" message="tns:ISWDatosAquacorp_Insertar_DetalleMovimiento_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_DetalleMovimientoResponse" message="tns:ISWDatosAquacorp_Insertar_DetalleMovimiento_OutputMessage" />
@@ -933,6 +1177,14 @@
     <wsdl:operation name="Obtener_DetalleMovimiento">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_DetalleMovimiento" message="tns:ISWDatosAquacorp_Obtener_DetalleMovimiento_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_DetalleMovimientoResponse" message="tns:ISWDatosAquacorp_Obtener_DetalleMovimiento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Movimiento_Cancelado">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento_Cancelado" message="tns:ISWDatosAquacorp_Insertar_Movimiento_Cancelado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento_CanceladoResponse" message="tns:ISWDatosAquacorp_Insertar_Movimiento_Cancelado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_DetalleMovimiento_Pedido">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_DetalleMovimiento_Pedido" message="tns:ISWDatosAquacorp_Obtener_DetalleMovimiento_Pedido_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_DetalleMovimiento_PedidoResponse" message="tns:ISWDatosAquacorp_Obtener_DetalleMovimiento_Pedido_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Insertar_Producto">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Producto" message="tns:ISWDatosAquacorp_Insertar_Producto_InputMessage" />
@@ -1146,18 +1398,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Reporte_Cliente_Categoria" message="tns:ISWDatosAquacorp_Reporte_Cliente_Categoria_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Reporte_Cliente_CategoriaResponse" message="tns:ISWDatosAquacorp_Reporte_Cliente_Categoria_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Insertar_Ubicacion">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Ubicacion" message="tns:ISWDatosAquacorp_Insertar_Ubicacion_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_UbicacionResponse" message="tns:ISWDatosAquacorp_Insertar_Ubicacion_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="Insertar_UbicacionDistribuidor">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_UbicacionDistribuidor" message="tns:ISWDatosAquacorp_Insertar_UbicacionDistribuidor_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_UbicacionDistribuidorResponse" message="tns:ISWDatosAquacorp_Insertar_UbicacionDistribuidor_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="Obtener_UbicacionDistribuidor_IdUsuario">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_UbicacionDistribuidor_IdUsuario" message="tns:ISWDatosAquacorp_Obtener_UbicacionDistribuidor_IdUsuario_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_UbicacionDistribuidor_IdUsuarioResponse" message="tns:ISWDatosAquacorp_Obtener_UbicacionDistribuidor_IdUsuario_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="Insertar_Persona">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Persona" message="tns:ISWDatosAquacorp_Insertar_Persona_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_PersonaResponse" message="tns:ISWDatosAquacorp_Insertar_Persona_OutputMessage" />
@@ -1177,6 +1417,10 @@
     <wsdl:operation name="Obtener_Ultimo_Id_Empleado">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Ultimo_Id_Empleado" message="tns:ISWDatosAquacorp_Obtener_Ultimo_Id_Empleado_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Ultimo_Id_EmpleadoResponse" message="tns:ISWDatosAquacorp_Obtener_Ultimo_Id_Empleado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Ultimo_Id">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Ultimo_Id" message="tns:ISWDatosAquacorp_Obtener_Ultimo_Id_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Ultimo_IdResponse" message="tns:ISWDatosAquacorp_Obtener_Ultimo_Id_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Insertar_Cargo">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Cargo" message="tns:ISWDatosAquacorp_Insertar_Cargo_InputMessage" />
@@ -1342,9 +1586,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_Material" message="tns:ISWDatosAquacorp_Actualizar_Material_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_MaterialResponse" message="tns:ISWDatosAquacorp_Actualizar_Material_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Material_Id_Material">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Material_Id_Material" message="tns:ISWDatosAquacorp_Obtener_Material_Id_Material_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Material_Id_MaterialResponse" message="tns:ISWDatosAquacorp_Obtener_Material_Id_Material_OutputMessage" />
+    <wsdl:operation name="Obtener_Material_IdMaterial">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Material_IdMaterial" message="tns:ISWDatosAquacorp_Obtener_Material_IdMaterial_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Material_IdMaterialResponse" message="tns:ISWDatosAquacorp_Obtener_Material_IdMaterial_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Obtener_Material">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Material" message="tns:ISWDatosAquacorp_Obtener_Material_InputMessage" />
@@ -1369,6 +1613,10 @@
     <wsdl:operation name="Obtener_Cliente_Buscador">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Cliente_Buscador" message="tns:ISWDatosAquacorp_Obtener_Cliente_Buscador_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Cliente_BuscadorResponse" message="tns:ISWDatosAquacorp_Obtener_Cliente_Buscador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_Cliente_Corta">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_Cliente_Corta" message="tns:ISWDatosAquacorp_Actualizar_Cliente_Corta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_Cliente_CortaResponse" message="tns:ISWDatosAquacorp_Actualizar_Cliente_Corta_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Insertar_CategoriaCliente">
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_CategoriaCliente" message="tns:ISWDatosAquacorp_Insertar_CategoriaCliente_InputMessage" />
@@ -1434,73 +1682,263 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_PuntoZona" message="tns:ISWDatosAquacorp_Obtener_PuntoZona_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_PuntoZonaResponse" message="tns:ISWDatosAquacorp_Obtener_PuntoZona_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Insertar_Exception">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Exception" message="tns:ISWDatosAquacorp_Insertar_Exception_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_ExceptionResponse" message="tns:ISWDatosAquacorp_Insertar_Exception_OutputMessage" />
+    <wsdl:operation name="Obtener_PuntoZona_Puntos">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_PuntoZona_Puntos" message="tns:ISWDatosAquacorp_Obtener_PuntoZona_Puntos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_PuntoZona_PuntosResponse" message="tns:ISWDatosAquacorp_Obtener_PuntoZona_Puntos_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Exception_Id_Exception">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception_Id_Exception" message="tns:ISWDatosAquacorp_Obtener_Exception_Id_Exception_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception_Id_ExceptionResponse" message="tns:ISWDatosAquacorp_Obtener_Exception_Id_Exception_OutputMessage" />
+    <wsdl:operation name="Insertar_Produccion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Produccion" message="tns:ISWDatosAquacorp_Insertar_Produccion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_ProduccionResponse" message="tns:ISWDatosAquacorp_Insertar_Produccion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Exception">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception" message="tns:ISWDatosAquacorp_Obtener_Exception_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_ExceptionResponse" message="tns:ISWDatosAquacorp_Obtener_Exception_OutputMessage" />
+    <wsdl:operation name="Actualizar_Produccion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_Produccion" message="tns:ISWDatosAquacorp_Actualizar_Produccion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_ProduccionResponse" message="tns:ISWDatosAquacorp_Actualizar_Produccion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Insertar_Gasto">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Gasto" message="tns:ISWDatosAquacorp_Insertar_Gasto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_GastoResponse" message="tns:ISWDatosAquacorp_Insertar_Gasto_OutputMessage" />
+    <wsdl:operation name="Obtener_Produccion_IdProduccion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Produccion_IdProduccion" message="tns:ISWDatosAquacorp_Obtener_Produccion_IdProduccion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Produccion_IdProduccionResponse" message="tns:ISWDatosAquacorp_Obtener_Produccion_IdProduccion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Actualizar_Gasto">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_Gasto" message="tns:ISWDatosAquacorp_Actualizar_Gasto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_GastoResponse" message="tns:ISWDatosAquacorp_Actualizar_Gasto_OutputMessage" />
+    <wsdl:operation name="Obtener_Produccion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Produccion" message="tns:ISWDatosAquacorp_Obtener_Produccion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_ProduccionResponse" message="tns:ISWDatosAquacorp_Obtener_Produccion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Gasto_Id_Gasto">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto_Id_Gasto" message="tns:ISWDatosAquacorp_Obtener_Gasto_Id_Gasto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto_Id_GastoResponse" message="tns:ISWDatosAquacorp_Obtener_Gasto_Id_Gasto_OutputMessage" />
+    <wsdl:operation name="Insertar_MateriaPrima">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_MateriaPrima" message="tns:ISWDatosAquacorp_Insertar_MateriaPrima_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_MateriaPrimaResponse" message="tns:ISWDatosAquacorp_Insertar_MateriaPrima_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Gasto">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto" message="tns:ISWDatosAquacorp_Obtener_Gasto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_GastoResponse" message="tns:ISWDatosAquacorp_Obtener_Gasto_OutputMessage" />
+    <wsdl:operation name="Actualizar_MateriaPrima">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_MateriaPrima" message="tns:ISWDatosAquacorp_Actualizar_MateriaPrima_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_MateriaPrimaResponse" message="tns:ISWDatosAquacorp_Actualizar_MateriaPrima_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Arqueo_Gasto">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Arqueo_Gasto" message="tns:ISWDatosAquacorp_Arqueo_Gasto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Arqueo_GastoResponse" message="tns:ISWDatosAquacorp_Arqueo_Gasto_OutputMessage" />
+    <wsdl:operation name="Obtener_MateriaPrima_IdMateriaPrima">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_MateriaPrima_IdMateriaPrima" message="tns:ISWDatosAquacorp_Obtener_MateriaPrima_IdMateriaPrima_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_MateriaPrima_IdMateriaPrimaResponse" message="tns:ISWDatosAquacorp_Obtener_MateriaPrima_IdMateriaPrima_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Insertar_TipoGasto">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_TipoGasto" message="tns:ISWDatosAquacorp_Insertar_TipoGasto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_TipoGastoResponse" message="tns:ISWDatosAquacorp_Insertar_TipoGasto_OutputMessage" />
+    <wsdl:operation name="Obtener_MateriaPrima">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_MateriaPrima" message="tns:ISWDatosAquacorp_Obtener_MateriaPrima_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_MateriaPrimaResponse" message="tns:ISWDatosAquacorp_Obtener_MateriaPrima_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Actualizar_TipoGasto">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_TipoGasto" message="tns:ISWDatosAquacorp_Actualizar_TipoGasto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_TipoGastoResponse" message="tns:ISWDatosAquacorp_Actualizar_TipoGasto_OutputMessage" />
+    <wsdl:operation name="Insertar_ExistenciaMateriaPrima">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_ExistenciaMateriaPrima" message="tns:ISWDatosAquacorp_Insertar_ExistenciaMateriaPrima_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_ExistenciaMateriaPrimaResponse" message="tns:ISWDatosAquacorp_Insertar_ExistenciaMateriaPrima_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Obtener_TipoGasto_Id_TipoGasto">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto_Id_TipoGasto" message="tns:ISWDatosAquacorp_Obtener_TipoGasto_Id_TipoGasto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto_Id_TipoGastoResponse" message="tns:ISWDatosAquacorp_Obtener_TipoGasto_Id_TipoGasto_OutputMessage" />
+    <wsdl:operation name="Actualizar_ExistenciaMateriaPrima">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_ExistenciaMateriaPrima" message="tns:ISWDatosAquacorp_Actualizar_ExistenciaMateriaPrima_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_ExistenciaMateriaPrimaResponse" message="tns:ISWDatosAquacorp_Actualizar_ExistenciaMateriaPrima_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Obtener_TipoGasto">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto" message="tns:ISWDatosAquacorp_Obtener_TipoGasto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGastoResponse" message="tns:ISWDatosAquacorp_Obtener_TipoGasto_OutputMessage" />
+    <wsdl:operation name="Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrima">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrima" message="tns:ISWDatosAquacorp_Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrima_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrimaResponse" message="tns:ISWDatosAquacorp_Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrima_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Insertar_Movimiento">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento" message="tns:ISWDatosAquacorp_Insertar_Movimiento_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_MovimientoResponse" message="tns:ISWDatosAquacorp_Insertar_Movimiento_OutputMessage" />
+    <wsdl:operation name="Obtener_ExistenciaMateriaPrima">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_ExistenciaMateriaPrima" message="tns:ISWDatosAquacorp_Obtener_ExistenciaMateriaPrima_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_ExistenciaMateriaPrimaResponse" message="tns:ISWDatosAquacorp_Obtener_ExistenciaMateriaPrima_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Actualizar_Movimiento">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_Movimiento" message="tns:ISWDatosAquacorp_Actualizar_Movimiento_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Actualizar_MovimientoResponse" message="tns:ISWDatosAquacorp_Actualizar_Movimiento_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="Obtener_Movimiento_Id_Movimiento">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_Id_Movimiento" message="tns:ISWDatosAquacorp_Obtener_Movimiento_Id_Movimiento_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_Id_MovimientoResponse" message="tns:ISWDatosAquacorp_Obtener_Movimiento_Id_Movimiento_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="Obtener_Movimiento">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento" message="tns:ISWDatosAquacorp_Obtener_Movimiento_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Obtener_MovimientoResponse" message="tns:ISWDatosAquacorp_Obtener_Movimiento_OutputMessage" />
+    <wsdl:operation name="Insertar_Provision">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_Provision" message="tns:ISWDatosAquacorp_Insertar_Provision_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISWDatosAquacorp/Insertar_ProvisionResponse" message="tns:ISWDatosAquacorp_Insertar_Provision_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISWDatosAquacorp" type="tns:ISWDatosAquacorp">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Insertar_Ubicacion">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Ubicacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_UbicacionDistribuidor">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_UbicacionDistribuidor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_UbicacionDistribuidor_IdUsuario">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_UbicacionDistribuidor_IdUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_Provision">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_Provision" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Provision_IdProvision">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Provision_IdProvision" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Provision">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Provision" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Exception">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Exception" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Exception_Id_Exception">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception_Id_Exception" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Exception">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Gasto">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Gasto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_Gasto">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_Gasto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Gasto_Id_Gasto">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto_Id_Gasto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Gasto">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Arqueo_Gasto">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Arqueo_Gasto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_TipoGasto">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_TipoGasto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_TipoGasto">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_TipoGasto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_TipoGasto_Id_TipoGasto">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto_Id_TipoGasto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_TipoGasto">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Movimiento">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_Movimiento">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_Movimiento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Movimiento_Id_Movimiento">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_Id_Movimiento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Movimiento">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Obtener_Movimiento_Codigo">
       <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_Codigo" style="document" />
       <wsdl:input>
@@ -1537,6 +1975,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Obtener_Movimiento_O_Pedido_IdUsuario">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_O_Pedido_IdUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Movimiento_ConFactura">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento_ConFactura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Movimiento_SinFactura">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento_SinFactura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Insertar_DetalleMovimiento">
       <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_DetalleMovimiento" style="document" />
       <wsdl:input>
@@ -1566,6 +2031,24 @@
     </wsdl:operation>
     <wsdl:operation name="Obtener_DetalleMovimiento">
       <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_DetalleMovimiento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar_Movimiento_Cancelado">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento_Cancelado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_DetalleMovimiento_Pedido">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_DetalleMovimiento_Pedido" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2050,33 +2533,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Insertar_Ubicacion">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Ubicacion" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Insertar_UbicacionDistribuidor">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_UbicacionDistribuidor" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Obtener_UbicacionDistribuidor_IdUsuario">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_UbicacionDistribuidor_IdUsuario" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="Insertar_Persona">
       <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Persona" style="document" />
       <wsdl:input>
@@ -2115,6 +2571,15 @@
     </wsdl:operation>
     <wsdl:operation name="Obtener_Ultimo_Id_Empleado">
       <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Ultimo_Id_Empleado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener_Ultimo_Id">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Ultimo_Id" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2491,8 +2956,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Material_Id_Material">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Material_Id_Material" style="document" />
+    <wsdl:operation name="Obtener_Material_IdMaterial">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Material_IdMaterial" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2547,6 +3012,15 @@
     </wsdl:operation>
     <wsdl:operation name="Obtener_Cliente_Buscador">
       <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Cliente_Buscador" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar_Cliente_Corta">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_Cliente_Corta" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2698,8 +3172,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Insertar_Exception">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Exception" style="document" />
+    <wsdl:operation name="Obtener_PuntoZona_Puntos">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_PuntoZona_Puntos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2707,8 +3181,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Exception_Id_Exception">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception_Id_Exception" style="document" />
+    <wsdl:operation name="Insertar_Produccion">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Produccion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2716,8 +3190,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Exception">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Exception" style="document" />
+    <wsdl:operation name="Actualizar_Produccion">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_Produccion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2725,8 +3199,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Insertar_Gasto">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Gasto" style="document" />
+    <wsdl:operation name="Obtener_Produccion_IdProduccion">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Produccion_IdProduccion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2734,8 +3208,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Actualizar_Gasto">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_Gasto" style="document" />
+    <wsdl:operation name="Obtener_Produccion">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Produccion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2743,8 +3217,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Gasto_Id_Gasto">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto_Id_Gasto" style="document" />
+    <wsdl:operation name="Insertar_MateriaPrima">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_MateriaPrima" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2752,8 +3226,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Obtener_Gasto">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Gasto" style="document" />
+    <wsdl:operation name="Actualizar_MateriaPrima">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_MateriaPrima" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2761,8 +3235,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Arqueo_Gasto">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Arqueo_Gasto" style="document" />
+    <wsdl:operation name="Obtener_MateriaPrima_IdMateriaPrima">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_MateriaPrima_IdMateriaPrima" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2770,8 +3244,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Insertar_TipoGasto">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_TipoGasto" style="document" />
+    <wsdl:operation name="Obtener_MateriaPrima">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_MateriaPrima" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2779,8 +3253,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Actualizar_TipoGasto">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_TipoGasto" style="document" />
+    <wsdl:operation name="Insertar_ExistenciaMateriaPrima">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_ExistenciaMateriaPrima" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2788,8 +3262,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Obtener_TipoGasto_Id_TipoGasto">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto_Id_TipoGasto" style="document" />
+    <wsdl:operation name="Actualizar_ExistenciaMateriaPrima">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_ExistenciaMateriaPrima" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2797,8 +3271,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Obtener_TipoGasto">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_TipoGasto" style="document" />
+    <wsdl:operation name="Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrima">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_ExistenciaMateriaPrima_IdExistenciaMateriaPrima" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2806,8 +3280,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Insertar_Movimiento">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Movimiento" style="document" />
+    <wsdl:operation name="Obtener_ExistenciaMateriaPrima">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_ExistenciaMateriaPrima" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2815,26 +3289,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Actualizar_Movimiento">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Actualizar_Movimiento" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Obtener_Movimiento_Id_Movimiento">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento_Id_Movimiento" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Obtener_Movimiento">
-      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Obtener_Movimiento" style="document" />
+    <wsdl:operation name="Insertar_Provision">
+      <soap:operation soapAction="http://tempuri.org/ISWDatosAquacorp/Insertar_Provision" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

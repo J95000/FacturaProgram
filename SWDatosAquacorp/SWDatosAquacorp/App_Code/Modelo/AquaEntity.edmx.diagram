@@ -65,11 +65,6 @@
         <AssociationConnector Association="aquacorpbddModel.FK_Saldo_Empleado" />
         <AssociationConnector Association="aquacorpbddModel.FK_Stock_Producto" />
         <AssociationConnector Association="aquacorpbddModel.FK_PrecioSugerido_Producto" />
-        <EntityTypeShape EntityType="aquacorpbddModel.Movimiento" Width="1.5" PointX="8" PointY="29.375" />
-        <AssociationConnector Association="aquacorpbddModel.FK_Movimiento_Cliente" />
-        <AssociationConnector Association="aquacorpbddModel.FK_DetalleMovimiento_Movimiento" />
-        <AssociationConnector Association="aquacorpbddModel.FK_Movimiento_Usuario" />
-        <AssociationConnector Association="aquacorpbddModel.FK_Pago_Movimiento" />
         <EntityTypeShape EntityType="aquacorpbddModel.Arqueo" Width="1.5" PointX="11" PointY="29.25" />
         <AssociationConnector Association="aquacorpbddModel.FK_Arqueo_Persona" />
         <AssociationConnector Association="aquacorpbddModel.FK_Arqueo_Usuario" />
@@ -89,6 +84,22 @@
         <EntityTypeShape EntityType="aquacorpbddModel.Provision" Width="1.5" PointX="10.625" PointY="24.75" />
         <AssociationConnector Association="aquacorpbddModel.FK_Provision_MateriaPrima" />
         <AssociationConnector Association="aquacorpbddModel.FK_Provision_Proveedor" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Auditoria" Width="1.5" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Direccion" Width="1.5" PointX="11" PointY="42.375" />
+        <EntityTypeShape EntityType="aquacorpbddModel.DireccionMovimiento" Width="1.5" PointX="13.25" PointY="33.875" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Dosificacion" Width="1.5" PointX="5.75" PointY="54.375" />
+        <EntityTypeShape EntityType="aquacorpbddModel.MovimientoCancelado" Width="1.5" PointX="9.875" PointY="33.875" />
+        <EntityTypeShape EntityType="aquacorpbddModel.UbicacionPrueba" Width="1.5" PointX="8.375" PointY="0.75" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Direccion_Cliente" />
+        <AssociationConnector Association="aquacorpbddModel.FK_DireccionMovimiento_Direccion" />
+        <EntityTypeShape EntityType="aquacorpbddModel.Movimiento" Width="1.5" PointX="11.625" PointY="36.625" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Movimiento_Cliente" />
+        <AssociationConnector Association="aquacorpbddModel.FK_DetalleMovimiento_Movimiento" />
+        <AssociationConnector Association="aquacorpbddModel.FK_DireccionMovimiento_Movimiento" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Movimiento_Dosificacion" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Movimiento_Usuario" />
+        <AssociationConnector Association="aquacorpbddModel.FK_MovimientoCancelado_Movimiento" />
+        <AssociationConnector Association="aquacorpbddModel.FK_Pago_Movimiento" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

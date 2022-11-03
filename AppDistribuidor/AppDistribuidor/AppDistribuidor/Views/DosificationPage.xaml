@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AppDistribuidor.ViewModels"
+             x:Class="AppDistribuidor.Views.DosificationPage"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:DosificationViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Nro. Autorizacion"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Entry Text="{Binding Autorizacion}" 
+                   Margin="50,0"/>
+            <Label Text="Llave De Dosificación"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Entry Text="{Binding LLaveDosificacion}" 
+                   Margin="50,0"/>
+            <Label Text="Fecha Limite De Emisión"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <DatePicker 
+                Margin="50,0" Date="{Binding FechaLimiteEmision}"/>
+            <Button Text="Registrar" Command="{Binding RegistryDosificationCommand}" IsEnabled="{Binding IsBusy}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

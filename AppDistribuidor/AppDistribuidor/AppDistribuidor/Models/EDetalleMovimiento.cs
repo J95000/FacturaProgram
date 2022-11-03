@@ -17,6 +17,6 @@ namespace AppDistribuidor.Models
         public DateTime FechaModificacion { get; set; }
         public DateTime FechaRegistro { get; set; }
    
-
+        public decimal SubTotal { get; set; }
     }
 }

@@ -8,7 +8,6 @@ namespace AppDistribuidor.Facturacion
     {
         /// <summary>
         /// Criptografia simetrica
-        /// <see cref="http://jc-mouse.net/"/>
         /// <param name="message">texto a encriptar</param>                
         /// <param name="key">llave para encriptacion</param>                
         /// <param name="unscripted">con guion o sin guion</param>                

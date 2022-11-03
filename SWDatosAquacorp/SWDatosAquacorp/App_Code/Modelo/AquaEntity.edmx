@@ -36,6 +36,15 @@
           <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
         </EntityType>
+        <EntityType Name="Auditoria">
+          <Key>
+            <PropertyRef Name="IdAuditoria" />
+          </Key>
+          <Property Name="IdAuditoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CRUD" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Calificacion">
           <Key>
             <PropertyRef Name="IdCalificacion" />
@@ -90,13 +99,10 @@
             <PropertyRef Name="IdCliente" />
           </Key>
           <Property Name="IdCliente" Type="int" Nullable="false" />
-          <Property Name="IdCategoriaCliente" Type="tinyint" Nullable="false" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="NitCi" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="CorreoElectronico" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="Latitud" Type="decimal" Precision="9" Scale="6" Nullable="false" />
-          <Property Name="Longitud" Type="decimal" Precision="9" Scale="6" Nullable="false" />
-          <Property Name="IdZona" Type="tinyint" Nullable="false" />
           <Property Name="FotoUbicacion" Type="image" Nullable="false" />
-          <Property Name="Contrato" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ControlEntrada">
           <Key>
@@ -161,6 +167,42 @@
           <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="SubTotal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="IdDireccion" />
+          </Key>
+          <Property Name="IdDireccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="NombreDireccion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Latitud" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Longitud" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DireccionMovimiento">
+          <Key>
+            <PropertyRef Name="IdDireccionMovimiento" />
+          </Key>
+          <Property Name="IdDireccionMovimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDireccion" Type="int" Nullable="false" />
+          <Property Name="IdMovimiento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dosificacion">
+          <Key>
+            <PropertyRef Name="IdDosificacion" />
+          </Key>
+          <Property Name="IdDosificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NroAutorizacion" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="FechaLimite" Type="date" Nullable="false" />
+          <Property Name="LlaveDosificacion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="NroInicialFactura" Type="int" Nullable="false" />
+          <Property Name="NroFinalFactura" Type="int" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -173,6 +215,7 @@
           <Property Name="IdCiudad" Type="tinyint" Nullable="false" />
           <Property Name="LugarNacimiento" Type="tinyint" Nullable="false" />
           <Property Name="TelefonoRespaldo" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Direccion" Type="varchar(max)" Nullable="false" />
           <Property Name="EstadoCivil" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="NombresPadre" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="PrimerApellidoPadre" Type="varchar" MaxLength="80" Nullable="false" />
@@ -287,6 +330,23 @@
           <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="PrecioTotal" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="IdDosificacion" Type="int" />
+          <Property Name="NroMovimiento" Type="int" />
+          <Property Name="CodigoControl" Type="varchar" MaxLength="12" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="100" />
+          <Property Name="NitCi" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="MovimientoCancelado">
+          <Key>
+            <PropertyRef Name="IdMovimientoCancelado" />
+          </Key>
+          <Property Name="IdMovimientoCancelado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMovimiento" Type="int" Nullable="false" />
+          <Property Name="Motivo" Type="varchar(max)" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Pago">
           <Key>
@@ -309,7 +369,6 @@
           <Property Name="PrimerApellido" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="SegundoApellido" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="Telefono" Type="varchar" MaxLength="8" Nullable="false" />
-          <Property Name="Direccion" Type="varchar(max)" Nullable="false" />
           <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
@@ -355,6 +414,7 @@
             <PropertyRef Name="IdProveedor" />
           </Key>
           <Property Name="IdProveedor" Type="int" Nullable="false" />
+          <Property Name="Direccion" Type="varchar(max)" Nullable="false" />
           <Property Name="TelefonoRespaldo" Type="varchar" MaxLength="8" Nullable="false" />
         </EntityType>
         <EntityType Name="Provision">
@@ -468,6 +528,16 @@
           <Property Name="Longitud" Type="decimal" Precision="9" Scale="6" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="UbicacionPrueba">
+          <Key>
+            <PropertyRef Name="IdUbicacion" />
+          </Key>
+          <Property Name="IdUbicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCelu" Type="varchar(max)" Nullable="false" />
+          <Property Name="Latitud" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Longitud" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -548,18 +618,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cliente_CategoriaCliente">
-          <End Role="CategoriaCliente" Type="Self.CategoriaCliente" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CategoriaCliente">
-              <PropertyRef Name="IdCategoriaCliente" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="IdCategoriaCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cliente_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
@@ -569,18 +627,6 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cliente_Zona">
-          <End Role="Zona" Type="Self.Zona" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Zona">
-              <PropertyRef Name="IdZona" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="IdZona" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -665,6 +711,42 @@
             </Principal>
             <Dependent Role="DetalleMovimiento">
               <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Direccion_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DireccionMovimiento_Direccion">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="1" />
+          <End Role="DireccionMovimiento" Type="Self.DireccionMovimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="IdDireccion" />
+            </Principal>
+            <Dependent Role="DireccionMovimiento">
+              <PropertyRef Name="IdDireccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DireccionMovimiento_Movimiento">
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="1" />
+          <End Role="DireccionMovimiento" Type="Self.DireccionMovimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Principal>
+            <Dependent Role="DireccionMovimiento">
+              <PropertyRef Name="IdMovimiento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -848,6 +930,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Movimiento_Dosificacion">
+          <End Role="Dosificacion" Type="Self.Dosificacion" Multiplicity="0..1" />
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dosificacion">
+              <PropertyRef Name="IdDosificacion" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="IdDosificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Movimiento_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
@@ -857,6 +951,18 @@
             </Principal>
             <Dependent Role="Movimiento">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovimientoCancelado_Movimiento">
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="1" />
+          <End Role="MovimientoCancelado" Type="Self.MovimientoCancelado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Principal>
+            <Dependent Role="MovimientoCancelado">
+              <PropertyRef Name="IdMovimiento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1028,6 +1134,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="Proc_Arqueo_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdArqueo" Type="int" Mode="In" />
           <Parameter Name="IdPersona" Type="int" Mode="In" />
@@ -1171,6 +1278,12 @@
         <Function Name="Proc_Ciudad_O_IdCiudad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdCiudad" Type="tinyint" Mode="In" />
         </Function>
+        <Function Name="Proc_Cliente_Modificar_Razon_Nit_Foto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+          <Parameter Name="RazonSocial" Type="varchar" Mode="In" />
+          <Parameter Name="NitCi" Type="varchar" Mode="In" />
+          <Parameter Name="FotoUbicacion" Type="image" Mode="In" />
+        </Function>
         <Function Name="Proc_ControlEntrada_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdControlEntrada" Type="int" Mode="In" />
           <Parameter Name="IdPersona" Type="int" Mode="In" />
@@ -1286,6 +1399,22 @@
         <Function Name="Proc_DetalleMovimiento_O" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Proc_DetalleMovimiento_O_IdDetalleMovimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdDetalleMovimiento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Proc_DetalleMovimiento_O_Pedido_IdMovimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMovimiento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Proc_DireccionMovimiento_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdDireccionMovimiento" Type="int" Mode="In" />
+          <Parameter Name="IdDireccion" Type="int" Mode="In" />
+          <Parameter Name="IdMovimiento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Proc_DireccionMovimiento_I" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdDireccion" Type="int" Mode="In" />
+          <Parameter Name="IdMovimiento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Proc_DireccionMovimiento_O" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Proc_DireccionMovimiento_O_IdMovimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMovimiento" Type="int" Mode="In" />
         </Function>
         <Function Name="Proc_Exception_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdException" Type="int" Mode="In" />
@@ -1467,6 +1596,29 @@
           <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
           <Parameter Name="Estado" Type="char" Mode="In" />
         </Function>
+        <Function Name="Proc_Movimiento_I_ConFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
+          <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
+          <Parameter Name="Estado" Type="char" Mode="In" />
+          <Parameter Name="PrecioTotal" Type="decimal" Mode="In" />
+          <Parameter Name="IdDosificacion" Type="int" Mode="In" />
+          <Parameter Name="NroMovimiento" Type="int" Mode="In" />
+          <Parameter Name="CodigoControl" Type="varchar" Mode="In" />
+          <Parameter Name="RazonSocial" Type="varchar" Mode="In" />
+          <Parameter Name="NitCi" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_Movimiento_I_SinFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
+          <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
+          <Parameter Name="Estado" Type="char" Mode="In" />
+          <Parameter Name="PrecioTotal" Type="decimal" Mode="In" />
+        </Function>
         <Function Name="Proc_Movimiento_O" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Proc_Movimiento_O_Codigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Codigo" Type="varchar" Mode="In" />
@@ -1478,6 +1630,15 @@
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
           <Parameter Name="fecha" Type="datetime" Mode="In" />
           <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_Movimiento_O_Pedido_IdUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Proc_Movimiento_Pedido_Cancelar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMovimiento" Type="int" Mode="In" />
+          <Parameter Name="Motivo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
         </Function>
         <Function Name="Proc_Pago_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdPago" Type="int" Mode="In" />
@@ -1506,7 +1667,6 @@
           <Parameter Name="PrimerApellido" Type="varchar" Mode="In" />
           <Parameter Name="SegundoApellido" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
-          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
           <Parameter Name="Estado" Type="char" Mode="In" />
@@ -1517,35 +1677,30 @@
           <Parameter Name="PrimerApellido" Type="varchar" Mode="In" />
           <Parameter Name="SegundoApellido" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
-          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
           <Parameter Name="Estado" Type="char" Mode="In" />
           <Parameter Name="IdCliente" Type="int" Mode="In" />
-          <Parameter Name="IdCategoriaCliente" Type="tinyint" Mode="In" />
+          <Parameter Name="RazonSocial" Type="varchar" Mode="In" />
+          <Parameter Name="NitCi" Type="varchar" Mode="In" />
           <Parameter Name="CorreoElectronico" Type="varchar" Mode="In" />
-          <Parameter Name="Latitud" Type="decimal" Mode="In" />
-          <Parameter Name="Longitud" Type="decimal" Mode="In" />
-          <Parameter Name="IdZona" Type="tinyint" Mode="In" />
           <Parameter Name="FotoUbicacion" Type="image" Mode="In" />
-          <Parameter Name="Contrato" Type="bit" Mode="In" />
         </Function>
         <Function Name="Proc_Persona_Cliente_I" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombres" Type="varchar" Mode="In" />
           <Parameter Name="PrimerApellido" Type="varchar" Mode="In" />
           <Parameter Name="SegundoApellido" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
-          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
           <Parameter Name="Estado" Type="char" Mode="In" />
-          <Parameter Name="IdCategoriaCliente" Type="tinyint" Mode="In" />
+          <Parameter Name="RazonSocial" Type="varchar" Mode="In" />
+          <Parameter Name="NitCi" Type="varchar" Mode="In" />
           <Parameter Name="CorreoElectronico" Type="varchar" Mode="In" />
+          <Parameter Name="FotoUbicacion" Type="image" Mode="In" />
+          <Parameter Name="NombreDireccion" Type="varchar" Mode="In" />
           <Parameter Name="Latitud" Type="decimal" Mode="In" />
           <Parameter Name="Longitud" Type="decimal" Mode="In" />
-          <Parameter Name="IdZona" Type="tinyint" Mode="In" />
-          <Parameter Name="FotoUbicacion" Type="image" Mode="In" />
-          <Parameter Name="Contrato" Type="bit" Mode="In" />
         </Function>
         <Function Name="Proc_Persona_Cliente_O" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Proc_Persona_Cliente_O_Buscador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1560,7 +1715,6 @@
           <Parameter Name="PrimerApellido" Type="varchar" Mode="In" />
           <Parameter Name="SegundoApellido" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
-          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
           <Parameter Name="Estado" Type="char" Mode="In" />
@@ -1570,6 +1724,7 @@
           <Parameter Name="IdCiudad" Type="tinyint" Mode="In" />
           <Parameter Name="LugarNacimiento" Type="tinyint" Mode="In" />
           <Parameter Name="TelefonoRespaldo" Type="varchar" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="EstadoCivil" Type="varchar" Mode="In" />
           <Parameter Name="NombresPadre" Type="varchar" Mode="In" />
           <Parameter Name="PrimerApellidoPadre" Type="varchar" Mode="In" />
@@ -1590,7 +1745,6 @@
           <Parameter Name="PrimerApellido" Type="varchar" Mode="In" />
           <Parameter Name="SegundoApellido" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
-          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
           <Parameter Name="Estado" Type="char" Mode="In" />
@@ -1600,6 +1754,7 @@
           <Parameter Name="IdCiudad" Type="tinyint" Mode="In" />
           <Parameter Name="LugarNacimiento" Type="tinyint" Mode="In" />
           <Parameter Name="TelefonoRespaldo" Type="varchar" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="EstadoCivil" Type="varchar" Mode="In" />
           <Parameter Name="NombresPadre" Type="varchar" Mode="In" />
           <Parameter Name="PrimerApellidoPadre" Type="varchar" Mode="In" />
@@ -1627,7 +1782,6 @@
           <Parameter Name="PrimerApellido" Type="varchar" Mode="In" />
           <Parameter Name="SegundoApellido" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
-          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
           <Parameter Name="Estado" Type="char" Mode="In" />
@@ -1642,11 +1796,11 @@
           <Parameter Name="PrimerApellido" Type="varchar" Mode="In" />
           <Parameter Name="SegundoApellido" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
-          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
           <Parameter Name="Estado" Type="char" Mode="In" />
           <Parameter Name="IdProveedor" Type="int" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="TelefonoRespaldo" Type="varchar" Mode="In" />
         </Function>
         <Function Name="Proc_Persona_Proveedor_I" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1654,10 +1808,10 @@
           <Parameter Name="PrimerApellido" Type="varchar" Mode="In" />
           <Parameter Name="SegundoApellido" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
-          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="FechaModificacion" Type="datetime" Mode="In" />
           <Parameter Name="Estado" Type="char" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar(max)" Mode="In" />
           <Parameter Name="TelefonoRespaldo" Type="varchar" Mode="In" />
         </Function>
         <Function Name="Proc_Persona_Proveedor_O" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -1977,9 +2131,40 @@
         <Function Name="Proc_Zona_O_IdZona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdZona" Type="tinyint" Mode="In" />
         </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="aquacorpbddModelStoreContainer">
           <EntitySet Name="Arqueo" EntityType="Self.Arqueo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Auditoria" EntityType="Self.Auditoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Calificacion" EntityType="Self.Calificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
@@ -1991,6 +2176,9 @@
           <EntitySet Name="Conyugue" EntityType="Self.Conyugue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Despido" EntityType="Self.Despido" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleMovimiento" EntityType="Self.DetalleMovimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DireccionMovimiento" EntityType="Self.DireccionMovimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dosificacion" EntityType="Self.Dosificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExceptionLog" EntityType="Self.ExceptionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Existencia" EntityType="Self.Existencia" Schema="dbo" store:Type="Tables" />
@@ -2000,6 +2188,7 @@
           <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MateriaPrima" EntityType="Self.MateriaPrima" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movimiento" EntityType="Self.Movimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovimientoCancelado" EntityType="Self.MovimientoCancelado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PrecioSugerido" EntityType="Self.PrecioSugerido" Schema="dbo" store:Type="Tables" />
@@ -2015,6 +2204,7 @@
           <EntitySet Name="TipoGasto" EntityType="Self.TipoGasto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UbicacionDistribuidor" EntityType="Self.UbicacionDistribuidor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UbicacionPrueba" EntityType="Self.UbicacionPrueba" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zona" EntityType="Self.Zona" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Arqueo_Persona" Association="Self.FK_Arqueo_Persona">
@@ -2037,16 +2227,8 @@
             <End Role="ControlSanitario" EntitySet="ControlSanitario" />
             <End Role="Calificacion" EntitySet="Calificacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cliente_CategoriaCliente" Association="Self.FK_Cliente_CategoriaCliente">
-            <End Role="CategoriaCliente" EntitySet="CategoriaCliente" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cliente_Persona" Association="Self.FK_Cliente_Persona">
             <End Role="Persona" EntitySet="Persona" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Zona" Association="Self.FK_Cliente_Zona">
-            <End Role="Zona" EntitySet="Zona" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_ControlEntrada_Persona" Association="Self.FK_ControlEntrada_Persona">
@@ -2076,6 +2258,18 @@
           <AssociationSet Name="FK_DetalleMovimiento_Producto" Association="Self.FK_DetalleMovimiento_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="DetalleMovimiento" EntitySet="DetalleMovimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Direccion_Cliente" Association="Self.FK_Direccion_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DireccionMovimiento_Direccion" Association="Self.FK_DireccionMovimiento_Direccion">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="DireccionMovimiento" EntitySet="DireccionMovimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DireccionMovimiento_Movimiento" Association="Self.FK_DireccionMovimiento_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimiento" />
+            <End Role="DireccionMovimiento" EntitySet="DireccionMovimiento" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_Ciudad" Association="Self.FK_Empleado_Ciudad">
             <End Role="Ciudad" EntitySet="Ciudad" />
@@ -2137,9 +2331,17 @@
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Movimiento" EntitySet="Movimiento" />
           </AssociationSet>
+          <AssociationSet Name="FK_Movimiento_Dosificacion" Association="Self.FK_Movimiento_Dosificacion">
+            <End Role="Dosificacion" EntitySet="Dosificacion" />
+            <End Role="Movimiento" EntitySet="Movimiento" />
+          </AssociationSet>
           <AssociationSet Name="FK_Movimiento_Usuario" Association="Self.FK_Movimiento_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Movimiento" EntitySet="Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovimientoCancelado_Movimiento" Association="Self.FK_MovimientoCancelado_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimiento" />
+            <End Role="MovimientoCancelado" EntitySet="MovimientoCancelado" />
           </AssociationSet>
           <AssociationSet Name="FK_Pago_Movimiento" Association="Self.FK_Pago_Movimiento">
             <End Role="Movimiento" EntitySet="Movimiento" />
@@ -2289,7 +2491,10 @@
           <NavigationProperty Name="CategoriaCliente" Relationship="Self.FK_Cliente_CategoriaCliente" FromRole="Cliente" ToRole="CategoriaCliente" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Cliente_Persona" FromRole="Cliente" ToRole="Persona" />
           <NavigationProperty Name="Zona" Relationship="Self.FK_Cliente_Zona" FromRole="Cliente" ToRole="Zona" />
-          <NavigationProperty Name="Movimiento" Relationship="aquacorpbddModel.FK_Movimiento_Cliente" FromRole="Cliente" ToRole="Movimiento" />
+          <Property Name="RazonSocial" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NitCi" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Direccion" Relationship="aquacorpbddModel.FK_Direccion_Cliente" FromRole="Cliente" ToRole="Direccion" />
+          <NavigationProperty Name="Movimientoes" Relationship="aquacorpbddModel.FK_Movimiento_Cliente" FromRole="Cliente" ToRole="Movimiento" />
         </EntityType>
         <EntityType Name="ControlEntrada">
           <Key>
@@ -2361,6 +2566,7 @@
           <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Estado" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Producto" Relationship="aquacorpbddModel.FK_DetalleMovimiento_Producto" FromRole="DetalleMovimiento" ToRole="Producto" />
+          <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="Movimiento" Relationship="aquacorpbddModel.FK_DetalleMovimiento_Movimiento" FromRole="DetalleMovimiento" ToRole="Movimiento" />
         </EntityType>
         <EntityType Name="Empleado">
@@ -2398,6 +2604,7 @@
           <NavigationProperty Name="ReferenciaLaboral" Relationship="Self.FK_ReferenciaLaboral_Empleado" FromRole="Empleado" ToRole="ReferenciaLaboral" />
           <NavigationProperty Name="ReferenciaPersonal" Relationship="Self.FK_ReferenciaPersonal_Empleado" FromRole="Empleado" ToRole="ReferenciaPersonal" />
           <NavigationProperty Name="Saldo" Relationship="aquacorpbddModel.FK_Saldo_Empleado" FromRole="Empleado" ToRole="Saldo" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ExceptionLog">
           <Key>
@@ -2588,9 +2795,9 @@
           <NavigationProperty Name="Gasto" Relationship="Self.FK_Gastos_Usuario" FromRole="Usuario" ToRole="Gasto" />
           <NavigationProperty Name="Gasto1" Relationship="Self.FK_Gastos_Usuario1" FromRole="Usuario" ToRole="Gasto" />
           <NavigationProperty Name="Pago" Relationship="Self.FK_Pago_Usuario" FromRole="Usuario" ToRole="Pago" />
-          <NavigationProperty Name="Movimiento" Relationship="aquacorpbddModel.FK_Movimiento_Usuario" FromRole="Usuario" ToRole="Movimiento" />
           <NavigationProperty Name="Arqueo" Relationship="aquacorpbddModel.FK_Arqueo_Usuario" FromRole="Usuario" ToRole="Arqueo" />
           <NavigationProperty Name="UbicacionDistribuidor" Relationship="aquacorpbddModel.FK_UbicacionDistribuidor_Usuario" FromRole="Usuario" ToRole="UbicacionDistribuidor" />
+          <NavigationProperty Name="Movimientoes" Relationship="aquacorpbddModel.FK_Movimiento_Usuario" FromRole="Usuario" ToRole="Movimiento" />
         </EntityType>
         <EntityType Name="Zona">
           <Key>
@@ -3344,7 +3551,6 @@
             <Parameter Name="PrimerApellido" Mode="In" Type="String" />
             <Parameter Name="SegundoApellido" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="FechaModificacion" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="String" />
@@ -3355,18 +3561,14 @@
             <Parameter Name="PrimerApellido" Mode="In" Type="String" />
             <Parameter Name="SegundoApellido" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="FechaModificacion" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="String" />
             <Parameter Name="IdCliente" Mode="In" Type="Int32" />
-            <Parameter Name="IdCategoriaCliente" Mode="In" Type="Byte" />
+            <Parameter Name="RazonSocial" Mode="In" Type="String" />
+            <Parameter Name="NitCi" Mode="In" Type="String" />
             <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
-            <Parameter Name="Latitud" Mode="In" Type="Decimal" />
-            <Parameter Name="Longitud" Mode="In" Type="Decimal" />
-            <Parameter Name="IdZona" Mode="In" Type="Byte" />
             <Parameter Name="FotoUbicacion" Mode="In" Type="Binary" />
-            <Parameter Name="Contrato" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Proc_Persona_Cliente_O" ReturnType="Collection(aquacorpbddModel.Proc_Persona_Cliente_O_Result)" />
           <FunctionImport Name="Proc_Persona_Cliente_O_Buscador" ReturnType="Collection(aquacorpbddModel.Proc_Persona_Cliente_O_Buscador_Result)">
@@ -3381,7 +3583,6 @@
             <Parameter Name="PrimerApellido" Mode="In" Type="String" />
             <Parameter Name="SegundoApellido" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="FechaModificacion" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="String" />
@@ -3391,6 +3592,7 @@
             <Parameter Name="IdCiudad" Mode="In" Type="Byte" />
             <Parameter Name="LugarNacimiento" Mode="In" Type="Byte" />
             <Parameter Name="TelefonoRespaldo" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="EstadoCivil" Mode="In" Type="String" />
             <Parameter Name="NombresPadre" Mode="In" Type="String" />
             <Parameter Name="PrimerApellidoPadre" Mode="In" Type="String" />
@@ -3411,7 +3613,6 @@
             <Parameter Name="PrimerApellido" Mode="In" Type="String" />
             <Parameter Name="SegundoApellido" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="FechaModificacion" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="String" />
@@ -3421,6 +3622,7 @@
             <Parameter Name="IdCiudad" Mode="In" Type="Byte" />
             <Parameter Name="LugarNacimiento" Mode="In" Type="Byte" />
             <Parameter Name="TelefonoRespaldo" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="EstadoCivil" Mode="In" Type="String" />
             <Parameter Name="NombresPadre" Mode="In" Type="String" />
             <Parameter Name="PrimerApellidoPadre" Mode="In" Type="String" />
@@ -3448,7 +3650,6 @@
             <Parameter Name="PrimerApellido" Mode="In" Type="String" />
             <Parameter Name="SegundoApellido" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="FechaModificacion" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="String" />
@@ -3596,17 +3797,16 @@
             <Parameter Name="PrimerApellido" Mode="In" Type="String" />
             <Parameter Name="SegundoApellido" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="FechaModificacion" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="String" />
-            <Parameter Name="IdCategoriaCliente" Mode="In" Type="Byte" />
+            <Parameter Name="RazonSocial" Mode="In" Type="String" />
+            <Parameter Name="NitCi" Mode="In" Type="String" />
             <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="FotoUbicacion" Mode="In" Type="Binary" />
+            <Parameter Name="NombreDireccion" Mode="In" Type="String" />
             <Parameter Name="Latitud" Mode="In" Type="Decimal" />
             <Parameter Name="Longitud" Mode="In" Type="Decimal" />
-            <Parameter Name="IdZona" Mode="In" Type="Byte" />
-            <Parameter Name="FotoUbicacion" Mode="In" Type="Binary" />
-            <Parameter Name="Contrato" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Proc_ControlSanitario_Reporte_Fecha" ReturnType="Collection(aquacorpbddModel.Proc_ControlSanitario_Reporte_Fecha_Result)">
           <Parameter Name="fecha" Mode="In" Type="DateTime" />
@@ -3725,23 +3925,6 @@
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="Movimiento" EntityType="aquacorpbddModel.Movimiento" />
-          <AssociationSet Name="FK_Movimiento_Cliente" Association="aquacorpbddModel.FK_Movimiento_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Movimiento" EntitySet="Movimiento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleMovimiento_Movimiento" Association="aquacorpbddModel.FK_DetalleMovimiento_Movimiento">
-            <End Role="Movimiento" EntitySet="Movimiento" />
-            <End Role="DetalleMovimiento" EntitySet="DetalleMovimiento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Movimiento_Usuario" Association="aquacorpbddModel.FK_Movimiento_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Movimiento" EntitySet="Movimiento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pago_Movimiento" Association="aquacorpbddModel.FK_Pago_Movimiento">
-            <End Role="Movimiento" EntitySet="Movimiento" />
-            <End Role="Pago" EntitySet="Pago" />
-          </AssociationSet>
           <FunctionImport Name="Proc_Arqueo_O_IdUsuario_Fecha" ReturnType="Collection(aquacorpbddModel.Proc_Arqueo_O_IdUsuario_Fecha_Result)">
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
@@ -3978,11 +4161,11 @@
             <Parameter Name="PrimerApellido" Mode="In" Type="String" />
             <Parameter Name="SegundoApellido" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="FechaModificacion" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="String" />
             <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="TelefonoRespaldo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Proc_Persona_Proveedor_I">
@@ -3990,10 +4173,10 @@
             <Parameter Name="PrimerApellido" Mode="In" Type="String" />
             <Parameter Name="SegundoApellido" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="FechaModificacion" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="TelefonoRespaldo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Proc_Persona_Proveedor_O" ReturnType="Collection(aquacorpbddModel.Proc_Persona_Proveedor_O_Result)" />
@@ -4071,8 +4254,51 @@
           <Parameter Name="IdProvision" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Proc_PuntoZona_O_IdZona_Puntos" ReturnType="Collection(Int32)">
-            <Parameter Name="IdZona" Mode="In" Type="Int32" />
+          <Parameter Name="IdZona" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Auditoria" EntityType="aquacorpbddModel.Auditoria" />
+          <EntitySet Name="Direccion" EntityType="aquacorpbddModel.Direccion" />
+          <EntitySet Name="DireccionMovimiento" EntityType="aquacorpbddModel.DireccionMovimiento" />
+          <EntitySet Name="Dosificacion" EntityType="aquacorpbddModel.Dosificacion" />
+          <EntitySet Name="MovimientoCancelado" EntityType="aquacorpbddModel.MovimientoCancelado" />
+          <EntitySet Name="UbicacionPrueba" EntityType="aquacorpbddModel.UbicacionPrueba" />
+          <AssociationSet Name="FK_Direccion_Cliente" Association="aquacorpbddModel.FK_Direccion_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DireccionMovimiento_Direccion" Association="aquacorpbddModel.FK_DireccionMovimiento_Direccion">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="DireccionMovimiento" EntitySet="DireccionMovimiento" />
+          </AssociationSet>
+          <EntitySet Name="Movimientoes" EntityType="aquacorpbddModel.Movimiento" />
+          <AssociationSet Name="FK_Movimiento_Cliente" Association="aquacorpbddModel.FK_Movimiento_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleMovimiento_Movimiento" Association="aquacorpbddModel.FK_DetalleMovimiento_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+            <End Role="DetalleMovimiento" EntitySet="DetalleMovimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DireccionMovimiento_Movimiento" Association="aquacorpbddModel.FK_DireccionMovimiento_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+            <End Role="DireccionMovimiento" EntitySet="DireccionMovimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimiento_Dosificacion" Association="aquacorpbddModel.FK_Movimiento_Dosificacion">
+            <End Role="Dosificacion" EntitySet="Dosificacion" />
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimiento_Usuario" Association="aquacorpbddModel.FK_Movimiento_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovimientoCancelado_Movimiento" Association="aquacorpbddModel.FK_MovimientoCancelado_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+            <End Role="MovimientoCancelado" EntitySet="MovimientoCancelado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pago_Movimiento" Association="aquacorpbddModel.FK_Pago_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="Proc_Articulo_O_Result">
           <Property Type="Int32" Name="IdArticulo" Nullable="false" />
@@ -4862,71 +5088,6 @@
           <Property Type="DateTime" Name="FechaModificacion" Nullable="false" Precision="23" />
           <Property Type="String" Name="Estado" Nullable="false" MaxLength="2" />
         </ComplexType>
-        <EntityType Name="Movimiento">
-          <Key>
-            <PropertyRef Name="IdMovimiento" />
-          </Key>
-          <Property Name="IdMovimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdCliente" Type="Int32" Nullable="false" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="TipoMovimiento" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Cliente" Relationship="aquacorpbddModel.FK_Movimiento_Cliente" FromRole="Movimiento" ToRole="Cliente" />
-          <NavigationProperty Name="DetalleMovimiento" Relationship="aquacorpbddModel.FK_DetalleMovimiento_Movimiento" FromRole="Movimiento" ToRole="DetalleMovimiento" />
-          <NavigationProperty Name="Usuario" Relationship="aquacorpbddModel.FK_Movimiento_Usuario" FromRole="Movimiento" ToRole="Usuario" />
-          <NavigationProperty Name="Pago" Relationship="aquacorpbddModel.FK_Pago_Movimiento" FromRole="Movimiento" ToRole="Pago" />
-        </EntityType>
-        <Association Name="FK_Movimiento_Cliente">
-          <End Type="aquacorpbddModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="Movimiento">
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleMovimiento_Movimiento">
-          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="1" />
-          <End Type="aquacorpbddModel.DetalleMovimiento" Role="DetalleMovimiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Movimiento">
-              <PropertyRef Name="IdMovimiento" />
-            </Principal>
-            <Dependent Role="DetalleMovimiento">
-              <PropertyRef Name="IdMovimiento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Movimiento_Usuario">
-          <End Type="aquacorpbddModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="Movimiento">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pago_Movimiento">
-          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="1" />
-          <End Type="aquacorpbddModel.Pago" Role="Pago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Movimiento">
-              <PropertyRef Name="IdMovimiento" />
-            </Principal>
-            <Dependent Role="Pago">
-              <PropertyRef Name="IdMovimiento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="Proc_Arqueo_O_IdUsuario_Fecha_Result">
           <Property Type="Int32" Name="IdProducto" Nullable="false" />
           <Property Type="Int32" Name="Cantidad" Nullable="true" />
@@ -5266,6 +5427,7 @@
           <NavigationProperty Name="Material" Relationship="aquacorpbddModel.FK_Material_Proveedor" FromRole="Proveedor" ToRole="Material" />
           <NavigationProperty Name="Persona" Relationship="aquacorpbddModel.FK_Proveedor_Persona" FromRole="Proveedor" ToRole="Persona" />
           <NavigationProperty Name="Provision" Relationship="aquacorpbddModel.FK_Provision_Proveedor" FromRole="Proveedor" ToRole="Provision" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Material_Proveedor">
           <End Type="aquacorpbddModel.Proveedor" Role="Proveedor" Multiplicity="1" />
@@ -5446,6 +5608,211 @@
           <Property Type="DateTime" Name="FechaModificacion" Nullable="false" Precision="23" />
           <Property Type="String" Name="Estado" Nullable="false" MaxLength="2" />
         </ComplexType>
+        <EntityType Name="Auditoria">
+          <Key>
+            <PropertyRef Name="IdAuditoria" />
+          </Key>
+          <Property Name="IdAuditoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CRUD" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="IdDireccion" />
+          </Key>
+          <Property Name="IdDireccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="NombreDireccion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Latitud" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="Longitud" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="aquacorpbddModel.FK_Direccion_Cliente" FromRole="Direccion" ToRole="Cliente" />
+          <NavigationProperty Name="DireccionMovimiento" Relationship="aquacorpbddModel.FK_DireccionMovimiento_Direccion" FromRole="Direccion" ToRole="DireccionMovimiento" />
+        </EntityType>
+        <EntityType Name="DireccionMovimiento">
+          <Key>
+            <PropertyRef Name="IdDireccionMovimiento" />
+          </Key>
+          <Property Name="IdDireccionMovimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDireccion" Type="Int32" Nullable="false" />
+          <Property Name="IdMovimiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Direccion" Relationship="aquacorpbddModel.FK_DireccionMovimiento_Direccion" FromRole="DireccionMovimiento" ToRole="Direccion" />
+          <NavigationProperty Name="Movimiento" Relationship="aquacorpbddModel.FK_DireccionMovimiento_Movimiento" FromRole="DireccionMovimiento" ToRole="Movimiento" />
+        </EntityType>
+        <EntityType Name="Dosificacion">
+          <Key>
+            <PropertyRef Name="IdDosificacion" />
+          </Key>
+          <Property Name="IdDosificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NroAutorizacion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FechaLimite" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LlaveDosificacion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NroInicialFactura" Type="Int32" Nullable="false" />
+          <Property Name="NroFinalFactura" Type="Int32" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Movimientoes" Relationship="aquacorpbddModel.FK_Movimiento_Dosificacion" FromRole="Dosificacion" ToRole="Movimiento" />
+        </EntityType>
+        <EntityType Name="MovimientoCancelado">
+          <Key>
+            <PropertyRef Name="IdMovimientoCancelado" />
+          </Key>
+          <Property Name="IdMovimientoCancelado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="Motivo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Movimiento" Relationship="aquacorpbddModel.FK_MovimientoCancelado_Movimiento" FromRole="MovimientoCancelado" ToRole="Movimiento" />
+        </EntityType>
+        <EntityType Name="UbicacionPrueba">
+          <Key>
+            <PropertyRef Name="IdUbicacion" />
+          </Key>
+          <Property Name="IdUbicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCelu" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Latitud" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="Longitud" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Direccion_Cliente">
+          <End Type="aquacorpbddModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="aquacorpbddModel.Direccion" Role="Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DireccionMovimiento_Direccion">
+          <End Type="aquacorpbddModel.Direccion" Role="Direccion" Multiplicity="1" />
+          <End Type="aquacorpbddModel.DireccionMovimiento" Role="DireccionMovimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="IdDireccion" />
+            </Principal>
+            <Dependent Role="DireccionMovimiento">
+              <PropertyRef Name="IdDireccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="IdMovimiento" />
+          </Key>
+          <Property Name="IdMovimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="TipoMovimiento" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="PrecioTotal" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="IdDosificacion" Type="Int32" />
+          <Property Name="NroMovimiento" Type="Int32" />
+          <Property Name="CodigoControl" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NitCi" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="aquacorpbddModel.FK_Movimiento_Cliente" FromRole="Movimiento" ToRole="Cliente" />
+          <NavigationProperty Name="DetalleMovimientoes" Relationship="aquacorpbddModel.FK_DetalleMovimiento_Movimiento" FromRole="Movimiento" ToRole="DetalleMovimiento" />
+          <NavigationProperty Name="DireccionMovimientoes" Relationship="aquacorpbddModel.FK_DireccionMovimiento_Movimiento" FromRole="Movimiento" ToRole="DireccionMovimiento" />
+          <NavigationProperty Name="Dosificacion" Relationship="aquacorpbddModel.FK_Movimiento_Dosificacion" FromRole="Movimiento" ToRole="Dosificacion" />
+          <NavigationProperty Name="Usuario" Relationship="aquacorpbddModel.FK_Movimiento_Usuario" FromRole="Movimiento" ToRole="Usuario" />
+          <NavigationProperty Name="MovimientoCanceladoes" Relationship="aquacorpbddModel.FK_MovimientoCancelado_Movimiento" FromRole="Movimiento" ToRole="MovimientoCancelado" />
+          <NavigationProperty Name="Pagoes" Relationship="aquacorpbddModel.FK_Pago_Movimiento" FromRole="Movimiento" ToRole="Pago" />
+        </EntityType>
+        <Association Name="FK_Movimiento_Cliente">
+          <End Type="aquacorpbddModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleMovimiento_Movimiento">
+          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="1" />
+          <End Type="aquacorpbddModel.DetalleMovimiento" Role="DetalleMovimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Principal>
+            <Dependent Role="DetalleMovimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DireccionMovimiento_Movimiento">
+          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="1" />
+          <End Type="aquacorpbddModel.DireccionMovimiento" Role="DireccionMovimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Principal>
+            <Dependent Role="DireccionMovimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimiento_Dosificacion">
+          <End Type="aquacorpbddModel.Dosificacion" Role="Dosificacion" Multiplicity="0..1" />
+          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dosificacion">
+              <PropertyRef Name="IdDosificacion" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="IdDosificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimiento_Usuario">
+          <End Type="aquacorpbddModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovimientoCancelado_Movimiento">
+          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="1" />
+          <End Type="aquacorpbddModel.MovimientoCancelado" Role="MovimientoCancelado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Principal>
+            <Dependent Role="MovimientoCancelado">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pago_Movimiento">
+          <End Type="aquacorpbddModel.Movimiento" Role="Movimiento" Multiplicity="1" />
+          <End Type="aquacorpbddModel.Pago" Role="Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5525,14 +5892,11 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="aquacorpbddModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="NitCi" ColumnName="NitCi" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="IdCategoriaCliente" ColumnName="IdCategoriaCliente" />
                 <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
-                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
-                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
-                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
                 <ScalarProperty Name="FotoUbicacion" ColumnName="FotoUbicacion" />
-                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5594,6 +5958,7 @@
           <EntitySetMapping Name="DetalleMovimiento">
             <EntityTypeMapping TypeName="aquacorpbddModel.DetalleMovimiento">
               <MappingFragment StoreEntitySet="DetalleMovimiento">
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
                 <ScalarProperty Name="IdDetalleMovimiento" ColumnName="IdDetalleMovimiento" />
                 <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
@@ -5608,6 +5973,7 @@
           <EntitySetMapping Name="Empleado">
             <EntityTypeMapping TypeName="aquacorpbddModel.Empleado">
               <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
                 <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
@@ -5708,7 +6074,6 @@
                 <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
                 <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
@@ -6849,20 +7214,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Movimiento">
-            <EntityTypeMapping TypeName="aquacorpbddModel.Movimiento">
-              <MappingFragment StoreEntitySet="Movimiento">
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="TipoMovimiento" ColumnName="TipoMovimiento" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Proc_Arqueo_O_IdUsuario_Fecha" FunctionName="aquacorpbddModel.Store.Proc_Arqueo_O_IdUsuario_Fecha">
             <ResultMapping>
               <ComplexTypeMapping TypeName="aquacorpbddModel.Proc_Arqueo_O_IdUsuario_Fecha_Result">
@@ -7250,6 +7601,7 @@
           <EntitySetMapping Name="Proveedor">
             <EntityTypeMapping TypeName="aquacorpbddModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
                 <ScalarProperty Name="TelefonoRespaldo" ColumnName="TelefonoRespaldo" />
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
               </MappingFragment>
@@ -7378,6 +7730,97 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Proc_PuntoZona_O_IdZona_Puntos" FunctionName="aquacorpbddModel.Store.Proc_PuntoZona_O_IdZona_Puntos" />
+          <EntitySetMapping Name="Auditoria">
+            <EntityTypeMapping TypeName="aquacorpbddModel.Auditoria">
+              <MappingFragment StoreEntitySet="Auditoria">
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="CRUD" ColumnName="CRUD" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdAuditoria" ColumnName="IdAuditoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direccion">
+            <EntityTypeMapping TypeName="aquacorpbddModel.Direccion">
+              <MappingFragment StoreEntitySet="Direccion">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="NombreDireccion" ColumnName="NombreDireccion" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DireccionMovimiento">
+            <EntityTypeMapping TypeName="aquacorpbddModel.DireccionMovimiento">
+              <MappingFragment StoreEntitySet="DireccionMovimiento">
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
+                <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
+                <ScalarProperty Name="IdDireccionMovimiento" ColumnName="IdDireccionMovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dosificacion">
+            <EntityTypeMapping TypeName="aquacorpbddModel.Dosificacion">
+              <MappingFragment StoreEntitySet="Dosificacion">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="NroFinalFactura" ColumnName="NroFinalFactura" />
+                <ScalarProperty Name="NroInicialFactura" ColumnName="NroInicialFactura" />
+                <ScalarProperty Name="LlaveDosificacion" ColumnName="LlaveDosificacion" />
+                <ScalarProperty Name="FechaLimite" ColumnName="FechaLimite" />
+                <ScalarProperty Name="NroAutorizacion" ColumnName="NroAutorizacion" />
+                <ScalarProperty Name="IdDosificacion" ColumnName="IdDosificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovimientoCancelado">
+            <EntityTypeMapping TypeName="aquacorpbddModel.MovimientoCancelado">
+              <MappingFragment StoreEntitySet="MovimientoCancelado">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
+                <ScalarProperty Name="IdMovimientoCancelado" ColumnName="IdMovimientoCancelado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UbicacionPrueba">
+            <EntityTypeMapping TypeName="aquacorpbddModel.UbicacionPrueba">
+              <MappingFragment StoreEntitySet="UbicacionPrueba">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="NombreCelu" ColumnName="NombreCelu" />
+                <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimientoes">
+            <EntityTypeMapping TypeName="aquacorpbddModel.Movimiento">
+              <MappingFragment StoreEntitySet="Movimiento">
+                <ScalarProperty Name="NitCi" ColumnName="NitCi" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="CodigoControl" ColumnName="CodigoControl" />
+                <ScalarProperty Name="NroMovimiento" ColumnName="NroMovimiento" />
+                <ScalarProperty Name="IdDosificacion" ColumnName="IdDosificacion" />
+                <ScalarProperty Name="PrecioTotal" ColumnName="PrecioTotal" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="TipoMovimiento" ColumnName="TipoMovimiento" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -7392,7 +7835,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

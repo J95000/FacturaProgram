@@ -57,6 +57,19 @@ namespace Modelo
     using System;
     using System.Collections.Generic;
     
+    public partial class Auditoria
+    {
+        public int IdAuditoria { get; set; }
+        public string Descripcion { get; set; }
+        public string CRUD { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+    }
+}
+namespace Modelo
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Calificacion
     {
         public int IdCalificacion { get; set; }
@@ -172,7 +185,8 @@ namespace Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
-            this.Movimiento = new HashSet<Movimiento>();
+            this.Direccion = new HashSet<Direccion>();
+            this.Movimientoes = new HashSet<Movimiento>();
         }
     
         public int IdCliente { get; set; }
@@ -183,12 +197,16 @@ namespace Modelo
         public byte IdZona { get; set; }
         public byte[] FotoUbicacion { get; set; }
         public bool Contrato { get; set; }
+        public string RazonSocial { get; set; }
+        public string NitCi { get; set; }
     
         public virtual CategoriaCliente CategoriaCliente { get; set; }
         public virtual Persona Persona { get; set; }
         public virtual Zona Zona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Movimiento> Movimiento { get; set; }
+        public virtual ICollection<Direccion> Direccion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Movimiento> Movimientoes { get; set; }
     }
 }
 namespace Modelo
@@ -290,9 +308,79 @@ namespace Modelo
         public System.DateTime FechaRegistro { get; set; }
         public System.DateTime FechaModificacion { get; set; }
         public string Estado { get; set; }
+        public Nullable<decimal> SubTotal { get; set; }
     
         public virtual Producto Producto { get; set; }
         public virtual Movimiento Movimiento { get; set; }
+    }
+}
+namespace Modelo
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Direccion
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Direccion()
+        {
+            this.DireccionMovimiento = new HashSet<DireccionMovimiento>();
+        }
+    
+        public int IdDireccion { get; set; }
+        public int IdCliente { get; set; }
+        public string NombreDireccion { get; set; }
+        public decimal Latitud { get; set; }
+        public decimal Longitud { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
+        public System.DateTime FechaModificacion { get; set; }
+        public string Estado { get; set; }
+    
+        public virtual Cliente Cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DireccionMovimiento> DireccionMovimiento { get; set; }
+    }
+}
+namespace Modelo
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DireccionMovimiento
+    {
+        public int IdDireccionMovimiento { get; set; }
+        public int IdDireccion { get; set; }
+        public int IdMovimiento { get; set; }
+    
+        public virtual Direccion Direccion { get; set; }
+        public virtual Movimiento Movimiento { get; set; }
+    }
+}
+namespace Modelo
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Dosificacion
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Dosificacion()
+        {
+            this.Movimientoes = new HashSet<Movimiento>();
+        }
+    
+        public int IdDosificacion { get; set; }
+        public string NroAutorizacion { get; set; }
+        public System.DateTime FechaLimite { get; set; }
+        public string LlaveDosificacion { get; set; }
+        public int NroInicialFactura { get; set; }
+        public Nullable<int> NroFinalFactura { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public string Estado { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Movimiento> Movimientoes { get; set; }
     }
 }
 namespace Modelo
@@ -334,6 +422,7 @@ namespace Modelo
         public System.DateTime FechaInicioTrabajo { get; set; }
         public string Garantia { get; set; }
         public byte[] Fotografia { get; set; }
+        public string Direccion { get; set; }
     
         public virtual Cargo Cargo { get; set; }
         public virtual Ciudad Ciudad { get; set; }
@@ -513,8 +602,10 @@ namespace Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Movimiento()
         {
-            this.DetalleMovimiento = new HashSet<DetalleMovimiento>();
-            this.Pago = new HashSet<Pago>();
+            this.DetalleMovimientoes = new HashSet<DetalleMovimiento>();
+            this.DireccionMovimientoes = new HashSet<DireccionMovimiento>();
+            this.MovimientoCanceladoes = new HashSet<MovimientoCancelado>();
+            this.Pagoes = new HashSet<Pago>();
         }
     
         public int IdMovimiento { get; set; }
@@ -525,13 +616,41 @@ namespace Modelo
         public System.DateTime FechaRegistro { get; set; }
         public System.DateTime FechaModificacion { get; set; }
         public string Estado { get; set; }
+        public Nullable<decimal> PrecioTotal { get; set; }
+        public Nullable<int> IdDosificacion { get; set; }
+        public Nullable<int> NroMovimiento { get; set; }
+        public string CodigoControl { get; set; }
+        public string RazonSocial { get; set; }
+        public string NitCi { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleMovimiento> DetalleMovimiento { get; set; }
+        public virtual ICollection<DetalleMovimiento> DetalleMovimientoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DireccionMovimiento> DireccionMovimientoes { get; set; }
+        public virtual Dosificacion Dosificacion { get; set; }
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pago> Pago { get; set; }
+        public virtual ICollection<MovimientoCancelado> MovimientoCanceladoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pago> Pagoes { get; set; }
+    }
+}
+namespace Modelo
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class MovimientoCancelado
+    {
+        public int IdMovimientoCancelado { get; set; }
+        public int IdMovimiento { get; set; }
+        public string Motivo { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
+        public System.DateTime FechaModificacion { get; set; }
+        public string Estado { get; set; }
+    
+        public virtual Movimiento Movimiento { get; set; }
     }
 }
 namespace Modelo
@@ -676,6 +795,7 @@ namespace Modelo
     
         public int IdProveedor { get; set; }
         public string TelefonoRespaldo { get; set; }
+        public string Direccion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Material> Material { get; set; }
@@ -858,6 +978,20 @@ namespace Modelo
     using System;
     using System.Collections.Generic;
     
+    public partial class UbicacionPrueba
+    {
+        public int IdUbicacion { get; set; }
+        public string NombreCelu { get; set; }
+        public decimal Latitud { get; set; }
+        public decimal Longitud { get; set; }
+        public System.DateTime Fecha { get; set; }
+    }
+}
+namespace Modelo
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -871,9 +1005,9 @@ namespace Modelo
             this.Gasto = new HashSet<Gasto>();
             this.Gasto1 = new HashSet<Gasto>();
             this.Pago = new HashSet<Pago>();
-            this.Movimiento = new HashSet<Movimiento>();
             this.Arqueo = new HashSet<Arqueo>();
             this.UbicacionDistribuidor = new HashSet<UbicacionDistribuidor>();
+            this.Movimientoes = new HashSet<Movimiento>();
         }
     
         public int IdUsuario { get; set; }
@@ -899,11 +1033,11 @@ namespace Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Pago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Movimiento> Movimiento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Arqueo> Arqueo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UbicacionDistribuidor> UbicacionDistribuidor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Movimiento> Movimientoes { get; set; }
     }
 }
 namespace Modelo

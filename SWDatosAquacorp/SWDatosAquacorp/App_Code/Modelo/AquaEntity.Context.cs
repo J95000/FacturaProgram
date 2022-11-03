@@ -57,7 +57,6 @@ namespace Modelo
         public virtual DbSet<TipoGasto> TipoGasto { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Saldo> Saldo { get; set; }
-        public virtual DbSet<Movimiento> Movimiento { get; set; }
         public virtual DbSet<Arqueo> Arqueo { get; set; }
         public virtual DbSet<UbicacionDistribuidor> UbicacionDistribuidor { get; set; }
         public virtual DbSet<ExistenciaMateriaPrima> ExistenciaMateriaPrima { get; set; }
@@ -66,6 +65,13 @@ namespace Modelo
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<MateriaPrima> MateriaPrima { get; set; }
         public virtual DbSet<Provision> Provision { get; set; }
+        public virtual DbSet<Auditoria> Auditoria { get; set; }
+        public virtual DbSet<Direccion> Direccion { get; set; }
+        public virtual DbSet<DireccionMovimiento> DireccionMovimiento { get; set; }
+        public virtual DbSet<Dosificacion> Dosificacion { get; set; }
+        public virtual DbSet<MovimientoCancelado> MovimientoCancelado { get; set; }
+        public virtual DbSet<UbicacionPrueba> UbicacionPrueba { get; set; }
+        public virtual DbSet<Movimiento> Movimientoes { get; set; }
     
         public virtual int Proc_Articulo_A(Nullable<int> idArticulo, Nullable<byte> idCategoria, Nullable<int> idUsuario, string titulo, string descripcion, string contenido, string imagen, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
         {
@@ -1175,7 +1181,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Pago_O_IdPago_Result>("Proc_Pago_O_IdPago", idPagoParameter);
         }
     
-        public virtual int Proc_Persona_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, string direccion, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
+        public virtual int Proc_Persona_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
         {
             var idPersonaParameter = idPersona.HasValue ?
                 new ObjectParameter("IdPersona", idPersona) :
@@ -1196,10 +1202,6 @@ namespace Modelo
             var telefonoParameter = telefono != null ?
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
     
             var fechaRegistroParameter = fechaRegistro.HasValue ?
                 new ObjectParameter("FechaRegistro", fechaRegistro) :
@@ -1213,10 +1215,10 @@ namespace Modelo
                 new ObjectParameter("Estado", estado) :
                 new ObjectParameter("Estado", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, direccionParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
         }
     
-        public virtual int Proc_Persona_Cliente_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, string direccion, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<int> idCliente, Nullable<byte> idCategoriaCliente, string correoElectronico, Nullable<decimal> latitud, Nullable<decimal> longitud, Nullable<byte> idZona, byte[] fotoUbicacion, Nullable<bool> contrato)
+        public virtual int Proc_Persona_Cliente_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<int> idCliente, string razonSocial, string nitCi, string correoElectronico, byte[] fotoUbicacion)
         {
             var idPersonaParameter = idPersona.HasValue ?
                 new ObjectParameter("IdPersona", idPersona) :
@@ -1237,10 +1239,6 @@ namespace Modelo
             var telefonoParameter = telefono != null ?
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
     
             var fechaRegistroParameter = fechaRegistro.HasValue ?
                 new ObjectParameter("FechaRegistro", fechaRegistro) :
@@ -1258,35 +1256,23 @@ namespace Modelo
                 new ObjectParameter("IdCliente", idCliente) :
                 new ObjectParameter("IdCliente", typeof(int));
     
-            var idCategoriaClienteParameter = idCategoriaCliente.HasValue ?
-                new ObjectParameter("IdCategoriaCliente", idCategoriaCliente) :
-                new ObjectParameter("IdCategoriaCliente", typeof(byte));
+            var razonSocialParameter = razonSocial != null ?
+                new ObjectParameter("RazonSocial", razonSocial) :
+                new ObjectParameter("RazonSocial", typeof(string));
+    
+            var nitCiParameter = nitCi != null ?
+                new ObjectParameter("NitCi", nitCi) :
+                new ObjectParameter("NitCi", typeof(string));
     
             var correoElectronicoParameter = correoElectronico != null ?
                 new ObjectParameter("CorreoElectronico", correoElectronico) :
                 new ObjectParameter("CorreoElectronico", typeof(string));
     
-            var latitudParameter = latitud.HasValue ?
-                new ObjectParameter("Latitud", latitud) :
-                new ObjectParameter("Latitud", typeof(decimal));
-    
-            var longitudParameter = longitud.HasValue ?
-                new ObjectParameter("Longitud", longitud) :
-                new ObjectParameter("Longitud", typeof(decimal));
-    
-            var idZonaParameter = idZona.HasValue ?
-                new ObjectParameter("IdZona", idZona) :
-                new ObjectParameter("IdZona", typeof(byte));
-    
             var fotoUbicacionParameter = fotoUbicacion != null ?
                 new ObjectParameter("FotoUbicacion", fotoUbicacion) :
                 new ObjectParameter("FotoUbicacion", typeof(byte[]));
     
-            var contratoParameter = contrato.HasValue ?
-                new ObjectParameter("Contrato", contrato) :
-                new ObjectParameter("Contrato", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Cliente_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, direccionParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idClienteParameter, idCategoriaClienteParameter, correoElectronicoParameter, latitudParameter, longitudParameter, idZonaParameter, fotoUbicacionParameter, contratoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Cliente_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idClienteParameter, razonSocialParameter, nitCiParameter, correoElectronicoParameter, fotoUbicacionParameter);
         }
     
         public virtual ObjectResult<Proc_Persona_Cliente_O_Result> Proc_Persona_Cliente_O()
@@ -1312,7 +1298,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Cliente_O_IdCliente_Result>("Proc_Persona_Cliente_O_IdCliente", idClienteParameter);
         }
     
-        public virtual int Proc_Persona_Empleado_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, string direccion, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<byte> idCargo, Nullable<System.DateTime> fechaNacimiento, string ci, Nullable<byte> idCiudad, Nullable<byte> lugarNacimiento, string telefonoRespaldo, string estadoCivil, string nombresPadre, string primerApellidoPadre, string segundoApellidoPadre, string ocupacionPadre, string nombresMadre, string primerApellidoMadre, string segundoApellidoMadre, string ocupacionMadre, string ultimoCurso, string colegioUnidadEducativa, Nullable<System.DateTime> fechaInicioTrabajo, string garantia, byte[] fotografia)
+        public virtual int Proc_Persona_Empleado_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<byte> idCargo, Nullable<System.DateTime> fechaNacimiento, string ci, Nullable<byte> idCiudad, Nullable<byte> lugarNacimiento, string telefonoRespaldo, string direccion, string estadoCivil, string nombresPadre, string primerApellidoPadre, string segundoApellidoPadre, string ocupacionPadre, string nombresMadre, string primerApellidoMadre, string segundoApellidoMadre, string ocupacionMadre, string ultimoCurso, string colegioUnidadEducativa, Nullable<System.DateTime> fechaInicioTrabajo, string garantia, byte[] fotografia)
         {
             var idPersonaParameter = idPersona.HasValue ?
                 new ObjectParameter("IdPersona", idPersona) :
@@ -1334,10 +1320,6 @@ namespace Modelo
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
     
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
             var fechaRegistroParameter = fechaRegistro.HasValue ?
                 new ObjectParameter("FechaRegistro", fechaRegistro) :
                 new ObjectParameter("FechaRegistro", typeof(System.DateTime));
@@ -1373,6 +1355,10 @@ namespace Modelo
             var telefonoRespaldoParameter = telefonoRespaldo != null ?
                 new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
                 new ObjectParameter("TelefonoRespaldo", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
     
             var estadoCivilParameter = estadoCivil != null ?
                 new ObjectParameter("EstadoCivil", estadoCivil) :
@@ -1430,10 +1416,10 @@ namespace Modelo
                 new ObjectParameter("Fotografia", fotografia) :
                 new ObjectParameter("Fotografia", typeof(byte[]));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Empleado_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, direccionParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idCargoParameter, fechaNacimientoParameter, ciParameter, idCiudadParameter, lugarNacimientoParameter, telefonoRespaldoParameter, estadoCivilParameter, nombresPadreParameter, primerApellidoPadreParameter, segundoApellidoPadreParameter, ocupacionPadreParameter, nombresMadreParameter, primerApellidoMadreParameter, segundoApellidoMadreParameter, ocupacionMadreParameter, ultimoCursoParameter, colegioUnidadEducativaParameter, fechaInicioTrabajoParameter, garantiaParameter, fotografiaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Empleado_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idCargoParameter, fechaNacimientoParameter, ciParameter, idCiudadParameter, lugarNacimientoParameter, telefonoRespaldoParameter, direccionParameter, estadoCivilParameter, nombresPadreParameter, primerApellidoPadreParameter, segundoApellidoPadreParameter, ocupacionPadreParameter, nombresMadreParameter, primerApellidoMadreParameter, segundoApellidoMadreParameter, ocupacionMadreParameter, ultimoCursoParameter, colegioUnidadEducativaParameter, fechaInicioTrabajoParameter, garantiaParameter, fotografiaParameter);
         }
     
-        public virtual int Proc_Persona_Empleado_I(string nombres, string primerApellido, string segundoApellido, string telefono, string direccion, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<byte> idCargo, Nullable<System.DateTime> fechaNacimiento, string ci, Nullable<byte> idCiudad, Nullable<byte> lugarNacimiento, string telefonoRespaldo, string estadoCivil, string nombresPadre, string primerApellidoPadre, string segundoApellidoPadre, string ocupacionPadre, string nombresMadre, string primerApellidoMadre, string segundoApellidoMadre, string ocupacionMadre, string ultimoCurso, string colegioUnidadEducativa, Nullable<System.DateTime> fechaInicioTrabajo, string garantia, byte[] fotografia)
+        public virtual int Proc_Persona_Empleado_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<byte> idCargo, Nullable<System.DateTime> fechaNacimiento, string ci, Nullable<byte> idCiudad, Nullable<byte> lugarNacimiento, string telefonoRespaldo, string direccion, string estadoCivil, string nombresPadre, string primerApellidoPadre, string segundoApellidoPadre, string ocupacionPadre, string nombresMadre, string primerApellidoMadre, string segundoApellidoMadre, string ocupacionMadre, string ultimoCurso, string colegioUnidadEducativa, Nullable<System.DateTime> fechaInicioTrabajo, string garantia, byte[] fotografia)
         {
             var nombresParameter = nombres != null ?
                 new ObjectParameter("Nombres", nombres) :
@@ -1451,10 +1437,6 @@ namespace Modelo
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
     
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
             var fechaRegistroParameter = fechaRegistro.HasValue ?
                 new ObjectParameter("FechaRegistro", fechaRegistro) :
                 new ObjectParameter("FechaRegistro", typeof(System.DateTime));
@@ -1490,6 +1472,10 @@ namespace Modelo
             var telefonoRespaldoParameter = telefonoRespaldo != null ?
                 new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
                 new ObjectParameter("TelefonoRespaldo", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
     
             var estadoCivilParameter = estadoCivil != null ?
                 new ObjectParameter("EstadoCivil", estadoCivil) :
@@ -1547,7 +1533,7 @@ namespace Modelo
                 new ObjectParameter("Fotografia", fotografia) :
                 new ObjectParameter("Fotografia", typeof(byte[]));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Empleado_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, direccionParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idCargoParameter, fechaNacimientoParameter, ciParameter, idCiudadParameter, lugarNacimientoParameter, telefonoRespaldoParameter, estadoCivilParameter, nombresPadreParameter, primerApellidoPadreParameter, segundoApellidoPadreParameter, ocupacionPadreParameter, nombresMadreParameter, primerApellidoMadreParameter, segundoApellidoMadreParameter, ocupacionMadreParameter, ultimoCursoParameter, colegioUnidadEducativaParameter, fechaInicioTrabajoParameter, garantiaParameter, fotografiaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Empleado_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idCargoParameter, fechaNacimientoParameter, ciParameter, idCiudadParameter, lugarNacimientoParameter, telefonoRespaldoParameter, direccionParameter, estadoCivilParameter, nombresPadreParameter, primerApellidoPadreParameter, segundoApellidoPadreParameter, ocupacionPadreParameter, nombresMadreParameter, primerApellidoMadreParameter, segundoApellidoMadreParameter, ocupacionMadreParameter, ultimoCursoParameter, colegioUnidadEducativaParameter, fechaInicioTrabajoParameter, garantiaParameter, fotografiaParameter);
         }
     
         public virtual ObjectResult<Proc_Persona_Empleado_O_Result> Proc_Persona_Empleado_O()
@@ -1573,7 +1559,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Empleado_O_IdEmpleado_Result>("Proc_Persona_Empleado_O_IdEmpleado", idEmpleadoParameter);
         }
     
-        public virtual int Proc_Persona_I(string nombres, string primerApellido, string segundoApellido, string telefono, string direccion, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
+        public virtual int Proc_Persona_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
         {
             var nombresParameter = nombres != null ?
                 new ObjectParameter("Nombres", nombres) :
@@ -1591,10 +1577,6 @@ namespace Modelo
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
     
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
             var fechaRegistroParameter = fechaRegistro.HasValue ?
                 new ObjectParameter("FechaRegistro", fechaRegistro) :
                 new ObjectParameter("FechaRegistro", typeof(System.DateTime));
@@ -1607,7 +1589,7 @@ namespace Modelo
                 new ObjectParameter("Estado", estado) :
                 new ObjectParameter("Estado", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, direccionParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
         }
     
         public virtual ObjectResult<Proc_Persona_O_Result> Proc_Persona_O()
@@ -2113,7 +2095,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Zona_O_IdZona_Result>("Proc_Zona_O_IdZona", idZonaParameter);
         }
     
-        public virtual int Proc_Persona_Cliente_I(string nombres, string primerApellido, string segundoApellido, string telefono, string direccion, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<byte> idCategoriaCliente, string correoElectronico, Nullable<decimal> latitud, Nullable<decimal> longitud, Nullable<byte> idZona, byte[] fotoUbicacion, Nullable<bool> contrato)
+        public virtual int Proc_Persona_Cliente_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, string razonSocial, string nitCi, string correoElectronico, byte[] fotoUbicacion, string nombreDireccion, Nullable<decimal> latitud, Nullable<decimal> longitud)
         {
             var nombresParameter = nombres != null ?
                 new ObjectParameter("Nombres", nombres) :
@@ -2131,10 +2113,6 @@ namespace Modelo
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
     
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
             var fechaRegistroParameter = fechaRegistro.HasValue ?
                 new ObjectParameter("FechaRegistro", fechaRegistro) :
                 new ObjectParameter("FechaRegistro", typeof(System.DateTime));
@@ -2147,13 +2125,25 @@ namespace Modelo
                 new ObjectParameter("Estado", estado) :
                 new ObjectParameter("Estado", typeof(string));
     
-            var idCategoriaClienteParameter = idCategoriaCliente.HasValue ?
-                new ObjectParameter("IdCategoriaCliente", idCategoriaCliente) :
-                new ObjectParameter("IdCategoriaCliente", typeof(byte));
+            var razonSocialParameter = razonSocial != null ?
+                new ObjectParameter("RazonSocial", razonSocial) :
+                new ObjectParameter("RazonSocial", typeof(string));
+    
+            var nitCiParameter = nitCi != null ?
+                new ObjectParameter("NitCi", nitCi) :
+                new ObjectParameter("NitCi", typeof(string));
     
             var correoElectronicoParameter = correoElectronico != null ?
                 new ObjectParameter("CorreoElectronico", correoElectronico) :
                 new ObjectParameter("CorreoElectronico", typeof(string));
+    
+            var fotoUbicacionParameter = fotoUbicacion != null ?
+                new ObjectParameter("FotoUbicacion", fotoUbicacion) :
+                new ObjectParameter("FotoUbicacion", typeof(byte[]));
+    
+            var nombreDireccionParameter = nombreDireccion != null ?
+                new ObjectParameter("NombreDireccion", nombreDireccion) :
+                new ObjectParameter("NombreDireccion", typeof(string));
     
             var latitudParameter = latitud.HasValue ?
                 new ObjectParameter("Latitud", latitud) :
@@ -2163,19 +2153,7 @@ namespace Modelo
                 new ObjectParameter("Longitud", longitud) :
                 new ObjectParameter("Longitud", typeof(decimal));
     
-            var idZonaParameter = idZona.HasValue ?
-                new ObjectParameter("IdZona", idZona) :
-                new ObjectParameter("IdZona", typeof(byte));
-    
-            var fotoUbicacionParameter = fotoUbicacion != null ?
-                new ObjectParameter("FotoUbicacion", fotoUbicacion) :
-                new ObjectParameter("FotoUbicacion", typeof(byte[]));
-    
-            var contratoParameter = contrato.HasValue ?
-                new ObjectParameter("Contrato", contrato) :
-                new ObjectParameter("Contrato", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Cliente_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, direccionParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idCategoriaClienteParameter, correoElectronicoParameter, latitudParameter, longitudParameter, idZonaParameter, fotoUbicacionParameter, contratoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Cliente_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, razonSocialParameter, nitCiParameter, correoElectronicoParameter, fotoUbicacionParameter, nombreDireccionParameter, latitudParameter, longitudParameter);
         }
     
         public virtual ObjectResult<Proc_ControlSanitario_Reporte_Fecha_Result> Proc_ControlSanitario_Reporte_Fecha(Nullable<System.DateTime> fecha)
@@ -3228,7 +3206,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Produccion_O_IdProduccion_Result>("Proc_Produccion_O_IdProduccion", idProduccionParameter);
         }
     
-        public virtual int Proc_Persona_Proveedor_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, string direccion, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<int> idProveedor, string telefonoRespaldo)
+        public virtual int Proc_Persona_Proveedor_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<int> idProveedor, string direccion, string telefonoRespaldo)
         {
             var idPersonaParameter = idPersona.HasValue ?
                 new ObjectParameter("IdPersona", idPersona) :
@@ -3250,10 +3228,6 @@ namespace Modelo
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
     
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
             var fechaRegistroParameter = fechaRegistro.HasValue ?
                 new ObjectParameter("FechaRegistro", fechaRegistro) :
                 new ObjectParameter("FechaRegistro", typeof(System.DateTime));
@@ -3270,14 +3244,18 @@ namespace Modelo
                 new ObjectParameter("IdProveedor", idProveedor) :
                 new ObjectParameter("IdProveedor", typeof(int));
     
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
             var telefonoRespaldoParameter = telefonoRespaldo != null ?
                 new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
                 new ObjectParameter("TelefonoRespaldo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Proveedor_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, direccionParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idProveedorParameter, telefonoRespaldoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Proveedor_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idProveedorParameter, direccionParameter, telefonoRespaldoParameter);
         }
     
-        public virtual int Proc_Persona_Proveedor_I(string nombres, string primerApellido, string segundoApellido, string telefono, string direccion, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, string telefonoRespaldo)
+        public virtual int Proc_Persona_Proveedor_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, string direccion, string telefonoRespaldo)
         {
             var nombresParameter = nombres != null ?
                 new ObjectParameter("Nombres", nombres) :
@@ -3295,10 +3273,6 @@ namespace Modelo
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
     
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
             var fechaRegistroParameter = fechaRegistro.HasValue ?
                 new ObjectParameter("FechaRegistro", fechaRegistro) :
                 new ObjectParameter("FechaRegistro", typeof(System.DateTime));
@@ -3311,11 +3285,15 @@ namespace Modelo
                 new ObjectParameter("Estado", estado) :
                 new ObjectParameter("Estado", typeof(string));
     
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
             var telefonoRespaldoParameter = telefonoRespaldo != null ?
                 new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
                 new ObjectParameter("TelefonoRespaldo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Proveedor_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, direccionParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, telefonoRespaldoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Proveedor_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, direccionParameter, telefonoRespaldoParameter);
         }
     
         public virtual ObjectResult<Proc_Persona_Proveedor_O_Result> Proc_Persona_Proveedor_O()

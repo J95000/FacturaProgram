@@ -24,7 +24,14 @@ public class CPersona
         {
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
-                db.Proc_Persona_I(ePersonaSimple.Nombres, ePersonaSimple.PrimerApellido, ePersonaSimple.SegundoApellido, ePersonaSimple.Telefono, ePersonaSimple.Direccion, ePersonaSimple.FechaRegistro, ePersonaSimple.FechaModificacion, ePersonaSimple.Estado);
+                db.Proc_Persona_I(
+                    ePersonaSimple.Nombres, 
+                    ePersonaSimple.PrimerApellido,
+                    ePersonaSimple.SegundoApellido,
+                    ePersonaSimple.Telefono,
+                    ePersonaSimple.FechaRegistro, 
+                    ePersonaSimple.FechaModificacion, 
+                    ePersonaSimple.Estado);
 
             }
         }
@@ -44,7 +51,15 @@ public class CPersona
         {
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
-                db.Proc_Persona_A(ePersonaSimple.IdPersona, ePersonaSimple.Nombres, ePersonaSimple.PrimerApellido, ePersonaSimple.SegundoApellido, ePersonaSimple.Telefono, ePersonaSimple.Direccion, ePersonaSimple.FechaRegistro, ePersonaSimple.FechaModificacion, ePersonaSimple.Estado);
+                db.Proc_Persona_A(
+                    ePersonaSimple.IdPersona, 
+                    ePersonaSimple.Nombres, 
+                    ePersonaSimple.PrimerApellido, 
+                    ePersonaSimple.SegundoApellido, 
+                    ePersonaSimple.Telefono, 
+                    ePersonaSimple.FechaRegistro,
+                    ePersonaSimple.FechaModificacion, 
+                    ePersonaSimple.Estado);
                
             }
         }

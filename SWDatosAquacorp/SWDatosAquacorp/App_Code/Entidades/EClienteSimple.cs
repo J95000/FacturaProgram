@@ -29,7 +29,10 @@ public class EClienteSimple : EPersonaSimple
     public byte[] FotoUbicacion { get; set; }
     [DataMember]
     public bool Contrato { get; set; }
-
+    [DataMember]
+    public string RazonSocial{ get; set; }
+    [DataMember]
+    public string NitCi{ get; set; }
     /// <summary>
     /// 
     /// </summary>
@@ -43,5 +46,7 @@ public class EClienteSimple : EPersonaSimple
         IdZona = 0;
         FotoUbicacion = new Byte[0];
         Contrato = false;
+        NitCi = "0";
+        RazonSocial = string.Empty;
     }
 }

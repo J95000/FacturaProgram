@@ -94,6 +94,11 @@
         <ShellContent Route="Gastos"
                       ContentTemplate="{DataTemplate local:ItemPage3}"/>
     </FlyoutItem>
+    <FlyoutItem Title="Activar Dosificación"
+                Icon="ventas.png">
+        <ShellContent Route="Dosificacion"
+                      ContentTemplate="{DataTemplate local:DosificationPage}"/>
+    </FlyoutItem>
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Salir" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>

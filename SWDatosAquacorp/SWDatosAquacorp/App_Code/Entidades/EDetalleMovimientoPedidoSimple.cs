@@ -1,5 +1,7 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Runtime.Serialization;
 
 /// <summary>
@@ -8,7 +10,7 @@ using System.Runtime.Serialization;
 
 
 [DataContract]
-public class EDetalleMovimientoSimple
+public class EDetalleMovimientoPedidoSimple
 {
     [DataMember]
     public int IdDetalleMovimiento { get; set; }
@@ -17,31 +19,22 @@ public class EDetalleMovimientoSimple
     [DataMember]
     public int IdProducto { get; set; }
     [DataMember]
+    public string NombreProducto { get; set; }
+    [DataMember]
     public decimal PrecioUnitario { get; set; }
     [DataMember]
     public byte Cantidad { get; set; }
     [DataMember]
-    public DateTime FechaRegistro { get; set; }
-    [DataMember]
-    public DateTime FechaModificacion { get; set; }
-    [DataMember]
-    public string Estado { get; set; }
-    [DataMember]
-    public decimal? SubTotal { get; set; }
+    public decimal SubTotal { get; set; }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public EDetalleMovimientoSimple()
+    public EDetalleMovimientoPedidoSimple()
     {
         IdDetalleMovimiento = 0;
         IdMovimiento = 0;
         IdProducto = 0;
+        NombreProducto = string.Empty;
         PrecioUnitario = 0;
         Cantidad = 0;
-        FechaRegistro = DateTime.Now;
-        FechaModificacion = DateTime.Now;
-        Estado = string.Empty;
-        SubTotal = null;
+        SubTotal = 0;
     }
 }

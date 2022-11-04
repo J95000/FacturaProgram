@@ -11,6 +11,8 @@ public class EProveedorSimple : EPersonaSimple
     [DataMember]
     public int IdProveedor { get; set; }
     [DataMember]
+    public string Direccion { get; set; }
+    [DataMember]
     public string TelefonoRespaldo { get; set; }
 
 
@@ -21,6 +23,7 @@ public class EProveedorSimple : EPersonaSimple
     public EProveedorSimple()
     {
         IdProveedor = 0;
+        Direccion = string.Empty;
         TelefonoRespaldo = string.Empty;
    
     }

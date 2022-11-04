@@ -1,6 +1,8 @@
-﻿using Modelo;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Modelo;
 /// <summary>
 /// Descripción breve de CEmpleado
 /// </summary>
@@ -18,34 +20,7 @@ public class CEmpleado
         {
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
-                db.Proc_Persona_Empleado_I(eEmpleadoSimple.Nombres,
-                    eEmpleadoSimple.PrimerApellido,
-                    eEmpleadoSimple.SegundoApellido,
-                    eEmpleadoSimple.Telefono,
-                    eEmpleadoSimple.FechaRegistro,
-                    eEmpleadoSimple.FechaModificacion,
-                    eEmpleadoSimple.Estado,
-                    eEmpleadoSimple.IdCargo,
-                    eEmpleadoSimple.FechaNacimiento,
-                    eEmpleadoSimple.Ci,
-                    eEmpleadoSimple.IdCiudad,
-                    eEmpleadoSimple.LugarNacimiento,
-                    eEmpleadoSimple.TelefonoRespaldo, 
-                    eEmpleadoSimple.Direccion, 
-                    eEmpleadoSimple.EstadoCivil, 
-                    eEmpleadoSimple.NombresPadre,      
-                    eEmpleadoSimple.PrimerApellidoPadre,
-                    eEmpleadoSimple.SegundoApellidoPadre,
-                    eEmpleadoSimple.OcupacionPadre, 
-                    eEmpleadoSimple.NombresMadre, 
-                    eEmpleadoSimple.PrimerApellidoMadre, 
-                    eEmpleadoSimple.SegundoApellidoMadre, 
-                    eEmpleadoSimple.OcupacionMadre, 
-                    eEmpleadoSimple.UltimoCurso, 
-                    eEmpleadoSimple.ColegioUnidadEducativa, 
-                    eEmpleadoSimple.FechaInicioTrabajo, 
-                    eEmpleadoSimple.Garantia, 
-                    eEmpleadoSimple.Fotografia);
+                db.Proc_Persona_Empleado_I(eEmpleadoSimple.Nombres, eEmpleadoSimple.PrimerApellido, eEmpleadoSimple.SegundoApellido, eEmpleadoSimple.Telefono,  eEmpleadoSimple.FechaRegistro, eEmpleadoSimple.FechaModificacion, eEmpleadoSimple.Estado, eEmpleadoSimple.IdCargo, eEmpleadoSimple.FechaNacimiento, eEmpleadoSimple.Ci, eEmpleadoSimple.IdCiudad, eEmpleadoSimple.LugarNacimiento, eEmpleadoSimple.TelefonoRespaldo, eEmpleadoSimple.Direccion, eEmpleadoSimple.EstadoCivil, eEmpleadoSimple.NombresPadre, eEmpleadoSimple.PrimerApellidoPadre, eEmpleadoSimple.SegundoApellidoPadre, eEmpleadoSimple.OcupacionPadre, eEmpleadoSimple.NombresMadre, eEmpleadoSimple.PrimerApellidoMadre, eEmpleadoSimple.SegundoApellidoMadre, eEmpleadoSimple.OcupacionMadre, eEmpleadoSimple.UltimoCurso, eEmpleadoSimple.ColegioUnidadEducativa, eEmpleadoSimple.FechaInicioTrabajo, eEmpleadoSimple.Garantia, eEmpleadoSimple.Fotografia);
             }
         }
         catch (Exception ex)
@@ -62,36 +37,7 @@ public class CEmpleado
         {
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
-                db.Proc_Persona_Empleado_A(
-                    eEmpleadoSimple.IdPersona, 
-                    eEmpleadoSimple.Nombres, 
-                    eEmpleadoSimple.PrimerApellido,
-                    eEmpleadoSimple.SegundoApellido,
-                    eEmpleadoSimple.Telefono,  
-                    eEmpleadoSimple.FechaRegistro, 
-                    eEmpleadoSimple.FechaModificacion,
-                    eEmpleadoSimple.Estado,
-                    eEmpleadoSimple.IdCargo,
-                    eEmpleadoSimple.FechaNacimiento,
-                    eEmpleadoSimple.Ci, 
-                    eEmpleadoSimple.IdCiudad, 
-                    eEmpleadoSimple.LugarNacimiento,
-                    eEmpleadoSimple.TelefonoRespaldo,
-                    eEmpleadoSimple.Direccion,
-                    eEmpleadoSimple.EstadoCivil, 
-                    eEmpleadoSimple.NombresPadre, 
-                    eEmpleadoSimple.PrimerApellidoPadre,
-                    eEmpleadoSimple.SegundoApellidoPadre,
-                    eEmpleadoSimple.OcupacionPadre, 
-                    eEmpleadoSimple.NombresMadre,
-                    eEmpleadoSimple.PrimerApellidoMadre, 
-                    eEmpleadoSimple.SegundoApellidoMadre, 
-                    eEmpleadoSimple.OcupacionMadre, 
-                    eEmpleadoSimple.UltimoCurso, 
-                    eEmpleadoSimple.ColegioUnidadEducativa, 
-                    eEmpleadoSimple.FechaInicioTrabajo, 
-                    eEmpleadoSimple.Garantia, 
-                    eEmpleadoSimple.Fotografia);
+                db.Proc_Persona_Empleado_A(eEmpleadoSimple.IdPersona, eEmpleadoSimple.Nombres, eEmpleadoSimple.PrimerApellido, eEmpleadoSimple.SegundoApellido, eEmpleadoSimple.Telefono,eEmpleadoSimple.FechaRegistro, eEmpleadoSimple.FechaModificacion, eEmpleadoSimple.Estado, eEmpleadoSimple.IdCargo, eEmpleadoSimple.FechaNacimiento, eEmpleadoSimple.Ci, eEmpleadoSimple.IdCiudad, eEmpleadoSimple.LugarNacimiento, eEmpleadoSimple.TelefonoRespaldo, eEmpleadoSimple.Direccion, eEmpleadoSimple.EstadoCivil, eEmpleadoSimple.NombresPadre, eEmpleadoSimple.PrimerApellidoPadre, eEmpleadoSimple.SegundoApellidoPadre, eEmpleadoSimple.OcupacionPadre, eEmpleadoSimple.NombresMadre, eEmpleadoSimple.PrimerApellidoMadre, eEmpleadoSimple.SegundoApellidoMadre, eEmpleadoSimple.OcupacionMadre, eEmpleadoSimple.UltimoCurso, eEmpleadoSimple.ColegioUnidadEducativa, eEmpleadoSimple.FechaInicioTrabajo, eEmpleadoSimple.Garantia, eEmpleadoSimple.Fotografia);
 
             }
         }
@@ -119,7 +65,7 @@ public class CEmpleado
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
                         Telefono = p.Telefono,
-                        Direccion = p.Direccion,
+
                         FechaRegistro = p.FechaRegistro,
                         FechaModificacion = p.FechaModificacion,
                         Estado = p.Estado,
@@ -132,6 +78,7 @@ public class CEmpleado
 
                         LugarNacimiento = p.LugarNacimiento,
                         TelefonoRespaldo = p.TelefonoRespaldo,
+                        Direccion = p.Direccion,
                         EstadoCivil = p.EstadoCivil,
                         NombresPadre = p.NombresPadre,
                         PrimerApellidoPadre = p.PrimerApellidoPadre,
@@ -176,7 +123,7 @@ public class CEmpleado
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
                         Telefono = p.Telefono,
-                        Direccion = p.Direccion,
+                        
                         FechaRegistro = p.FechaRegistro,
                         FechaModificacion = p.FechaModificacion,
                         Estado = p.Estado,
@@ -188,6 +135,7 @@ public class CEmpleado
                         IdCiudad = p.IdCiudad,
                         LugarNacimiento = p.LugarNacimiento,
                         TelefonoRespaldo = p.TelefonoRespaldo,
+                        Direccion = p.Direccion,
                         EstadoCivil = p.EstadoCivil,
                         NombresPadre = p.NombresPadre,
                         PrimerApellidoPadre = p.PrimerApellidoPadre,
@@ -230,7 +178,7 @@ public class CEmpleado
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
                         Telefono = p.Telefono,
-                        Direccion = p.Direccion,
+                        
                         FechaRegistro = p.FechaRegistro,
                         FechaModificacion = p.FechaModificacion,
                         Estado = p.Estado,
@@ -242,6 +190,7 @@ public class CEmpleado
                         IdCiudad = p.IdCiudad,
                         LugarNacimiento = p.LugarNacimiento,
                         TelefonoRespaldo = p.TelefonoRespaldo,
+                        Direccion = p.Direccion,
                         EstadoCivil = p.EstadoCivil,
                         NombresPadre = p.NombresPadre,
                         PrimerApellidoPadre = p.PrimerApellidoPadre,

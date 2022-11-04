@@ -24,14 +24,7 @@ public class CPersona
         {
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
-                db.Proc_Persona_I(
-                    ePersonaSimple.Nombres, 
-                    ePersonaSimple.PrimerApellido,
-                    ePersonaSimple.SegundoApellido,
-                    ePersonaSimple.Telefono,
-                    ePersonaSimple.FechaRegistro, 
-                    ePersonaSimple.FechaModificacion, 
-                    ePersonaSimple.Estado);
+                db.Proc_Persona_I(ePersonaSimple.Nombres, ePersonaSimple.PrimerApellido, ePersonaSimple.SegundoApellido, ePersonaSimple.Telefono,  ePersonaSimple.FechaRegistro, ePersonaSimple.FechaModificacion, ePersonaSimple.Estado);
 
             }
         }
@@ -51,15 +44,7 @@ public class CPersona
         {
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
-                db.Proc_Persona_A(
-                    ePersonaSimple.IdPersona, 
-                    ePersonaSimple.Nombres, 
-                    ePersonaSimple.PrimerApellido, 
-                    ePersonaSimple.SegundoApellido, 
-                    ePersonaSimple.Telefono, 
-                    ePersonaSimple.FechaRegistro,
-                    ePersonaSimple.FechaModificacion, 
-                    ePersonaSimple.Estado);
+                db.Proc_Persona_A(ePersonaSimple.IdPersona, ePersonaSimple.Nombres, ePersonaSimple.PrimerApellido, ePersonaSimple.SegundoApellido, ePersonaSimple.Telefono, ePersonaSimple.FechaRegistro, ePersonaSimple.FechaModificacion, ePersonaSimple.Estado);
                
             }
         }
@@ -87,7 +72,6 @@ public class CPersona
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
                         Telefono = p.Telefono,
-                        Direccion = p.Direccion,
                         FechaRegistro = p.FechaRegistro,
                         FechaModificacion = p.FechaModificacion,
                         Estado = p.Estado
@@ -118,7 +102,6 @@ public class CPersona
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
                         Telefono = p.Telefono,
-                        Direccion = p.Direccion,
                         FechaRegistro = p.FechaRegistro,
                         FechaModificacion = p.FechaModificacion,
                         Estado = p.Estado

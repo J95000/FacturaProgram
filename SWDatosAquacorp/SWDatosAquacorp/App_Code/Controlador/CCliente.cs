@@ -1,6 +1,8 @@
-﻿using Modelo;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Modelo;
 /// <summary>
 /// Descripción breve de CCliente
 /// </summary>
@@ -16,21 +18,8 @@ public class CCliente
         {
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
-                db.Proc_Persona_Cliente_I(
-                    eClienteSimple.Nombres,
-                    eClienteSimple.PrimerApellido,
-                    eClienteSimple.SegundoApellido,
-                    eClienteSimple.Telefono,
-                    eClienteSimple.FechaRegistro,
-                    eClienteSimple.FechaModificacion,
-                    eClienteSimple.Estado,
-                    eClienteSimple.RazonSocial,
-                    eClienteSimple.NitCi,
-                    eClienteSimple.CorreoElectronico,
-                    eClienteSimple.FotoUbicacion,
-                    eClienteSimple.Direccion,
-                    eClienteSimple.Latitud,
-                    eClienteSimple.Longitud);
+                db.Proc_Persona_Cliente_I(eClienteSimple.Nombres, eClienteSimple.PrimerApellido, eClienteSimple.SegundoApellido, eClienteSimple.Telefono,  eClienteSimple.FechaRegistro, eClienteSimple.FechaModificacion, eClienteSimple.Estado, eClienteSimple.RazonSocial, eClienteSimple.NitCi, eClienteSimple.CorreoElectronico,  eClienteSimple.FotoUbicacion, eClienteSimple.NombreDireccion, eClienteSimple.Latitud, eClienteSimple.Longitud);
+
             }
         }
         catch (Exception ex)
@@ -50,20 +39,7 @@ public class CCliente
             using (aquacorpbddEntities db = new aquacorpbddEntities())
             {
 
-                db.Proc_Persona_Cliente_A(
-                    eClienteSimple.IdPersona,
-                    eClienteSimple.Nombres,
-                    eClienteSimple.PrimerApellido,
-                    eClienteSimple.SegundoApellido,
-                    eClienteSimple.Telefono,
-                    eClienteSimple.FechaRegistro,
-                    eClienteSimple.FechaModificacion,
-                    eClienteSimple.Estado,
-                    eClienteSimple.IdCliente,
-                    eClienteSimple.RazonSocial,
-                    eClienteSimple.NitCi,
-                    eClienteSimple.CorreoElectronico,
-                    eClienteSimple.FotoUbicacion);
+                db.Proc_Persona_Cliente_A(eClienteSimple.IdPersona, eClienteSimple.Nombres, eClienteSimple.PrimerApellido, eClienteSimple.SegundoApellido, eClienteSimple.Telefono,  eClienteSimple.FechaRegistro, eClienteSimple.FechaModificacion, eClienteSimple.Estado, eClienteSimple.IdCliente,  eClienteSimple.RazonSocial, eClienteSimple.NitCi, eClienteSimple.CorreoElectronico,  eClienteSimple.FotoUbicacion);
             }
         }
         catch (Exception ex)
@@ -90,21 +66,18 @@ public class CCliente
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
                         Telefono = p.Telefono,
-                        Direccion = p.Direccion,
+   
                         FechaRegistro = p.FechaRegistro,
                         FechaModificacion = p.FechaModificacion,
                         Estado = p.Estado,
 
                         IdCliente = p.IdCliente,
-                        IdCategoriaCliente = p.IdCategoriaCliente,
-                        CorreoElectronico = p.CorreoElectronico,
-                        Latitud = p.Latitud,
-                        Longitud = p.Longitud,
-                        IdZona = p.IdZona
+                        RazonSocial=p.RazonSocial,
+                        NitCi=p.NitCi,
+                        CorreoElectronico = p.CorreoElectronico
                         ,
                         FotoUbicacion = p.FotoUbicacion
-                        ,
-                        Contrato = p.Contrato
+                   
                     };
                 }
             }
@@ -135,19 +108,16 @@ public class CCliente
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
                         Telefono = p.Telefono,
-                        Direccion = p.Direccion,
                         FechaRegistro = p.FechaRegistro,
                         FechaModificacion = p.FechaModificacion,
                         Estado = p.Estado,
 
                         IdCliente = p.IdCliente,
-                        IdCategoriaCliente = p.IdCategoriaCliente,
-                        CorreoElectronico = p.CorreoElectronico,
-                        Latitud = p.Latitud,
-                        Longitud = p.Longitud,
-                        IdZona = p.IdZona,
-
-                        Contrato = p.Contrato
+  
+                        RazonSocial = p.RazonSocial,
+                        NitCi = p.NitCi,
+                        CorreoElectronico = p.CorreoElectronico
+      
                     };
                     lstECClienteSimple.Add(eClienteSimple);
                 }
@@ -176,20 +146,9 @@ public class CCliente
                         Nombres = p.Nombres,
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
-                        Telefono = p.Telefono,
-                        Direccion = p.Direccion,
-                        FechaRegistro = p.FechaRegistro,
-                        FechaModificacion = p.FechaModificacion,
-                        Estado = p.Estado,
-
-                        IdCliente = p.IdCliente,
-                        IdCategoriaCliente = p.IdCategoriaCliente,
+                        RazonSocial = p.RazonSocial,
+                        NitCi = p.NitCi,
                         CorreoElectronico = p.CorreoElectronico,
-                        Latitud = p.Latitud,
-                        Longitud = p.Longitud,
-                        IdZona = p.IdZona,
-                        FotoUbicacion = p.FotoUbicacion,
-                        Contrato = p.Contrato
                     };
                     lstECClienteSimple.Add(eClienteSimple);
                 }
@@ -200,6 +159,25 @@ public class CCliente
             cException.Insertar_Exception_LocalDatos(new EExceptionSimple() { Fecha = DateTime.Now, IdUsuario = 1, NombreMetodo = ex.TargetSite.Name, Mensaje = ex.Message, ExceptionMensaje = ex.StackTrace });
         }
         return lstECClienteSimple;
+    }
+
+    public void Actualizar_Cliente_Corta(EClienteCortaSimple eClienteCortaSimple)
+    {
+
+        try
+        {
+            using (aquacorpbddEntities db = new aquacorpbddEntities())
+            {
+                db.Proc_Cliente_Modificar_Razon_Nit_Foto( eClienteCortaSimple.IdCliente, eClienteCortaSimple.RazonSocial, eClienteCortaSimple.NitCi, eClienteCortaSimple.FotoUbicacion);
+
+            }
+        }
+        catch (Exception ex)
+        {
+
+            cException.Insertar_Exception_LocalDatos(new EExceptionSimple() { Fecha = DateTime.Now, IdUsuario = 1, NombreMetodo = ex.TargetSite.Name, Mensaje = ex.Message, ExceptionMensaje = ex.StackTrace });
+        }
+
     }
     #endregion
 

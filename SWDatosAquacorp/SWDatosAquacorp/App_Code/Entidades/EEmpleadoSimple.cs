@@ -27,6 +27,8 @@ public class EEmpleadoSimple : EPersonaSimple
     [DataMember]
     public string TelefonoRespaldo { get; set; }
     [DataMember]
+    public string Direccion { get; set; }
+    [DataMember]
     public string EstadoCivil { get; set; }
     [DataMember]
     public string NombresPadre { get; set; }
@@ -71,6 +73,7 @@ public class EEmpleadoSimple : EPersonaSimple
         IdCiudad = 0;
         LugarNacimiento = 0;
         TelefonoRespaldo = string.Empty;
+        Direccion = string.Empty;
         EstadoCivil = string.Empty;
         NombresPadre = string.Empty;
         PrimerApellidoPadre = string.Empty;

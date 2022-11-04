@@ -25,7 +25,18 @@ public class EMovimientoSimple
     public DateTime FechaModificacion { get; set; }
     [DataMember]
     public string Estado { get; set; }
-
+    [DataMember]
+    public decimal? PrecioTotal { get; set; }
+    [DataMember]
+    public int? IdDosificacion { get; set; }
+    [DataMember]
+    public int? NroMovimiento { get; set; }
+    [DataMember]
+    public string CodigoControl { get; set; }
+    [DataMember]
+    public string RazonSocial { get; set; }
+    [DataMember]
+    public string NitCi { get; set; }
     /// <summary>
     /// 
     /// </summary>
@@ -39,5 +50,12 @@ public class EMovimientoSimple
         FechaRegistro = DateTime.Now;
         FechaModificacion = DateTime.Now;
         Estado = string.Empty;
+
+        PrecioTotal = null;
+        IdDosificacion = null;
+        NroMovimiento = null;
+        CodigoControl = string.Empty;
+        RazonSocial = string.Empty;
+        NitCi = string.Empty;
     }
 }

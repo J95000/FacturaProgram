@@ -20,6 +20,8 @@ namespace AppDistribuidor.Views
     public partial class ItemsPage : ContentPage
     {
         ItemsViewModel _viewModel;
+        GenerarFactura generarFactura;
+        EnvioCorreo envioCorreo;
         
         List<string> clientes;
         int idCliente = 0;
@@ -301,9 +303,11 @@ namespace AppDistribuidor.Views
                                     {
                                         if(itt.Count == indice)
                                         {
+                                            generarFactura = new GenerarFactura();
+                                            envioCorreo = new EnvioCorreo();
                                             await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
-                                            byte[] pdf = _viewModel.GenerarPdf(eMovimientoCompleja, eDetalleMovimientoCompleja);
-                                            _viewModel.EnviarCorreo("axel20ayalam@gmail.com", "eddymartinez2022@gmail.com", pdf);
+                                            byte[] pdf = generarFactura.GenerarPdf(itt,eMovimientoCompleja, eDetalleMovimientoCompleja);
+                                            envioCorreo.EnviarCorreo("axel20ayalam@gmail.com", "pablors0598@gmail.com", pdf);
                                         }
                                     }
                                     else

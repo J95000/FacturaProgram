@@ -9,7 +9,6 @@ namespace AppDistribuidor.Facturacion
     {
         /// <summary>
         /// Genera codigo de control
-        /// <see cref="http://jc-mouse.net/"/>
         /// <param name="authorizationNumber">Numero de autorizacion</param>        
         /// <param name="invoiceNumber">Numero de factura</param>        
         /// <param name="nitci">Número de Identificación Tributaria o Carnet de Identidad</param>        

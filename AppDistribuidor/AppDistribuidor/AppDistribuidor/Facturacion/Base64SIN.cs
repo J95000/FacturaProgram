@@ -8,7 +8,6 @@ namespace AppDistribuidor.Facturacion
     {
         /// <summary>
         /// Codificador base64
-        /// <see cref="http://jc-mouse.net/"/>
         /// <param name="value">Numero a codificar</param>                
         /// <returns>Cadena codificada</returns>
         /// </summary>

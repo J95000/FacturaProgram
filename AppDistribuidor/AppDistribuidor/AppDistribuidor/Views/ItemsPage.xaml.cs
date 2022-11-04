@@ -13,15 +13,21 @@ using Xamarin.Forms.Xaml;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using AppDistribuidor.Facturacion;
 
 namespace AppDistribuidor.Views
 {
     public partial class ItemsPage : ContentPage
     {
         ItemsViewModel _viewModel;
+        GenerarFactura generarFactura;
+        EnvioCorreo envioCorreo;
         
         List<string> clientes;
         int idCliente = 0;
+
+        /* Añadido por Cabybara*/
+        ECliente clienteCompleja;
         public ItemsPage()
         {
             InitializeComponent();
@@ -152,7 +158,7 @@ namespace AppDistribuidor.Views
             //SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
             //SWNegocio.EClienteCompleja clienteCompleja = cliente.Obtener_Cliente_Buscador_NombreCompleto(listsd);
 
-            ECliente clienteCompleja = Task.Run(() => Obtener_Cliente_Buscador_NombreCompleto(listsd.NombreCompleto)).GetAwaiter().GetResult();
+            clienteCompleja = Task.Run(() => Obtener_Cliente_Buscador_NombreCompleto(listsd.NombreCompleto)).GetAwaiter().GetResult();
             idCliente = clienteCompleja.IdCliente;
             
             
@@ -252,8 +258,14 @@ namespace AppDistribuidor.Views
                                 IdUsuario = VariablesGlobales.IdUsuario,
                                 NombreCliente = "",
                                 NombreUsuario = "",
-                                TipoMovimiento = "VENTA"
-
+                                TipoMovimiento = "VENTA",
+                                /* Añadido por Capybara*/
+                                PrecioTotal = VariablesGlobales.Total,
+                                IdDosificacion = 1,
+                                NroMovimiento = 2378,
+                                CodigoControl = CodigoControl.generateControlCode("7904006306693", "2378", "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), "zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS"),
+                                RazonSocial = clienteCompleja.Nombres,
+                                NitCi = "8934674"
 
                             };
 
@@ -282,7 +294,7 @@ namespace AppDistribuidor.Views
                                         PrecioUnitario = item.Precio,
                                         FechaModificacion = DateTime.Now,
                                         FechaRegistro = DateTime.Now,
-
+                                        SubTotal = item.Cantidad * item.Precio
                                     };
 
                                     bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
@@ -291,9 +303,11 @@ namespace AppDistribuidor.Views
                                     {
                                         if(itt.Count == indice)
                                         {
+                                            generarFactura = new GenerarFactura();
+                                            envioCorreo = new EnvioCorreo();
                                             await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
-                                            byte[] pdf = _viewModel.GenerarPdf(eMovimientoCompleja, eDetalleMovimientoCompleja);
-                                            _viewModel.EnviarCorreo("axel20ayalam@gmail.com", "eddymartinez2022@gmail.com", pdf);
+                                            byte[] pdf = generarFactura.GenerarPdf(itt,eMovimientoCompleja, eDetalleMovimientoCompleja);
+                                            envioCorreo.EnviarCorreo("axel20ayalam@gmail.com", "pablors0598@gmail.com", pdf);
                                         }
                                     }
                                     else

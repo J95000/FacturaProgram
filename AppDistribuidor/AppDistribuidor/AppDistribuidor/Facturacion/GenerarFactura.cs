@@ -43,7 +43,7 @@ namespace AppDistribuidor.Facturacion
 
                 //DATOS A MOSTRAR EN LA FACTURA
                 Paragraph datosEmpresa = new Paragraph("Aquacorp Srl\nCASA MATRIZ: Avenida Perú #349\nTeléfono: 44378234\nCochabamba - Bolivia").SetFontSize(9);
-                Paragraph datosFactura = new Paragraph("NIT: 395410026\nNo FACTURA: " + eMovimientoCompleja.NroMovimiento.ToString() + "\nNo AUTORIZACIÓN: " + eMovimientoCompleja.NroMovimiento + "\nFEC EMISIÓN: " + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(9);
+                Paragraph datosFactura = new Paragraph("NIT: 395410026\nNo FACTURA: " + eMovimientoCompleja.NroMovimiento.ToString() + "\nNo AUTORIZACIÓN: " + eDosificacionCompleja.NroAutorizacion + "\nFEC EMISIÓN: " + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(9);
                 Paragraph datosCliente = new Paragraph(" NOMBRE / RAZÓN SOCIAL: " + eMovimientoCompleja.RazonSocial + "\n NIT/CI: " + eMovimientoCompleja.NitCi).SetFontSize(10);
 
                 Paragraph codigoControl = new Paragraph("CÓDIGO DE CONTROL: " + eMovimientoCompleja.CodigoControl).SetFontSize(10);

@@ -79,10 +79,10 @@ namespace AppDistribuidor.Views
 
         }
 
-        public EDosificacionCompleja Obtener_Dosificacion_Habilitado()
+        public async Task<EDosificacionCompleja> Obtener_Dosificacion_Habilitado()
         {
             var client = new HttpClient();
-            var responseString = client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_Dosificacion_Habilitado");
+            var responseString = await client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_Dosificacion_Habilitado");
             string resp = Convert.ToString(responseString);
             var obj = JsonConvert.DeserializeObject<object>(resp);
             string data = Convert.ToString(obj);
@@ -405,6 +405,7 @@ namespace AppDistribuidor.Views
                             string factura = await DisplayActionSheet("Facturación", "Si", "No", "Se requiere factura?.");
                            
                             Console.WriteLine("Action:::::::::::: " + factura);
+
                             if (factura == "Si")
                             {
                                string razon = clienteCompleja.RazonSocial;
@@ -416,7 +417,7 @@ namespace AppDistribuidor.Views
                                 if (RazonNit == "Si")
                                 {
                                     EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
-                                    eDosificacionCompleja = Obtener_Dosificacion_Habilitado();
+                                    eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
 
                                     EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
                                     {
@@ -424,7 +425,6 @@ namespace AppDistribuidor.Views
                                         RazonSocial = razon,
                                         NitCi = nit,
                                         IdCliente = clienteCompleja.IdCliente
-
                                     };
 
                                     bool actualizaCli = await InsertarActualizarCliente(clienteCorta);
@@ -451,9 +451,7 @@ namespace AppDistribuidor.Views
                                             PrecioTotal = VariablesGlobales.Total,
                                             ///////////////////////////////////////////////////
                                             IdDosificacion = eDosificacionCompleja.IdDosificacion,
-                                            //IdDosificacion = 1,
                                             NroMovimiento = eDosificacionCompleja.NroFinalFactura,
-                                            //NroMovimiento = 1,
                                             CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
                                             RazonSocial = razon,
                                             NitCi = nit
@@ -495,7 +493,7 @@ namespace AppDistribuidor.Views
                                                         generarFactura = new GenerarFactura();
                                                         envioCorreo = new EnvioCorreo();
                                                         byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
-                                                        string correo = clienteCompleja.CorreoElectronico;
+                                                        string correo = "rodrigo.iriarte14@gmail.com";//clienteCompleja.CorreoElectronico;
                                                         await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
                                                         envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
 
@@ -525,7 +523,7 @@ namespace AppDistribuidor.Views
                                 else
                                 {
                                     EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
-                                    eDosificacionCompleja = Obtener_Dosificacion_Habilitado();
+                                    eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
 
                                     string nuevoRazonSocial = await DisplayPromptAsync("Nueva Razon Social", "");
                                     string nuevoNit = await DisplayPromptAsync("Nuevo Nit o Ci", "");
@@ -565,9 +563,7 @@ namespace AppDistribuidor.Views
                                             PrecioTotal = VariablesGlobales.Total,
                                             ///////////////////////////////////////////////////
                                             IdDosificacion = eDosificacionCompleja.IdDosificacion,
-                                            //IdDosificacion = 1,
                                             NroMovimiento = eDosificacionCompleja.NroFinalFactura,
-                                            //NroMovimiento = 1,
                                             CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
                                             RazonSocial = nuevoRazonSocial,
                                             NitCi = nuevoNit
@@ -715,7 +711,7 @@ namespace AppDistribuidor.Views
                             // BindingContext = null;
 
 
-                           
+
                             busca.Text = String.Empty;
                             Console.WriteLine($"-----BUCAR CLIENTE LIMPIAR-----");
                             _viewModel.Productos.Clear();

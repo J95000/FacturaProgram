@@ -40,6 +40,7 @@
                    TextColor="White" />
             <Entry Text="{Binding Cantidad, Mode=TwoWay}"
                    FontSize="Medium"
+                   Keyboard="Numeric" 
                    TextColor="#b9ffff"
                    PlaceholderColor="#C1DFF7" />
             <StackLayout Orientation="Horizontal">

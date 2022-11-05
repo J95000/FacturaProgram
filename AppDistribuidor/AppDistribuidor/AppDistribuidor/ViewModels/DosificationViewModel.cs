@@ -13,7 +13,6 @@ namespace AppDistribuidor.ViewModels
             fechaLimiteEmision = DateTime.Now;
             IsBusy = true;
         }
-
         #region Properties
         private string autorizacion;
         private string llaveDosificacion;
@@ -59,7 +58,7 @@ namespace AppDistribuidor.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        await App.Current.MainPage.DisplayAlert("Error",ex.Message.ToString(), "Cerrar");
+                        await App.Current.MainPage.DisplayAlert("Error", ex.Message.ToString(), "Cerrar");
                     }
                     IsBusy = true;
                 });

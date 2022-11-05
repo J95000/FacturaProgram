@@ -22,6 +22,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using Plugin.Toast;
+using System.Text.RegularExpressions;
 
 namespace AppDistribuidor.Views
 {
@@ -36,31 +37,23 @@ namespace AppDistribuidor.Views
 
         public AboutPage()
         {
-            
-            //  VariablesGlobales.idUsuario = 3;
             InitializeComponent();
 
             this.BindingContext = new FotoViewModel();
-
-           // VariablesGlobales.stream = GetStreamFromUrl("https://i.ibb.co/njxyvPL/descarga.png");
+            Localizar();
+            // VariablesGlobales.stream = GetStreamFromUrl("https://i.ibb.co/njxyvPL/descarga.png");
             VariablesGlobales.Bandera = 0;
-  
-            // EmpezarTodo();
 
-            //StartService();
 
-            LlenarZonas();
-
-            LlenarCategorias();
 
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.DtdProcessing = DtdProcessing.Parse;
-     
+
             //if (Device.RuntimePlatform == Device.Android)
             //{
             //    //MessagingCenter.Subscribe<LocationMessage>(this, "Location", message =>
             //    //{
-                
+
 
             //    //    Device.BeginInvokeOnMainThread(async () =>
             //    //    {
@@ -139,14 +132,14 @@ namespace AppDistribuidor.Views
                 else
                 {
                     CrossToastPopUp.Current.ShowToastMessage("No existe una conexion a Internet. ");
-                  //  DisplayAlert("Conexión a Internet", "No existe una conexion a Internet. \n Por favor Conectese a internet eh intente de nuevo.", "OK");
+                    //  DisplayAlert("Conexión a Internet", "No existe una conexion a Internet. \n Por favor Conectese a internet eh intente de nuevo.", "OK");
                     ban = false;
                 }
             }
             catch (Exception ex)
             {
                 CrossToastPopUp.Current.ShowToastMessage("Ocurrio un problema al verificar conexion a internet. ");
-               // DisplayAlert("Error", "Ocurrio un problema al verificar conexion a internet.\n " + ex.Message, "OK");
+                // DisplayAlert("Error", "Ocurrio un problema al verificar conexion a internet.\n " + ex.Message, "OK");
 
             }
             Console.WriteLine($"-----  SALE DE VERIFICAR CONEXION A INTERNET  -----");
@@ -189,10 +182,29 @@ namespace AppDistribuidor.Views
                 else return false;
             }
 
-            
+
         }
 
-        public static async Task<bool> InsertarCliente(ECliente eECliente)
+        public async Task<bool> Verificar_Cliente_Correo(string correo)
+        {
+            var client = new HttpClient();
+            Task<string> response =  client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Verificar_Cliente_Correo" + "/" + correo);
+            
+            DoIndependentWork();
+            string contents = await response;
+
+            if (contents == "true") return true;
+            else return false;
+
+
+        }
+
+        public void DoIndependentWork()
+        {
+            Console.WriteLine("Working...");
+        }
+
+        public bool InsertarCliente(EClienteCompleja eECliente)
         {
 
             using (HttpClient cliente = new HttpClient())
@@ -209,70 +221,71 @@ namespace AppDistribuidor.Views
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var request = new StringContent(jsonString, Encoding.UTF8, "application/json");
                 var response = cliente.PostAsync(requestUrl, request).Result;
-                var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (result == "true") return true;
+                var result = response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                string resp = Convert.ToString(result);
+                if (resp == "true") return true;
                 else return false;
             }
 
 
         }
 
-        
-
-        public async Task<bool> LlenarBdd()
-        {
-            bool ban = false;
-            int idUsu = VariablesGlobales.IdUsuario;
-           // SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
-
-            try
-            {
-                //SWNegocio.EUbicacionDistribuidorCompleja eUbicacionCompleja = new SWNegocio.EUbicacionDistribuidorCompleja()
-                //{
-                //    IdUsuario = idUsu,
-                //    NombreDispositivo = nombrecel,
-                //    Latitud = latit,
-                //    Longitud = lonit,
-                //    Fecha = DateTime.Now
-                //};
-                EUbicacion eUbicacionCompleja = new EUbicacion()
-                {
-                    IdUsuario = idUsu,
-                    NombreDispositivo = nombrecel,
-                    Latitud = latit,
-                    Longitud = lonit,
-                    Fecha = DateTime.Now
-                };
 
 
-                ban = Task.Run(() => Insertar_UbicacionDistribuidor(eUbicacionCompleja)).GetAwaiter().GetResult();
-               // ban = Task.Run(() => cliente.Insertar_UbicacionDistribuidor(eUbicacionCompleja)).GetAwaiter().GetResult();
-              
-                locationLabel.Text += $"{Environment.NewLine}=== Datos Registrados en BDD ===";
-                await Task.Delay(500);
-                //await cliente.CloseAsync();
+        //public async Task<bool> LlenarBdd()
+        //{
+        //    bool ban = false;
+        //    int idUsu = VariablesGlobales.IdUsuario;
+        //    // SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
 
-            }
-            catch (CommunicationException et)
-            {
-                //cliente.Abort();
-                locationLabel.Text += $"{Environment.NewLine}====={et.Message}";
-            }
-            catch (SqlException ex) when (ex.Number == -2)
-            {
-                Console.WriteLine("Timeout occurred");
-                locationLabel.Text += $"{Environment.NewLine}====={ex.Message}";
-            }
-            //finally
-            //{
-            //    await cliente.CloseAsync();
-            //    cliente.Abort();
+        //    try
+        //    {
+        //        //SWNegocio.EUbicacionDistribuidorCompleja eUbicacionCompleja = new SWNegocio.EUbicacionDistribuidorCompleja()
+        //        //{
+        //        //    IdUsuario = idUsu,
+        //        //    NombreDispositivo = nombrecel,
+        //        //    Latitud = latit,
+        //        //    Longitud = lonit,
+        //        //    Fecha = DateTime.Now
+        //        //};
+        //        EUbicacion eUbicacionCompleja = new EUbicacion()
+        //        {
+        //            IdUsuario = idUsu,
+        //            NombreDispositivo = nombrecel,
+        //            Latitud = latit,
+        //            Longitud = lonit,
+        //            Fecha = DateTime.Now
+        //        };
 
 
-            //}
-            return ban;
-        }
-      
+        //        ban = Task.Run(() => Insertar_UbicacionDistribuidor(eUbicacionCompleja)).GetAwaiter().GetResult();
+        //        // ban = Task.Run(() => cliente.Insertar_UbicacionDistribuidor(eUbicacionCompleja)).GetAwaiter().GetResult();
+
+        //        locationLabel.Text += $"{Environment.NewLine}=== Datos Registrados en BDD ===";
+        //        await Task.Delay(500);
+        //        //await cliente.CloseAsync();
+
+        //    }
+        //    catch (CommunicationException et)
+        //    {
+        //        //cliente.Abort();
+        //        locationLabel.Text += $"{Environment.NewLine}====={et.Message}";
+        //    }
+        //    catch (SqlException ex) when (ex.Number == -2)
+        //    {
+        //        Console.WriteLine("Timeout occurred");
+        //        locationLabel.Text += $"{Environment.NewLine}====={ex.Message}";
+        //    }
+        //    //finally
+        //    //{
+        //    //    await cliente.CloseAsync();
+        //    //    cliente.Abort();
+
+
+        //    //}
+        //    return ban;
+        //}
+
         async void Button_Clicked(System.Object sender, System.EventArgs e)
         {
             Console.WriteLine($"-----   ENTRA A PEDIR PERMISO PARA UBICACION   -----");
@@ -310,11 +323,11 @@ namespace AppDistribuidor.Views
                 if (Preferences.Get("LocationServiceRunning", false) == false)
                 {
                     Console.WriteLine($"-----   SERVICIO DE LOCALIZACION EMPIEZA   -----");
-                    StartService();
+                   // StartService();
                 }
                 else
                 {
-                    StopService();
+                  //  StopService();
                 }
             }
         }
@@ -353,60 +366,60 @@ namespace AppDistribuidor.Views
             {
                 if (Preferences.Get("LocationServiceRunning", false) == false)
                 {
-                    StartService();
+                  //  StartService();
                 }
                 else
                 {
-                    StopService();
+                   // StopService();
                 }
             }
         }
-        private void StartService()
-        {
-            var startServiceMessage = new StartServiceMessage();
-            MessagingCenter.Send(startServiceMessage, "ServicioInicio");
-            Preferences.Set("LocationServiceRunning", true);
-            locationLabel.Text = "Geolocalizacion Inicio";
-            BtnInicio.Text = "Stop";
-            BtnInicio.BackgroundColor = Xamarin.Forms.Color.FromRgb(43, 149, 219);
-            var modelo = DeviceInfo.Model;
-            var marca = DeviceInfo.Manufacturer;
-            var nombre = DeviceInfo.Name;
-            var version = DeviceInfo.VersionString;
-            var plataforma = DeviceInfo.Platform;
-            var idioma = DeviceInfo.Idiom;
-            var tipoDispositivo = DeviceInfo.DeviceType;
+        //private void StartService()
+        //{
+        //    var startServiceMessage = new StartServiceMessage();
+        //    MessagingCenter.Send(startServiceMessage, "ServicioInicio");
+        //    Preferences.Set("LocationServiceRunning", true);
+        //    locationLabel.Text = "Geolocalizacion Inicio";
+        //    BtnInicio.Text = "Stop";
+        //    BtnInicio.BackgroundColor = Xamarin.Forms.Color.FromRgb(43, 149, 219);
+        //    var modelo = DeviceInfo.Model;
+        //    var marca = DeviceInfo.Manufacturer;
+        //    var nombre = DeviceInfo.Name;
+        //    var version = DeviceInfo.VersionString;
+        //    var plataforma = DeviceInfo.Platform;
+        //    var idioma = DeviceInfo.Idiom;
+        //    var tipoDispositivo = DeviceInfo.DeviceType;
 
-            //locationLabel.Text += String.Format("Modelo:{0}" +
-            //                              "\nMarca:{1}" +
-            //                              "\nNombre:{2}" +
-            //                             "\nVersion:{3}" +
-            //                              "\nPlataforma:{4}" +
-            //                              "\nIdioma:{5}" +
-            //                              "\nTipo Dispositivo:{6}", modelo, marca, nombre, version, plataforma, idioma, tipoDispositivo);
-            nombrecel = String.Format("Modelo:{0}" +
-                                          "Marca:{1}" +
-                                          "Nombre:{2}" +
-                                         "Version:{3}" +
-                                          "Plataforma:{4}" +
-                                          "Idioma:{5}" +
-                                          "Tipo Dispositivo:{6}", modelo, marca, nombre, version, plataforma, idioma, tipoDispositivo);
-            locationLabel.Text += $"{Environment.NewLine}";
+        //    //locationLabel.Text += String.Format("Modelo:{0}" +
+        //    //                              "\nMarca:{1}" +
+        //    //                              "\nNombre:{2}" +
+        //    //                             "\nVersion:{3}" +
+        //    //                              "\nPlataforma:{4}" +
+        //    //                              "\nIdioma:{5}" +
+        //    //                              "\nTipo Dispositivo:{6}", modelo, marca, nombre, version, plataforma, idioma, tipoDispositivo);
+        //    nombrecel = String.Format("Modelo:{0}" +
+        //                                  "Marca:{1}" +
+        //                                  "Nombre:{2}" +
+        //                                 "Version:{3}" +
+        //                                  "Plataforma:{4}" +
+        //                                  "Idioma:{5}" +
+        //                                  "Tipo Dispositivo:{6}", modelo, marca, nombre, version, plataforma, idioma, tipoDispositivo);
+        //    locationLabel.Text += $"{Environment.NewLine}";
 
-        }
+        //}
 
-        private void StopService()
-        {
-            var stopServiceMessage = new StopServiceMessage();
-            MessagingCenter.Send(stopServiceMessage, "ServiceStopped");
-            Preferences.Set("LocationServiceRunning", false);
-            BtnInicio.Text = "Iniciar";
-            BtnInicio.BackgroundColor = Xamarin.Forms.Color.FromRgb(43, 189, 47);
-        }
+        //private void StopService()
+        //{
+        //    var stopServiceMessage = new StopServiceMessage();
+        //    MessagingCenter.Send(stopServiceMessage, "ServiceStopped");
+        //    Preferences.Set("LocationServiceRunning", false);
+        //    BtnInicio.Text = "Iniciar";
+        //    BtnInicio.BackgroundColor = Xamarin.Forms.Color.FromRgb(43, 189, 47);
+        //}
 
         private void Current_PositionChanged(object sender, Plugin.Geolocator.Abstractions.PositionEventArgs e)
         {
-            locationLabel.Text += $"{e.Position.Latitude}, {e.Position.Longitude}, {e.Position.Timestamp.TimeOfDay}{Environment.NewLine}";
+            //locationLabel.Text += $"{e.Position.Latitude}, {e.Position.Longitude}, {e.Position.Timestamp.TimeOfDay}{Environment.NewLine}";
             //LlenarBdd(nombrecel, (decimal)e.Position.Latitude, (decimal)e.Position.Longitude, DateTime.Now);
             Console.WriteLine($"{e.Position.Latitude}, {e.Position.Longitude}, {e.Position.Timestamp.TimeOfDay}");
         }
@@ -416,7 +429,7 @@ namespace AppDistribuidor.Views
 
 
         }
-       
+
 
 
 
@@ -477,215 +490,236 @@ namespace AppDistribuidor.Views
                 return ms.ToArray();
             }
         }
-        private async void BtnRegistrar_Clicked(object sender, EventArgs e)
+
+
+        private async void Localizar()
         {
+            var locator = CrossGeolocator.Current; //acceso a la api
+            locator.DesiredAccuracy = 50; //presicion en metros
+            if (locator.IsGeolocationAvailable)//servicio existente en el dispositivo        
+            { 
+            if(locator.IsGeolocationEnabled)//GPS activado en el dispositivo
+                {
+                    if(!locator.IsListening)//comprueba si el dispositivo escucha al servicio
+                    {
+                        await locator.StartListeningAsync(TimeSpan.FromSeconds(1), 5); //incia de la escucha
+                    }
+                    locator.PositionChanged += (cambio, args) =>
+                    {
+                        var loc = args.Position;
+                        latit = decimal.Parse(loc.Latitude.ToString()); 
+                        lonit = decimal.Parse(loc.Longitude.ToString());
+                    };
+                }          
+            }
+        }
 
 
 
-            //SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
+        private void BtnRegistrar_Clicked(object sender, EventArgs e)
+        {
             try
             {
-                if (Validar())
+                if (CheckConexion())
                 {
-                    Stream streamIma;
-                    byte[] byteIma;
-                    byte[] nuevo;
-
-                    if (VariablesGlobales.Bandera == 0)
+                    if (Validar())
                     {
-                        streamIma = VariablesGlobales.stream;
-                        nuevo = ReadFully(streamIma);
-                    }
-                    else
-                    {
-                        streamIma = VariablesGlobales.stream;
-                        byteIma = ReadFully(streamIma);
-                        nuevo = ResizeImage(byteIma, 120, 120);
-                    }
 
 
-                    var selectedCategoria = DdlstCategoria.SelectedItem as SWNegocio.ECategoriaClienteCompleja;
-                    var selectedZona = DdlstZona.SelectedItem as SWNegocio.EZonaCompleja;
-                    string apellido = "";
-                    if (TxtSegundoApellido.Text.Trim().Length < 1)
-                    {
-                        apellido = "";
-                    }
-                    else
-                    {
-                        apellido = TxtSegundoApellido.Text.Trim().ToUpper();
-                    }
-                    
+                        if (latit == 0)
+                        {
+                            // TODO Let the user know they need to accept
+                            Localizar();
+                        }
+                        else
+                        {
 
-                    ECliente eClienteCompleja = new ECliente()
-                    {
-                        Direccion = TxtDireccion.Text.Trim().ToUpper(),
-                        Estado = "HA",
-                        FechaModificacion = DateTime.Now,
-                        FechaRegistro = DateTime.Now,
-                        IdPersona=1,
-                        Nombres = TxtNombres.Text.Trim().ToUpper(),
-                        PrimerApellido = TxtPrimerApellido.Text.Trim().ToUpper(),
-                        SegundoApellido = apellido,
-                        Telefono = TxtTelefono.Text.Trim(),
-                        Cont=1,
-                        Contrato = false,
-                        CorreoElectronico = TxtCorreo.Text.Trim().ToUpper(),
-                        FotoUbicacion = nuevo,
-                        IdCategoriaCliente = selectedCategoria.IdCategoriaCliente,
-                        IdCliente=1,
-                        IdZona = selectedZona.IdZona,
-                        Latitud = latit,
-                        Longitud = lonit,
-                        NombreCategoriaCliente="",
-                        NombreZona=""
+                            decimal nulati = latit;
+                            decimal nuLongi = lonit;
 
 
 
+                            Stream streamIma;
+                            byte[] byteIma;
+                            byte[] nuevo;
+
+                            if (VariablesGlobales.Bandera == 0)
+                            {
+                                streamIma = VariablesGlobales.stream;
+                                nuevo = ReadFully(streamIma);
+                            }
+                            else
+                            {
+                                streamIma = VariablesGlobales.stream;
+                                byteIma = ReadFully(streamIma);
+                                nuevo = ResizeImage(byteIma, 120, 120);
+                            }
 
 
-                    };
+                            string apellido = "";
+                            if (TxtSegundoApellido.Text.Trim().Length < 1)
+                            {
+                                apellido = "";
+                            }
+                            else
+                            {
+                                apellido = TxtSegundoApellido.Text.Trim().ToUpper();
+                            }
 
-                   bool res= await InsertarCliente(eClienteCompleja);
-                    //cliente.Insertar_Cliente(eClienteCompleja);
-                    if (res)
-                    {
-                        Limpiar();
-                        await DisplayAlert("Cliente", "El nuevo cliente fue registrado exitosamente.", "Ok");
-                    }
-                    else
-                    {
-                        await DisplayAlert("Cliente", "El nuevo cliente no pudo ser registrado.", "Ok");
+
+                            EClienteCompleja eClienteCompleja = new EClienteCompleja()
+                            {
+                                Estado = "HA",
+                                FechaModificacion = DateTime.Now,
+                                FechaRegistro = DateTime.Now,
+                                IdPersona = 1,
+                                Nombres = TxtNombres.Text.Trim().ToUpper(),
+                                PrimerApellido = TxtPrimerApellido.Text.Trim().ToUpper(),
+                                SegundoApellido = apellido,
+                                Telefono = TxtTelefono.Text.Trim(),
+                                Cont = 1,
+                                CorreoElectronico = TxtCorreo.Text.Trim().ToUpper(),
+                                FotoUbicacion = nuevo,
+                                IdCliente = 1,
+                                RazonSocial = TxtRazon.Text.Trim().ToUpper(),
+                                NitCi = TxtNit.Text.Trim(),
+                                Direccion = TxtDireccion.Text.Trim().ToUpper(),
+                                Latitud = nulati,
+                                Longitud = nuLongi
+
+                            };
+
+                            bool res = InsertarCliente(eClienteCompleja);
+
+
+
+                            if (VariablesGlobales.TipoRegistroCliente == 1)
+                            {
+                                if (res)
+                                {
+
+                                    CrossToastPopUp.Current.ShowToastMessage("Cliente registrado.");
+                                    VariablesGlobales.NombreClienteRegistrado = TxtNombres.Text.ToUpper() + " " + TxtPrimerApellido.Text.ToUpper() + " " + TxtSegundoApellido.Text.ToUpper();
+                                    Limpiar();
+                                    Navigation.PopAsync();
+                                }
+                                else
+                                {
+                                    CrossToastPopUp.Current.ShowToastMessage("Cliente NO registrado.");
+                                    CrossToastPopUp.Current.ShowToastMessage("Intente de nuevo.");
+                                }
+                            }
+                            else
+                            {
+                                if (res)
+                                {
+                                    Limpiar();
+                                    DisplayAlert("Cliente", "El nuevo cliente fue registrado exitosamente.", "Ok");
+                                }
+                                else
+                                {
+                                    DisplayAlert("Cliente", "El nuevo cliente no pudo ser registrado.", "Ok");
+                                }
+                            }
+                        }
                     }
                 }
+                
 
             }
             catch (Exception ex)
             {
 
-                await DisplayAlert("Cliente", "Ocurrio un error al registrar cliente.\n " + ex.Message, "Ok");
-            }
-
-
-
-
-        }
-        public static async Task<List<ECategoriaCliente>> Obtener_CategoriaCliente()
-        {
-            var client = new HttpClient();
-            var responseString = await client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_CategoriaCliente");
-            string resp = Convert.ToString(responseString);
-            var obj = JsonConvert.DeserializeObject<object>(resp);
-            string data = Convert.ToString(obj);
-            List<ECategoriaCliente> eUsuarioCompleja = new List<ECategoriaCliente>();
-            eUsuarioCompleja = JsonConvert.DeserializeObject<List<ECategoriaCliente>>(data);
-            return eUsuarioCompleja;
-
-        }
-        public void LlenarCategorias()
-        {
-            try
-            {
-                //SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
-                List<ECategoriaCliente> eCategoriaCliente = Task.Run(() => Obtener_CategoriaCliente()).GetAwaiter().GetResult();
-                DdlstCategoria.ItemsSource = eCategoriaCliente;
-                DdlstCategoria.ItemDisplayBinding = new Binding("NombreCategoriaCliente");
-            }
-            catch (Exception)
-            {
-
-
+                DisplayAlert("Cliente", "Ocurrio un error al registrar cliente." + ex.Message, "Ok");
             }
         }
-        public static async Task<List<EZona>> Obtener_Zona()
-        {
-            var client = new HttpClient();
-            var responseString = await client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_Zona");
-            string resp = Convert.ToString(responseString);
-            var obj = JsonConvert.DeserializeObject<object>(resp);
-            string data = Convert.ToString(obj);
-            List<EZona> eUsuarioCompleja = new List<EZona>();
-            eUsuarioCompleja = JsonConvert.DeserializeObject<List<EZona>>(data);
-            return eUsuarioCompleja;
-
-        }
-        public void LlenarZonas()
-        {
-            try
-            {
-                SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
-                List<EZona> eZona = Task.Run(() => Obtener_Zona()).GetAwaiter().GetResult();
-                DdlstZona.ItemsSource = eZona;
-                DdlstZona.ItemDisplayBinding = new Binding("NombreZona");
-            }
-            catch (Exception)
-            {
-
-
-            }
-        }
-
 
         public bool Validar()
         {
-            if (TxtNombres.Text.Trim() == string.Empty)
+            if (string.IsNullOrWhiteSpace(TxtNombres.Text.Trim()))
             {
-                DisplayAlert("Validación", "El campo Nombres es obligatorio.", "Ok");
+                CrossToastPopUp.Current.ShowToastMessage("Nombres es obligatorio.");
                 return false;
+
             }
             else
             {
-                if (TxtPrimerApellido.Text.Trim() == string.Empty)
+                if (TxtNombres.Text.Trim().Length < 3)
                 {
-                    DisplayAlert("Validación", "El campo Primer Apellido es obligatorio.", "Ok");
+                    CrossToastPopUp.Current.ShowToastMessage("Nombres incorrecto.");
                     return false;
+
                 }
                 else
                 {
-                    if (TxtDireccion.Text.Trim() == string.Empty)
+                    if (string.IsNullOrWhiteSpace(TxtPrimerApellido.Text.Trim()))
                     {
-                        DisplayAlert("Validación", "El campo Direccion es obligatorio.", "Ok");
+                        CrossToastPopUp.Current.ShowToastMessage("Primer Apellido es obligatorio. ");
                         return false;
                     }
                     else
                     {
-                        if (TxtTelefono.Text.Trim() == string.Empty)
+                        if (TxtPrimerApellido.Text.Trim().Length < 3)
                         {
-                            DisplayAlert("Validación", "El campo Telefono es obligatorio.", "Ok");
+                            CrossToastPopUp.Current.ShowToastMessage("Primer Apellido incorrecto");
                             return false;
                         }
                         else
                         {
-                            if (TxtTelefono.Text.Trim().Length < 7 || TxtTelefono.Text.Trim().Length > 8)
+                            if (string.IsNullOrWhiteSpace(TxtDireccion.Text.Trim()))
                             {
-                                DisplayAlert("Validación", "El campo Telefono no tiene la cantidad correcta de caracteres.", "Ok");
+                                CrossToastPopUp.Current.ShowToastMessage("Direccion es obligatorio. ");
                                 return false;
                             }
                             else
                             {
-                                if (TxtCorreo.Text.Trim() == string.Empty)
+                                if (TxtDireccion.Text.Trim().Length < 10 && TxtDireccion.Text.Trim().Length > 250)
                                 {
-                                    DisplayAlert("Validación", "El campo Correo es obligatorio.", "Ok");
+                                    CrossToastPopUp.Current.ShowToastMessage("Direccion incorrecto");
                                     return false;
                                 }
                                 else
                                 {
-
-                                    if (DdlstCategoria.SelectedIndex < 0)
+                                    if (string.IsNullOrWhiteSpace(TxtTelefono.Text.Trim()))
                                     {
-                                        DisplayAlert("Validación", "El campo Categoria es obligatorio.", "Ok");
+                                        CrossToastPopUp.Current.ShowToastMessage("Telefono es obligatorio. ");
                                         return false;
                                     }
                                     else
                                     {
-                                        if (DdlstZona.SelectedIndex < 0)
+                                        if (TxtTelefono.Text.Trim().Length < 7 || TxtTelefono.Text.Trim().Length > 8)
                                         {
-                                            DisplayAlert("Validación", "El campo Zona es obligatorio.", "Ok");
+                                            CrossToastPopUp.Current.ShowToastMessage("Telefono incorrecto. ");
                                             return false;
                                         }
                                         else
                                         {
-                                            return true;
+                                            if (string.IsNullOrWhiteSpace(TxtCorreo.Text.Trim()))
+                                            {
+                                                CrossToastPopUp.Current.ShowToastMessage("Correo es obligatorio. ");
+                                                return false;
+                                            }
+                                            else
+                                            {
+                                                if (!IsValidEmail(TxtCorreo.Text.Trim()))
+                                                {
+                                                    CrossToastPopUp.Current.ShowToastMessage("Correo invalido. ");
+                                                    return false;
+                                                }
+                                                else
+                                                {
+                                                    bool res = Task.Run(() => Verificar_Cliente_Correo(TxtCorreo.Text.Trim().ToUpper())).GetAwaiter().GetResult();
+                                                    if (res)
+                                                    {
+                                                        CrossToastPopUp.Current.ShowToastMessage("Correo ya registrado.");
+                                                        return false;
+                                                    }
+                                                    else
+                                                    {
+                                                            return true;
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -696,6 +730,76 @@ namespace AppDistribuidor.Views
             }
 
         }
+
+        static bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        //public static async Task<List<ECategoriaCliente>> Obtener_CategoriaCliente()
+        //{
+        //    var client = new HttpClient();
+        //    var responseString = await client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_CategoriaCliente");
+        //    string resp = Convert.ToString(responseString);
+        //    var obj = JsonConvert.DeserializeObject<object>(resp);
+        //    string data = Convert.ToString(obj);
+        //    List<ECategoriaCliente> eUsuarioCompleja = new List<ECategoriaCliente>();
+        //    eUsuarioCompleja = JsonConvert.DeserializeObject<List<ECategoriaCliente>>(data);
+        //    return eUsuarioCompleja;
+
+        //}
+        //public void LlenarCategorias()
+        //{
+        //    try
+        //    {
+        //        //SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
+        //        List<ECategoriaCliente> eCategoriaCliente = Task.Run(() => Obtener_CategoriaCliente()).GetAwaiter().GetResult();
+        //        DdlstCategoria.ItemsSource = eCategoriaCliente;
+        //        DdlstCategoria.ItemDisplayBinding = new Binding("NombreCategoriaCliente");
+        //    }
+        //    catch (Exception)
+        //    {
+
+
+        //    }
+        //}
+        //public static async Task<List<EZona>> Obtener_Zona()
+        //{
+        //    var client = new HttpClient();
+        //    var responseString = await client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_Zona");
+        //    string resp = Convert.ToString(responseString);
+        //    var obj = JsonConvert.DeserializeObject<object>(resp);
+        //    string data = Convert.ToString(obj);
+        //    List<EZona> eUsuarioCompleja = new List<EZona>();
+        //    eUsuarioCompleja = JsonConvert.DeserializeObject<List<EZona>>(data);
+        //    return eUsuarioCompleja;
+
+        //}
+        //public void LlenarZonas()
+        //{
+        //    try
+        //    {
+        //        SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
+        //        List<EZona> eZona = Task.Run(() => Obtener_Zona()).GetAwaiter().GetResult();
+        //        DdlstZona.ItemsSource = eZona;
+        //        DdlstZona.ItemDisplayBinding = new Binding("NombreZona");
+        //    }
+        //    catch (Exception)
+        //    {
+
+
+        //    }
+        //}
+
+
+
 
         public void Limpiar()
         {
@@ -705,10 +809,11 @@ namespace AppDistribuidor.Views
             TxtDireccion.Text = string.Empty;
             TxtTelefono.Text = string.Empty;
             TxtCorreo.Text = string.Empty;
-            DdlstCategoria.SelectedIndex = -1;
-            DdlstZona.SelectedIndex = -1;
-            fotito.Source = ImageSource.FromUri(new Uri("https://protkd.com/wp-content/uploads/2017/04/default-image.jpg"));
-            VariablesGlobales.stream = GetStreamFromUrl("https://protkd.com/wp-content/uploads/2017/04/default-image.jpg");
+            TxtRazon.Text = string.Empty;
+            TxtNit.Text = string.Empty;
+
+            fotito.Source = ImageSource.FromUri(new Uri("https://i.ibb.co/qChmypq/descarga.png"));
+            VariablesGlobales.stream = GetStreamFromUrl("https://i.ibb.co/qChmypq/descarga.png");
             VariablesGlobales.Bandera = 0;
         }
 
@@ -724,11 +829,7 @@ namespace AppDistribuidor.Views
                 Title = "Pedido Asignado",
                 ReturningData = "Pedido Dato",
                 NotificationId = ranNum
-
-
             };
-
-
 
             LocalNotificationCenter.Current.Show(notification);
 

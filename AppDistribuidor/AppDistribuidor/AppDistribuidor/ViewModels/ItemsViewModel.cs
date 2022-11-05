@@ -11,24 +11,20 @@ using System.ComponentModel;
 using Plugin.Toast;
 using Plugin.Connectivity;
 
-using System.IO;
-using System.Net.Mail;
-using AppDistribuidor.Facturacion;
-
 namespace AppDistribuidor.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
 
-        public ObservableCollection<EClienteNombres> Clientess { get; set; }
+        public ObservableCollection<EClienteNombres> Clientess { get; }
 
-
+        public Command BuscarClientesCommand { get; }
 
         private ProductoVenta _selectedProducto;
         public ObservableCollection<ProductoVenta> Productos { get; }
         public Command LoadProductosCommand { get; }
         public Command AddProductoCommand { get; }
-       
+
         public Command BorrarTodoCommand { get; }
         public Command<ProductoVenta> ProductoTapped { get; }
 
@@ -58,8 +54,6 @@ namespace AppDistribuidor.ViewModels
 
             BorrarTodoCommand = new Command(BorrarTodo);
 
-        
-
             Clientess = ListarClientes();
         }
         public bool CheckConexion()
@@ -73,53 +67,92 @@ namespace AppDistribuidor.ViewModels
                 }
                 else
                 {
-                    CrossToastPopUp.Current.ShowToastMessage("No existe una conexion a Internet. " );
-                   // DisplayAlert("Conexión a Internet", "No existe una conexion a Internet. \n Por favor Conectese a internet eh intente de nuevo.", "OK");
+                    CrossToastPopUp.Current.ShowToastMessage("No existe una conexion a Internet. ");
+                    // DisplayAlert("Conexión a Internet", "No existe una conexion a Internet. \n Por favor Conectese a internet eh intente de nuevo.", "OK");
                     ban = false;
                 }
             }
             catch (Exception ex)
             {
-               // DisplayAlert("Error", "Ocurrio un problema al verificar conexion a internet.\n " + ex.Message, "OK");
+                // DisplayAlert("Error", "Ocurrio un problema al verificar conexion a internet.\n " + ex.Message, "OK");
                 CrossToastPopUp.Current.ShowToastMessage("Ocurrio un problema al verificar conexion a internet.");
             }
             return ban;
 
         }
+
         public ObservableCollection<EClienteNombres> ListarClientes()
         {
-        
+
 
             ObservableCollection<EClienteNombres> eClienteNombres = new ObservableCollection<EClienteNombres>();
-            if (CheckConexion())
-            {
+            //if (CheckConexion())
+            //{
 
-            SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
+            //    SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
 
-            List<SWNegocio.EClienteCompleja> eClienteComplejas = cliente.Obtener_Cliente().ToList();
+            //    List<SWNegocio.EClienteCompleja> eClienteComplejas = cliente.Obtener_Cliente().ToList();
 
-            //List<EClienteCorta> eClienteComplejas = Task.Run(() => Obtener_Cliente()).GetAwaiter().GetResult();
+            //    //List<EClienteCorta> eClienteComplejas = Task.Run(() => Obtener_Cliente()).GetAwaiter().GetResult();
 
 
-            foreach (SWNegocio.EClienteCompleja item in eClienteComplejas)
-            {
-                EClienteNombres eClienteNombres1 = new EClienteNombres() { 
-                NombreCompleto= item.Nombres + " " + item.PrimerApellido + " " + item.SegundoApellido
-                };
+            //    foreach (SWNegocio.EClienteCompleja item in eClienteComplejas)
+            //    {
+            //        EClienteNombres eClienteNombres1 = new EClienteNombres()
+            //        {
+            //            NombreCompleto = item.Nombres + " " + item.PrimerApellido + " " + item.SegundoApellido
+            //        };
 
-                eClienteNombres.Add(eClienteNombres1);
-                //clientes.Add(item.Nombres + " " + item.PrimerApellido + " " + item.SegundoApellido);
-            }
+            //        eClienteNombres.Add(eClienteNombres1);
+            //        //clientes.Add(item.Nombres + " " + item.PrimerApellido + " " + item.SegundoApellido);
+            //    }
 
-            }
+            //}
+
+
+            //Console.WriteLine($"-----SE ESTA BUSCANDO =====   " + nombreCliente + " -----");
+            //Console.WriteLine($"-----SE ESTA BUSCANDO =====   " + nombreCliente + " -----");
+            //Console.WriteLine($"-----SE ESTA BUSCANDO =====   " + nombreCliente + " -----");
+            //Console.WriteLine($"-----SE ESTA BUSCANDO =====   " + nombreCliente + " -----");
             return eClienteNombres;
         }
+
+
+        //public ObservableCollection<EClienteNombres> ListarClientes()
+        //{
+
+
+        //    ObservableCollection<EClienteNombres> eClienteNombres = new ObservableCollection<EClienteNombres>();
+        //    if (CheckConexion())
+        //    {
+
+        //    SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
+
+        //    List<SWNegocio.EClienteCompleja> eClienteComplejas = cliente.Obtener_Cliente().ToList();
+
+        //    //List<EClienteCorta> eClienteComplejas = Task.Run(() => Obtener_Cliente()).GetAwaiter().GetResult();
+
+
+        //    foreach (SWNegocio.EClienteCompleja item in eClienteComplejas)
+        //    {
+        //        EClienteNombres eClienteNombres1 = new EClienteNombres() { 
+        //        NombreCompleto= item.Nombres + " " + item.PrimerApellido + " " + item.SegundoApellido
+        //        };
+
+        //        eClienteNombres.Add(eClienteNombres1);
+        //        //clientes.Add(item.Nombres + " " + item.PrimerApellido + " " + item.SegundoApellido);
+        //    }
+
+        //    }
+
+        //    return eClienteNombres;
+        //}
 
 
         public async void BorrarTodo()
         {
             VariablesGlobales.Total = 0;
-           IsBusy = true;
+            IsBusy = true;
             Total = "Total : " + VariablesGlobales.Total;
             try
             {
@@ -142,20 +175,45 @@ namespace AppDistribuidor.ViewModels
                 IsBusy = false;
             }
 
-           
+
         }
         async Task ExecuteLoadProductosCommand()
         {
+            ProductoVenta producto = new ProductoVenta();
+
             IsBusy = true;
             Total = "Total : " + VariablesGlobales.Total;
             try
             {
                 Productos.Clear();
                 var productos = await DataStore.GetProductosAsync(true);
-                foreach (var producto in productos)
+
+
+                var query = (from t in productos
+                             group t by new { t.IdProducto, t.NombreProducto, t.Precio }
+                              into grp
+                             select new
+                             {
+                                 grp.Key.IdProducto,
+                                 grp.Key.NombreProducto,
+                                 Cantidad = grp.Sum(t => t.Cantidad),
+                                 grp.Key.Precio
+                             }).ToList();
+
+                foreach (var item in query)
                 {
+                    producto = new ProductoVenta() { 
+                    IdProducto = item.IdProducto,
+                    NombreProducto = item.NombreProducto,
+                    Cantidad= byte.Parse(item.Cantidad.ToString()),
+                    Precio=item.Precio
+                    
+                    };
+
                     Productos.Add(producto);
+                  
                 }
+          
             }
             catch (Exception ex)
             {
@@ -172,7 +230,7 @@ namespace AppDistribuidor.ViewModels
             IsBusy = true;
             //  SelectedItem = null;
             SelectedProducto = null;
-               
+
         }
 
         public string Total
@@ -187,7 +245,7 @@ namespace AppDistribuidor.ViewModels
             set => SetProperty(ref nombreCliente, value);
         }
 
-    
+
 
         public ProductoVenta SelectedProducto
         {
@@ -198,7 +256,7 @@ namespace AppDistribuidor.ViewModels
                 OnProductoSelected(value);
             }
         }
-       
+
 
         private async void OnAddProducto(object obj)
         {
@@ -213,20 +271,20 @@ namespace AppDistribuidor.ViewModels
         private async void OnProductoBorrar(ProductoVenta producto)
         {
             //ProductoVenta productoVenta = (ProductoVenta)obj;
-          var res = await DataStore.DeleteProductoAsync(producto.IdProducto);
+            var res = await DataStore.DeleteProductoAsync(producto.IdProducto,producto.Precio);
 
-            if(res)
+            if (res)
             {
-                VariablesGlobales.Total = VariablesGlobales.Total - (producto.Cantidad* producto.Precio);
+                VariablesGlobales.Total = VariablesGlobales.Total - (producto.Cantidad * producto.Precio);
 
-               await ExecuteLoadProductosCommand();
+                await ExecuteLoadProductosCommand();
                 CrossToastPopUp.Current.ShowToastMessage("Producto borrado de lista. ");
             }
             else
             {
                 CrossToastPopUp.Current.ShowToastMessage("Problema al borrar producto. ");
             }
-               
+
 
             //await Shell.Current.GoToAsync(nameof(NewItemPage));
             // This will push the ItemDetailPage onto the navigation stack
@@ -242,6 +300,5 @@ namespace AppDistribuidor.ViewModels
             await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={producto.IdProducto}");
         }
 
-        
     }
 }

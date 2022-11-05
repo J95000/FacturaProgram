@@ -4,9 +4,8 @@ using System.Text;
 
 namespace AppDistribuidor.Models
 {
-    public class ECliente
+    public class EClienteCompleja
     {
-      
         public string Estado { get; set; }
         public DateTime FechaModificacion { get; set; }
         public DateTime FechaRegistro { get; set; }
@@ -23,6 +22,8 @@ namespace AppDistribuidor.Models
         public string RazonSocial { get; set; }
 
         public string NitCi { get; set; }
-
+        public string Direccion { get; set; }
+        public decimal Latitud { get; set; }
+        public decimal Longitud { get; set; }
     }
 }

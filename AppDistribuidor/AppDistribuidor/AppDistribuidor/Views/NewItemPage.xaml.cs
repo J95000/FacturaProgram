@@ -68,12 +68,8 @@ namespace AppDistribuidor.Views
         {
             try
             {
-                //SWNegocio.SWNegocioAquacorpClient client = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
                 if(CheckConexion())
-                {
-
-
-               
+                { 
                 List<EProductoCorta> eProductoComplejas = Task.Run(() => Obtener_Producto()).GetAwaiter().GetResult();
                 DdlstProducto.ItemsSource = eProductoComplejas;
                 DdlstProducto.ItemDisplayBinding = new Binding("NombreProducto");
@@ -82,7 +78,6 @@ namespace AppDistribuidor.Views
             catch (Exception ex)
             {
                 CrossToastPopUp.Current.ShowToastMessage("Problema al obtener lista de productos. \n " + ex.Message);
-                //await DisplayAlert("Prestamo", "Problema al registrar Prestamo.", "Ok");
             }
         }
         public static async Task<List<EPrecioSugerido>> Obtener_PrecioSugerido_IdProducto(string idProducto)
@@ -101,16 +96,14 @@ namespace AppDistribuidor.Views
         {
             try
             {
-                //SWNegocio.SWNegocioAquacorpClient client = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
-               //List<SWNegocio.EPrecioSugeridoCompleja> eProductoComplejas = client.Obtener_PrecioSugerido_IdProducto(idProducto).ToList();
-                List<EPrecioSugerido> eProductoComplejas = Task.Run(() => Obtener_PrecioSugerido_IdProducto(idProducto.ToString())).GetAwaiter().GetResult();
+              List<EPrecioSugerido> eProductoComplejas = Task.Run(() => Obtener_PrecioSugerido_IdProducto(idProducto.ToString())).GetAwaiter().GetResult();
                 
                 DdlstPrecio.ItemsSource = eProductoComplejas;
                 DdlstPrecio.ItemDisplayBinding = new Binding("Precio");
             }
             catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage("Problema al obtener lista de precios. \n " + ex.Message);
+                CrossToastPopUp.Current.ShowToastMessage("Problema al obtener lista de precios.  " + ex.Message);
 
             }
         }
@@ -118,9 +111,6 @@ namespace AppDistribuidor.Views
         {
             try
             {
-
-               // var selectedProducto = DdlstProducto.SelectedItem as SWNegocio.EProductoCompleja;
-
                 var selectedProducto = DdlstProducto.SelectedItem as EProductoCorta;
                 idProducto = selectedProducto.IdProducto;
                  TxtIdProdu.Text= selectedProducto.IdProducto.ToString();
@@ -129,7 +119,7 @@ namespace AppDistribuidor.Views
             }
             catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage("Problema al seleccionar un producto. \n " + ex.Message);
+                CrossToastPopUp.Current.ShowToastMessage("Problema al seleccionar un producto.  " + ex.Message);
 
             }
         }
@@ -139,15 +129,13 @@ namespace AppDistribuidor.Views
             try
             {
 
-                //var selectedPrecio = DdlstPrecio.SelectedItem as SWNegocio.EPrecioSugeridoCompleja;
-
                 var selectedPrecio = DdlstPrecio.SelectedItem as EPrecioSugerido;
                 idPrecio = selectedPrecio.IdPrecioSugerido;
                 TxtPrecio.Text = selectedPrecio.Precio.ToString();
             }
             catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage("Problema al seleccionar un precio. \n " + ex.Message);
+                CrossToastPopUp.Current.ShowToastMessage("Problema al seleccionar un precio.  " + ex.Message);
 
             }
         }

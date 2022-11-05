@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SWNegocio;
+using System;
 using System.Net.Http;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -45,15 +47,19 @@ namespace AppDistribuidor.ViewModels
         {
             get
             {
-                return new Command(execute: async (obj) =>
+                return new Command(async() =>
                 {
                     try
                     {
                         IsBusy = false;
                         var client = new HttpClient();
 
-                        //string contents = await client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Acceso_Ci_Contrasena" + "/" + usuario + "/" + contra); ;
-                       
+                        string contents = await client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_Dosificacion_Habilitado");
+                        string resp = Convert.ToString(contents);
+                        var obj = JsonConvert.DeserializeObject<object>(resp);
+                        string data = Convert.ToString(obj);
+                        EMovimientoCompleja eMovimientoCompleja = new EMovimientoCompleja();
+                        eMovimientoCompleja = JsonConvert.DeserializeObject<EMovimientoCompleja>(data);
 
                         await App.Current.MainPage.DisplayAlert("Atencion!", "echo", "Cerrar");
                     }

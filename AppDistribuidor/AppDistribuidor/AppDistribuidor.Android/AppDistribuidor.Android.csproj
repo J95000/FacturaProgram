@@ -64,6 +64,9 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="NotificationHelper.cs" />
+    <Compile Include="PdfActivity.cs" />
+    <Compile Include="PdfExtensions.cs" />
+    <Compile Include="PdfViewer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

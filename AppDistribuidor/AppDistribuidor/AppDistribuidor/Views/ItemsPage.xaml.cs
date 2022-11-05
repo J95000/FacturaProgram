@@ -443,7 +443,7 @@ namespace AppDistribuidor.Views
                                             NitCi = nit
                                             //////////////////////////////////////////////////////
                                         };
-
+                                        
                                         bool res = await Insertar_Movimiento_ConFactura(eMovimientoCompleja);
 
                                         if (res)

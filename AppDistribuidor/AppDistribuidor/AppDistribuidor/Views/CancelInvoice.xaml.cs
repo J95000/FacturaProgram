@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace AppDistribuidor.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AnularFacturaPage : ContentPage
+    public partial class CancelInvoice : ContentPage
     {
-        public AnularFacturaPage()
+        public CancelInvoice()
         {
             InitializeComponent();
         }

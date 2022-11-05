@@ -8,51 +8,65 @@
         <vm:DosificationViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid BackgroundColor="#1465bb">
-            <Frame Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" CornerRadius="5" BackgroundColor="#0659B8">
-                <StackLayout Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" WidthRequest="250">
 
-                    <Label Text="Número de Autorización"
-                           TextColor="#ffffff"
-                           FontSize="Small"
-                           Margin="0,5,0,0"
-                       />
+        <Grid >
+            <ScrollView>
+                <StackLayout BackgroundColor="#1465bb">
+                    
+                    <StackLayout Padding="30">
+                        <Image  Source="dosi.png" HeightRequest="150" WidthRequest="150" />
+                    </StackLayout>
 
-                    <Entry Text="{Binding Autorizacion}" 
-                           Keyboard="Numeric"
-                           TextColor="#ffffff"
-                           Placeholder="Número de Autorización"
-                           PlaceholderColor="#cdcdcdcd"
-                           FontSize="Small"
-                       />
+                    <Frame Margin="30,0,30,0" HorizontalOptions="FillAndExpand" CornerRadius="15">
+                        <Frame.Background>
+                            <LinearGradientBrush  EndPoint="0,1">
+                                <GradientStop Color="#f2f2f2" Offset="0.1"/>
+                                <GradientStop Color="#ffffff" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Frame.Background>
+                        <StackLayout>
+                            <Label Text="Número de Autorización"
+                               TextColor="#000000"
+                               FontSize="Small"
+                               Margin="0,5,0,0"
+                               FontFamily="Comfortaa"
+                            />
 
-                    <Label Text="Llave De Dosificación"
-                           Margin="0,10,0,0"
-                           TextColor="#ffffff"
-                           FontSize="Small"/>
+                            <Entry Text="{Binding Autorizacion}" 
+                               Keyboard="Numeric"
+                               TextColor="#000000"
+                               Placeholder="Número de Autorización"
+                               PlaceholderColor="#c2c2c2"
+                               FontSize="Small"
+                            />
 
-                    <Entry Text="{Binding LLaveDosificacion}"
-                           Placeholder="Llave de Dosificación"
-                           PlaceholderColor="#cdcdcdcd"
-                           TextColor="#ffffff"
-                           FontSize="Small"
-                       />
+                            <Label Text="Llave De Dosificación"
+                               Margin="0,10,0,0"
+                               TextColor="#000000"
+                               FontSize="Small"
+                            />
 
-                    <Label Text="Fecha Límite De Emisión"
-                           Margin="0,10,0,0"
-                           TextColor="#ffffff"
-                           FontSize="Small"/>
+                            <Entry Text="{Binding LLaveDosificacion}"
+                               Placeholder="Llave de Dosificación"
+                               PlaceholderColor="#c2c2c2"
+                               TextColor="#000000"
+                               FontSize="Small"
+                            />
 
-                    <DatePicker 
-                           TextColor="#ffffff"
-                           Date="{Binding FechaLimiteEmision}"
-                           FontSize="Small"/>
+                            <Label Text="Fecha Límite De Emisión"
+                               Margin="0,10,0,0"
+                               TextColor="#000000"
+                               FontSize="Small"
+                            />
 
-                    <Button Text="Registrar" CornerRadius="4" BackgroundColor="#043e80" TextColor="#ffffff" FontSize="Small" Command="{Binding RegistryDosificationCommand}" IsEnabled="{Binding IsBusy}" Margin="0,20,0,0"/>
+                            <DatePicker TextColor="#000000" Date="{Binding FechaLimiteEmision}" FontSize="Small"/>
+                            <Button Text="Registrar" CornerRadius="10" BackgroundColor="#043e80" TextColor="#ffffff" FontSize="Small" Command="{Binding RegistryDosificationCommand}" IsEnabled="{Binding IsBusy}" Margin="0,20,0,0"/>
+                            
+                        </StackLayout>
+                    </Frame>
+                    <Label HorizontalOptions="Center" Text="* Recuerda renovar la dosificación cada 180 dias" FontSize="Micro" TextColor="#ffffff"/>
                 </StackLayout>
-            </Frame>
-
+            </ScrollView>
         </Grid>
-
     </ContentPage.Content>
 </ContentPage>

@@ -53,6 +53,7 @@ namespace AppDistribuidor.ViewModels
                         var client = new HttpClient();
 
                         //string contents = await client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Acceso_Ci_Contrasena" + "/" + usuario + "/" + contra); ;
+                       
 
                         await App.Current.MainPage.DisplayAlert("Atencion!", "echo", "Cerrar");
                     }

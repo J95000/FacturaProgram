@@ -11,10 +11,8 @@
         <StackLayout>
             <Label Text="Codigo De Control"                 
                 HorizontalOptions="CenterAndExpand" />
-            <Entry Text="buscar" />
-            <Button Text="Buscar" Command="{Binding SearchInvoiceCommand}"/>
-            
-
+            <Entry Text="{Binding ControlCode}" />
+            <Button Text="Buscar factura" Command="{Binding SearchInvoiceCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

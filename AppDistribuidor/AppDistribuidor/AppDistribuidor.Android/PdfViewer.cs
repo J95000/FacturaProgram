@@ -21,7 +21,7 @@ namespace AppDistribuidor.Droid
 {
     public class PdfViewer : IPdfViewer
     {
-        public async Task Open(byte[] pdf)
+        public async Task Open(byte[] pdf,int idMovimiento)
         {
             var client = new HttpClient();
 
@@ -36,6 +36,7 @@ namespace AppDistribuidor.Droid
             var renderer = new PdfRenderer(pdfFileDescriptor);
 
             PdfActivity.PdfRenderer = renderer;
+            PdfActivity.idMovimiento = idMovimiento;
             MainActivity.CurrentActivity.StartActivity(new Intent(MainActivity.CurrentActivity, typeof(PdfActivity)));
         }
     }

@@ -7,7 +7,7 @@ namespace AppDistribuidor.Services
 {
     public interface IPdfViewer
     {
-        Task Open(byte[] pdf);
+        Task Open(byte[] pdf,int idMovimiento);
 
     }
 }

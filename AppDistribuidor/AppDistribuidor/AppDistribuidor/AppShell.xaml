@@ -108,7 +108,7 @@
         <ShellContent Route="Dosificacion"   ContentTemplate="{DataTemplate local:DosificationPage}"/>
     </FlyoutItem>
     <FlyoutItem Title="Anulacion Factura"   Icon="anular.png">
-        <ShellContent Route="Anulacion"   ContentTemplate="{DataTemplate local:AnularFacturaPage}"/>
+        <ShellContent Route="Anulacion"   ContentTemplate="{DataTemplate local:CancelInvoice}"/>
     </FlyoutItem>
     <FlyoutItem Title="Cambiar Contraseña"   Icon="cambio.png">
         <ShellContent Route="Cambiar"   ContentTemplate="{DataTemplate local:PasswordChangePage}"/>

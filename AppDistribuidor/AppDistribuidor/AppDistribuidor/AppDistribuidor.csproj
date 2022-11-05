@@ -40,8 +40,8 @@
     <EmbeddedResource Update="Controles\FlyoutHeader.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AnularFacturaPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    <EmbeddedResource Update="Views\CancelInvoice.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\DosificationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

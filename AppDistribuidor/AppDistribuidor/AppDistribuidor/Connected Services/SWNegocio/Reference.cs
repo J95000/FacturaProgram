@@ -9,6 +9,8 @@
 
 namespace SWNegocio
 {
+    using System;
+    using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     
     
@@ -2385,6 +2387,11 @@ namespace SWNegocio
             {
                 this.TipoMovimientoField = value;
             }
+        }
+
+        public static implicit operator ObservableCollection<object>(EMovimientoCompleja v)
+        {
+            throw new NotImplementedException();
         }
     }
     

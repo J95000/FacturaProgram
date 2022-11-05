@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppDistribuidor.Views.CancelInvoice"
+             xmlns:vm="clr-namespace:AppDistribuidor.ViewModels"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:CancelInvoiceViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Codigo De Control"                 
+                HorizontalOptions="CenterAndExpand" />
+            <Entry Text="{Binding ControlCode}" />
+            <Button Text="Buscar factura" Command="{Binding SearchInvoiceCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

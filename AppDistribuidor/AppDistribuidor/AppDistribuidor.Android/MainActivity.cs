@@ -16,9 +16,14 @@ namespace AppDistribuidor.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         Intent serviceIntent;
+        public static Activity CurrentActivity;
         private const int RequestCode = 5469;
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            TabLayoutResource = Resource.Layout.Tabbar;
+            ToolbarResource = Resource.Layout.Toolbar;
+            CurrentActivity = this;
+
             base.OnCreate(savedInstanceState);
 
 
@@ -96,5 +101,6 @@ namespace AppDistribuidor.Droid
 
             base.OnActivityResult(requestCode, resultCode, data);
         }
+
     }
 }

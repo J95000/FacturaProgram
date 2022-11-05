@@ -99,6 +99,11 @@
         <ShellContent Route="Dosificacion"
                       ContentTemplate="{DataTemplate local:DosificationPage}"/>
     </FlyoutItem>
+    <FlyoutItem Title="Anular Factura"
+                Icon="ventas.png">
+        <ShellContent Route="AnularFactura"
+                      ContentTemplate="{DataTemplate local:CancelInvoice}"/>
+    </FlyoutItem>
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Salir" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>

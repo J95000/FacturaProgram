@@ -79,6 +79,18 @@ namespace AppDistribuidor.Views
 
         }
 
+        public EDosificacionCompleja Obtener_Dosificacion_Habilitado()
+        {
+            var client = new HttpClient();
+            var responseString = client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_Dosificacion_Habilitado");
+            string resp = Convert.ToString(responseString);
+            var obj = JsonConvert.DeserializeObject<object>(resp);
+            string data = Convert.ToString(obj);
+            EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
+            eDosificacionCompleja = JsonConvert.DeserializeObject<EDosificacionCompleja>(data);
+            return eDosificacionCompleja;
+        }
+
         public void ListarClientes()
         {
             clientes = new List<string>();
@@ -388,7 +400,7 @@ namespace AppDistribuidor.Views
                         if (_viewModel.Productos.Count > 0)
                         {
 
-                             clienteCompleja = Task.Run(() => Obtener_Cliente_Buscador_NombreCompleto(NombreCliente)).GetAwaiter().GetResult();
+                            clienteCompleja = Task.Run(() => Obtener_Cliente_Buscador_NombreCompleto(NombreCliente)).GetAwaiter().GetResult();
 
                             string factura = await DisplayActionSheet("Facturación", "Si", "No", "Se requiere factura?.");
                            
@@ -403,6 +415,8 @@ namespace AppDistribuidor.Views
 
                                 if (RazonNit == "Si")
                                 {
+                                    EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
+                                    eDosificacionCompleja = Obtener_Dosificacion_Habilitado();
 
                                     EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
                                     {
@@ -436,9 +450,11 @@ namespace AppDistribuidor.Views
 
                                             PrecioTotal = VariablesGlobales.Total,
                                             ///////////////////////////////////////////////////
-                                            IdDosificacion = 1,
-                                            NroMovimiento = 1,
-                                            CodigoControl = CodigoControl.generateControlCode("7904006306693", "2378", "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), "zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS"),
+                                            IdDosificacion = eDosificacionCompleja.IdDosificacion,
+                                            //IdDosificacion = 1,
+                                            NroMovimiento = eDosificacionCompleja.NroFinalFactura,
+                                            //NroMovimiento = 1,
+                                            CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
                                             RazonSocial = razon,
                                             NitCi = nit
                                             //////////////////////////////////////////////////////
@@ -478,10 +494,10 @@ namespace AppDistribuidor.Views
                                                     {
                                                         generarFactura = new GenerarFactura();
                                                         envioCorreo = new EnvioCorreo();
-                                                        byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja);
+                                                        byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
                                                         string correo = clienteCompleja.CorreoElectronico;
                                                         await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
-                                                        envioCorreo.EnviarCorreo("axel20ayalam@gmail.com", correo, pdf);
+                                                        envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
 
                                                     }
                                                 }
@@ -508,6 +524,9 @@ namespace AppDistribuidor.Views
                                 }
                                 else
                                 {
+                                    EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
+                                    eDosificacionCompleja = Obtener_Dosificacion_Habilitado();
+
                                     string nuevoRazonSocial = await DisplayPromptAsync("Nueva Razon Social", "");
                                     string nuevoNit = await DisplayPromptAsync("Nuevo Nit o Ci", "");
 
@@ -545,9 +564,11 @@ namespace AppDistribuidor.Views
 
                                             PrecioTotal = VariablesGlobales.Total,
                                             ///////////////////////////////////////////////////
-                                            IdDosificacion = 1,
-                                            NroMovimiento = 1,
-                                            CodigoControl = CodigoControl.generateControlCode("7904006306693", "2378", "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), "zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS"),
+                                            IdDosificacion = eDosificacionCompleja.IdDosificacion,
+                                            //IdDosificacion = 1,
+                                            NroMovimiento = eDosificacionCompleja.NroFinalFactura,
+                                            //NroMovimiento = 1,
+                                            CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
                                             RazonSocial = nuevoRazonSocial,
                                             NitCi = nuevoNit
                                             //////////////////////////////////////////////////////
@@ -587,10 +608,10 @@ namespace AppDistribuidor.Views
                                                     {
                                                         generarFactura = new GenerarFactura();
                                                         envioCorreo = new EnvioCorreo();
-                                                        byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja);
+                                                        byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
                                                         string correo = clienteCompleja.CorreoElectronico;
                                                         await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
-                                                        envioCorreo.EnviarCorreo("axel20ayalam@gmail.com", correo, pdf);
+                                                        envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
 
                                                     }
                                                 }

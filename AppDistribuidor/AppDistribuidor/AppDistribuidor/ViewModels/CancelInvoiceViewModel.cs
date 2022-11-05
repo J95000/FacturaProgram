@@ -86,7 +86,7 @@ namespace AppDistribuidor.ViewModels
                         productos.Add(new ProductoVenta { IdProducto = 2, Cantidad = 1, Precio = 8, NombreProducto = "Botellon Verde" });
 
                         GenerarFactura generarFactura = new GenerarFactura();
-                        byte[] pdf = generarFactura.GenerarPdf(productos, eMovimiento, new EDetalleMovimiento());
+                        byte[] pdf = generarFactura.GenerarPdf(productos, eMovimiento, new EDetalleMovimiento(),new EDosificacionCompleja());
                         await DependencyService.Get<IPdfViewer>().Open(pdf,1);
 
                     }

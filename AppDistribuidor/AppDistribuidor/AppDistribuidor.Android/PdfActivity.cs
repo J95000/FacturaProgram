@@ -26,9 +26,9 @@ namespace AppDistribuidor.Droid
             builder.SetMessage("Se Anulara la Factura");
             builder.SetPositiveButton("Anular", async (sender, e) =>
             {
-                HttpClient httpClient = new HttpClient(new Xamarin.Android.Net.AndroidClientHandler());
+                HttpClient httpClient = new HttpClient();
 
-                var resstring = await httpClient.GetAsync($"http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Actualizar_Movimiento_Facturacion/{idMovimiento}/{DateTime.Now}/DE");
+                var resstring = await httpClient.GetStringAsync($"http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Actualizar_Movimiento_Facturacion/{idMovimiento}/{DateTime.Now.ToString("dd-MM-yyyy")}/DE");
                 string res = Convert.ToString(resstring);
                 if (res == "true")
                 {

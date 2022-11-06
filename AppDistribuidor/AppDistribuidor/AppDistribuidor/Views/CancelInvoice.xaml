@@ -24,6 +24,7 @@
                         />
 
                         <Entry Text="{Binding ControlCode}"
+                           TextColor="#000000"
                            Placeholder="Código de Control"
                            PlaceholderColor="#c2c2c2"
                            FontSize="Small"

@@ -95,7 +95,7 @@ namespace AppDistribuidor.ViewModels
                         }
                         else
                         {
-                            await App.Current.MainPage.DisplayAlert("Error", $"La Factura con Codigo de Control: \n {controlCode} . No existe o esta Inhabilidada", "Cerrar");
+                            await App.Current.MainPage.DisplayAlert("Error", $"La Factura con Codigo de Control: \n {controlCode} . No Existe o Esta Anulada", "Cerrar");
                         }
                     }
                     catch (Exception e)

@@ -52,7 +52,7 @@ namespace AppDistribuidor.Facturacion
                 Paragraph saltoLinea = new Paragraph(new Text("\n"));
 
                 //CABECERA
-                float[] pointColumnWidths = { 80F, 150F, 200F, 150F };
+                float[] pointColumnWidths = { 80F, 200F, 150F, 150F };
                 Table tablaCabecera = new Table(pointColumnWidths);
                 tablaCabecera.AddCell(new Cell().SetBorder(Border.NO_BORDER).Add(image.ScaleAbsolute(70, 70)));
                 tablaCabecera.AddCell(new Cell().SetBorder(Border.NO_BORDER).Add(datosEmpresa));

@@ -64,7 +64,7 @@
                             
                         </StackLayout>
                     </Frame>
-                    <Label HorizontalOptions="Center" Text="* Recuerda renovar la dosificación cada 180 dias" FontSize="Micro" TextColor="#ffffff"/>
+                    <Label HorizontalOptions="Center" Text="* Recuerda renovar la dosificación cada 90 dias" FontSize="Micro" TextColor="#ffffff"/>
                 </StackLayout>
             </ScrollView>
         </Grid>

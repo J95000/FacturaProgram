@@ -91,6 +91,18 @@ namespace AppDistribuidor.Views
             return eDosificacionCompleja;
         }
 
+        public async Task<EDosificacionCompleja> Obtener_Dosificacion_IdDosificacion(int IdDosificacion)
+        {
+            var client = new HttpClient();
+            var responseString = await client.GetStringAsync($"http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_Dosificacion_IdDosificacion/{IdDosificacion}");
+            string resp = Convert.ToString(responseString);
+            var obj = JsonConvert.DeserializeObject<object>(resp);
+            string data = Convert.ToString(obj);
+            EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
+            eDosificacionCompleja = JsonConvert.DeserializeObject<EDosificacionCompleja>(data);
+            return eDosificacionCompleja;
+        }
+
         public void ListarClientes()
         {
             clientes = new List<string>();
@@ -418,6 +430,7 @@ namespace AppDistribuidor.Views
                                 {
                                     EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
                                     eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
+                                    eDosificacionCompleja.NroFinalFactura++;
 
                                     EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
                                     {
@@ -493,7 +506,7 @@ namespace AppDistribuidor.Views
                                                         generarFactura = new GenerarFactura();
                                                         envioCorreo = new EnvioCorreo();
                                                         byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
-                                                        string correo = "rodrigo.iriarte14@gmail.com";//clienteCompleja.CorreoElectronico;
+                                                        string correo = clienteCompleja.CorreoElectronico;
                                                         await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
                                                         envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
 
@@ -524,6 +537,7 @@ namespace AppDistribuidor.Views
                                 {
                                     EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
                                     eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
+                                    eDosificacionCompleja.NroFinalFactura++;
 
                                     string nuevoRazonSocial = await DisplayPromptAsync("Nueva Razon Social", "");
                                     string nuevoNit = await DisplayPromptAsync("Nuevo Nit o Ci", "");

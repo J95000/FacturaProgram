@@ -12,12 +12,12 @@
         <Grid >
             <ScrollView>
                 <StackLayout BackgroundColor="#1465bb">
-                    
-                    <StackLayout Padding="30">
-                        <Image  Source="dosi.png" HeightRequest="150" WidthRequest="150" />
+
+                    <StackLayout Padding="30" Margin="0,10,0,0">
+                        <Image  Source="dosi.png" HeightRequest="120" WidthRequest="120" />
                     </StackLayout>
 
-                    <Frame Margin="30,0,30,0" HorizontalOptions="FillAndExpand" CornerRadius="15">
+                    <Frame HorizontalOptions="Center" CornerRadius="15"  WidthRequest="300" MinimumWidthRequest="300">
                         <Frame.Background>
                             <LinearGradientBrush  EndPoint="0,1">
                                 <GradientStop Color="#f2f2f2" Offset="0.1"/>

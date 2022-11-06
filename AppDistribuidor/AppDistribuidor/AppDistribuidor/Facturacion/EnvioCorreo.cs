@@ -14,7 +14,7 @@ namespace AppDistribuidor.Facturacion
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
             mail.From = new MailAddress(emisor);
-            mail.To.Add("pablors0598@gmail.com");
+            mail.To.Add(receptor);
             mail.Subject = "Factura - San Antonio";
             mail.Body = "Estimado cliente, a continuación se le adjunta la factura de la compra realizada.\nGracias por su preferencia.";
             mail.Attachments.Add(new Attachment(new MemoryStream(document), "factura.pdf", "application/pdf"));

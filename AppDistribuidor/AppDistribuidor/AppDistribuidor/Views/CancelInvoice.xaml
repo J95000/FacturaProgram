@@ -12,7 +12,7 @@
             <Label Text="Codigo De Control"                 
                 HorizontalOptions="CenterAndExpand" />
             <Entry Text="{Binding ControlCode}" />
-            <Button Text="Buscar factura" Command="{Binding SearchInvoiceCommand}"/>
+            <Button Text="Buscar factura" Command="{Binding SearchInvoiceCommand}" IsEnabled="{Binding IsBusy}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

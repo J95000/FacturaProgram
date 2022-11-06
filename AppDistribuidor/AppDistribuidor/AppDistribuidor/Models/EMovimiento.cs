@@ -19,8 +19,8 @@ namespace AppDistribuidor.Models
         public string TipoMovimiento { get; set; }
 
         public decimal PrecioTotal { get; set; }
-        public int IdDosificacion { get; set; }
-        public int NroMovimiento { get; set; }
+        public int? IdDosificacion { get; set; }
+        public int? NroMovimiento { get; set; }
         public string CodigoControl { get; set; }
         public string RazonSocial { get; set; }
         public string NitCi { get; set; }

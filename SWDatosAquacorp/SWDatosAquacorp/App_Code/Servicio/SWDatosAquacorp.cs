@@ -326,6 +326,11 @@ public class SWDatosAquacorp : ISWDatosAquacorp
         CCliente cCliente = new CCliente();
         return cCliente.Obtener_Cliente_Buscador(nombre);
     }
+    public void Actualizar_Cliente_Corta(EClienteCortaSimple eClienteCortaSimple)
+    {
+        CCliente cCliente = new CCliente();
+          cCliente.Actualizar_Cliente_Corta(eClienteCortaSimple);
+    }
     #endregion
 
     #region CATEGORIACLIENTE
@@ -642,6 +647,22 @@ public class SWDatosAquacorp : ISWDatosAquacorp
         CMovimiento cMovimiento = new CMovimiento();
         return cMovimiento.Arqueo_Retorno(idUsuario, fecha);
     }
+    public List<EMovimientoPedidoSimple> Obtener_Movimiento_O_Pedido_IdUsuario(int IdUsuario, DateTime fecha)
+    {
+        CMovimiento cMovimiento = new CMovimiento();
+        return cMovimiento.Obtener_Movimiento_O_Pedido_IdUsuario(IdUsuario, fecha);
+    }
+    public void Insertar_Movimiento_ConFactura(EMovimientoSimple eMovimientoSimple)
+    {
+            CMovimiento cMovimiento = new CMovimiento();
+             cMovimiento.Insertar_Movimiento_ConFactura(eMovimientoSimple);
+    }
+    public void Insertar_Movimiento_SinFactura(EMovimientoSimple eMovimientoSimple)
+    {
+        CMovimiento cMovimiento = new CMovimiento();
+        cMovimiento.Insertar_Movimiento_SinFactura(eMovimientoSimple);
+
+    }
     #endregion
 
     #region  DETALLEMOVIMIENTO
@@ -664,6 +685,16 @@ public class SWDatosAquacorp : ISWDatosAquacorp
     {
         CDetalleMovimiento cDetalleMovimiento = new CDetalleMovimiento();
         return cDetalleMovimiento.Obtener_DetalleMovimiento();
+    }
+    public void Insertar_Movimiento_Cancelado(EMovimientoCanceladoSimple eMovimientoCanceladoSimple)
+    {
+        CDetalleMovimiento cDetalleMovimiento = new CDetalleMovimiento();
+        cDetalleMovimiento.Insertar_Movimiento_Cancelado(eMovimientoCanceladoSimple);
+    }
+    public List<EDetalleMovimientoPedidoSimple> Obtener_DetalleMovimiento_Pedido(int idMovimiento)
+    {
+        CDetalleMovimiento cDetalleMovimiento = new CDetalleMovimiento();
+        return cDetalleMovimiento.Obtener_DetalleMovimiento_Pedido(idMovimiento);
     }
     #endregion
 

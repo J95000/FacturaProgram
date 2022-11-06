@@ -85,8 +85,6 @@ public class CMovimiento
         return eMovimientoSimple;
     }
 
-
-
     public List<EMovimientoSimple> Obtener_Movimiento()
     {
         List<EMovimientoSimple> lstEMovimientoSimple = new List<EMovimientoSimple>();
@@ -245,6 +243,89 @@ public class CMovimiento
             cException.Insertar_Exception_LocalDatos(new EExceptionSimple() { Fecha = DateTime.Now, IdUsuario = 1, NombreMetodo = ex.TargetSite.Name, Mensaje = ex.Message, ExceptionMensaje = ex.StackTrace });
         }
         return lstEArqueoMovimientoSimple;
+    }
+
+
+
+    public List<EMovimientoPedidoSimple> Obtener_Movimiento_O_Pedido_IdUsuario(int IdUsuario, DateTime fecha)
+    {
+        List<EMovimientoPedidoSimple> lstEMovimientoPedidoSimple = new List<EMovimientoPedidoSimple>();
+        EMovimientoPedidoSimple eMovimientoPedidoSimple = new EMovimientoPedidoSimple();
+        try
+        {
+            using (aquacorpbddEntities db = new aquacorpbddEntities())
+            {
+                var Movimiento = db.Proc_Movimiento_O_Pedido_IdUsuario(IdUsuario, fecha);
+                foreach (var v in Movimiento)
+                {
+                    eMovimientoPedidoSimple = new EMovimientoPedidoSimple
+                    {
+                    IdMovimiento = v.IdMovimiento,
+                    Codigo = v.Codigo,
+                    IdCliente = v.IdCliente,
+                    NombreCliente = v.NombreCliente,
+                    Telefono = v.Telefono,
+                    IdDireccion = v.IdDireccion,
+                    NombreDireccion = v.NombreDireccion,
+                    Latitud = v.Latitud,
+                    Longitud = v.Longitud,
+                    FechaRegistro = v.FechaRegistro,
+                    FechaModificacion = v.FechaModificacion,
+                    RazonSocial = v.RazonSocial,
+                    NitCi = v.NitCi,
+                    FotoUbicacion = v.FotoUbicacion
+                };
+                    lstEMovimientoPedidoSimple.Add(eMovimientoPedidoSimple);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            cException.Insertar_Exception_LocalDatos(new EExceptionSimple() { Fecha = DateTime.Now, IdUsuario = 1, NombreMetodo = ex.TargetSite.Name, Mensaje = ex.Message, ExceptionMensaje = ex.StackTrace });
+        }
+        return lstEMovimientoPedidoSimple;
+    }
+    public void Insertar_Movimiento_ConFactura(EMovimientoSimple eMovimientoSimple)
+    {
+
+        using (aquacorpbddEntities db = new aquacorpbddEntities())
+        {
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    db.Proc_Movimiento_I_ConFactura(eMovimientoSimple.IdCliente, eMovimientoSimple.IdUsuario, eMovimientoSimple.TipoMovimiento, eMovimientoSimple.FechaRegistro, eMovimientoSimple.FechaModificacion, eMovimientoSimple.Estado, eMovimientoSimple.PrecioTotal, eMovimientoSimple.IdDosificacion, eMovimientoSimple.NroMovimiento, eMovimientoSimple.CodigoControl, eMovimientoSimple.RazonSocial, eMovimientoSimple.NitCi);
+                    transaction.Commit();
+                }
+
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    cException.Insertar_Exception_LocalDatos(new EExceptionSimple() { Fecha = DateTime.Now, IdUsuario = 1, NombreMetodo = ex.TargetSite.Name, Mensaje = ex.Message, ExceptionMensaje = ex.StackTrace });
+                }
+            }
+        }
+    }
+    public void Insertar_Movimiento_SinFactura(EMovimientoSimple eMovimientoSimple)
+    {
+
+        using (aquacorpbddEntities db = new aquacorpbddEntities())
+        {
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    db.Proc_Movimiento_I_SinFactura(eMovimientoSimple.IdCliente, eMovimientoSimple.IdUsuario, eMovimientoSimple.TipoMovimiento, eMovimientoSimple.FechaRegistro, eMovimientoSimple.FechaModificacion, eMovimientoSimple.Estado, eMovimientoSimple.PrecioTotal);
+                    transaction.Commit();
+                }
+
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    cException.Insertar_Exception_LocalDatos(new EExceptionSimple() { Fecha = DateTime.Now, IdUsuario = 1, NombreMetodo = ex.TargetSite.Name, Mensaje = ex.Message, ExceptionMensaje = ex.StackTrace });
+                }
+            }
+        }
     }
     #endregion
 

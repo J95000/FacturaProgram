@@ -85,6 +85,7 @@ public class CDetalleMovimiento
 
 
 
+  
     public List<EDetalleMovimientoSimple> Obtener_DetalleMovimiento()
     {
         List<EDetalleMovimientoSimple> lstEDetalleMovimientoSimple = new List<EDetalleMovimientoSimple>();
@@ -117,6 +118,54 @@ public class CDetalleMovimiento
         }
         return lstEDetalleMovimientoSimple;
     }
+    public void Insertar_Movimiento_Cancelado(EMovimientoCanceladoSimple eMovimientoCanceladoSimple)
+    {
+        try
+        {
+            using (aquacorpbddEntities db = new aquacorpbddEntities())
+            {
+                db.Proc_Movimiento_Pedido_Cancelar(eMovimientoCanceladoSimple.IdMovimiento, eMovimientoCanceladoSimple.Motivo, eMovimientoCanceladoSimple.FechaRegistro);
+            }
+        }
+
+        catch (Exception ex)
+        {
+        
+            cException.Insertar_Exception_LocalDatos(new EExceptionSimple() { Fecha = DateTime.Now, IdUsuario = 1, NombreMetodo = ex.TargetSite.Name, Mensaje = ex.Message, ExceptionMensaje = ex.StackTrace });
+        }
+    }
+    public List<EDetalleMovimientoPedidoSimple> Obtener_DetalleMovimiento_Pedido(int idMovimiento)
+    {
+        List<EDetalleMovimientoPedidoSimple> lstEDetalleMovimientoSimple = new List<EDetalleMovimientoPedidoSimple>();
+        try
+        {
+            using (aquacorpbddEntities db = new aquacorpbddEntities())
+            {
+                var DetalleMovimiento = db.Proc_DetalleMovimiento_O_Pedido_IdMovimiento(idMovimiento);
+                foreach (var dp in DetalleMovimiento)
+                {
+                    EDetalleMovimientoPedidoSimple eDetalleMovimientoSimple = new EDetalleMovimientoPedidoSimple
+                    {
+                        IdDetalleMovimiento = dp.IdDetalleMovimiento,
+                        IdMovimiento = dp.IdMovimiento,
+                        IdProducto = dp.IdProducto,
+                        NombreProducto = dp.NombreProducto,
+                        PrecioUnitario = dp.PrecioUnitario,
+                        Cantidad = dp.Cantidad,
+                        SubTotal = (decimal)dp.SubTotal
+
+                    };
+                    lstEDetalleMovimientoSimple.Add(eDetalleMovimientoSimple);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            cException.Insertar_Exception_LocalDatos(new EExceptionSimple() { Fecha = DateTime.Now, IdUsuario = 1, NombreMetodo = ex.TargetSite.Name, Mensaje = ex.Message, ExceptionMensaje = ex.StackTrace });
+        }
+        return lstEDetalleMovimientoSimple;
+    }
+
     #endregion
 
 }

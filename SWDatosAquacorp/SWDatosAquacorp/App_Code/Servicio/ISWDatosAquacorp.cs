@@ -172,6 +172,8 @@ public interface ISWDatosAquacorp
     List<EClienteSimple> Obtener_Cliente();
     [OperationContract]
     List<EClienteSimple> Obtener_Cliente_Buscador(string nombre);
+    [OperationContract]
+    void Actualizar_Cliente_Corta(EClienteCortaSimple eClienteCortaSimple);
     #endregion
 
     #region CATEGORIACLIENTE
@@ -324,6 +326,13 @@ public interface ISWDatosAquacorp
     List<EArqueoMovimientoSimple> Arqueo_Movimiento(int idUsuario, DateTime fecha, string tipoMovimiento);
     [OperationContract]
     List<EArqueoSimple> Arqueo_Retorno(int idUsuario, DateTime fecha);
+    [OperationContract]
+    List<EMovimientoPedidoSimple> Obtener_Movimiento_O_Pedido_IdUsuario(int IdUsuario, DateTime fecha);
+    [OperationContract]
+    void Insertar_Movimiento_ConFactura(EMovimientoSimple eMovimientoSimple);
+    [OperationContract]
+    void Insertar_Movimiento_SinFactura(EMovimientoSimple eMovimientoSimple);
+    
     #endregion
 
     #region DETALLEMOVIMIENTO
@@ -335,6 +344,12 @@ public interface ISWDatosAquacorp
     EDetalleMovimientoSimple Obtener_DetalleMovimiento_Id_Movimiento(int IdMovimiento);
     [OperationContract]
     List<EDetalleMovimientoSimple> Obtener_DetalleMovimiento();
+
+    [OperationContract]
+    void Insertar_Movimiento_Cancelado(EMovimientoCanceladoSimple eMovimientoCanceladoSimple);
+     [OperationContract]
+    List<EDetalleMovimientoPedidoSimple> Obtener_DetalleMovimiento_Pedido(int idMovimiento);
+   
     #endregion
 
     #region PRODUCTO

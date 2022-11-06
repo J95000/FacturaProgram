@@ -33,19 +33,15 @@ namespace Modelo
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<CategoriaCliente> CategoriaCliente { get; set; }
         public virtual DbSet<Ciudad> Ciudad { get; set; }
-        public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<ControlEntrada> ControlEntrada { get; set; }
         public virtual DbSet<ControlSanitario> ControlSanitario { get; set; }
         public virtual DbSet<Conyugue> Conyugue { get; set; }
         public virtual DbSet<Despido> Despido { get; set; }
-        public virtual DbSet<DetalleMovimiento> DetalleMovimiento { get; set; }
-        public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<ExceptionLog> ExceptionLog { get; set; }
         public virtual DbSet<Existencia> Existencia { get; set; }
         public virtual DbSet<Gasto> Gasto { get; set; }
         public virtual DbSet<Habilidad> Habilidad { get; set; }
         public virtual DbSet<Pago> Pago { get; set; }
-        public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<PrecioSugerido> PrecioSugerido { get; set; }
         public virtual DbSet<PuntoZona> PuntoZona { get; set; }
         public virtual DbSet<ReferenciaLaboral> ReferenciaLaboral { get; set; }
@@ -62,16 +58,19 @@ namespace Modelo
         public virtual DbSet<ExistenciaMateriaPrima> ExistenciaMateriaPrima { get; set; }
         public virtual DbSet<Material> Material { get; set; }
         public virtual DbSet<Produccion> Produccion { get; set; }
-        public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<MateriaPrima> MateriaPrima { get; set; }
         public virtual DbSet<Provision> Provision { get; set; }
-        public virtual DbSet<Auditoria> Auditoria { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Direccion> Direccion { get; set; }
+        public virtual DbSet<Empleado> Empleado { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<DetalleMovimiento> DetalleMovimiento { get; set; }
         public virtual DbSet<DireccionMovimiento> DireccionMovimiento { get; set; }
+        public virtual DbSet<Movimiento> Movimiento { get; set; }
+        public virtual DbSet<Auditoria> Auditoria { get; set; }
         public virtual DbSet<Dosificacion> Dosificacion { get; set; }
         public virtual DbSet<MovimientoCancelado> MovimientoCancelado { get; set; }
-        public virtual DbSet<UbicacionPrueba> UbicacionPrueba { get; set; }
-        public virtual DbSet<Movimiento> Movimientoes { get; set; }
     
         public virtual int Proc_Articulo_A(Nullable<int> idArticulo, Nullable<byte> idCategoria, Nullable<int> idUsuario, string titulo, string descripcion, string contenido, string imagen, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
         {
@@ -841,20 +840,6 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_DetalleMovimiento_I", idMovimientoParameter, idProductoParameter, precioUnitarioParameter, cantidadParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Proc_DetalleMovimiento_O_Result> Proc_DetalleMovimiento_O()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_DetalleMovimiento_O_Result>("Proc_DetalleMovimiento_O");
-        }
-    
-        public virtual ObjectResult<Proc_DetalleMovimiento_O_IdDetalleMovimiento_Result> Proc_DetalleMovimiento_O_IdDetalleMovimiento(Nullable<int> idDetalleMovimiento)
-        {
-            var idDetalleMovimientoParameter = idDetalleMovimiento.HasValue ?
-                new ObjectParameter("IdDetalleMovimiento", idDetalleMovimiento) :
-                new ObjectParameter("IdDetalleMovimiento", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_DetalleMovimiento_O_IdDetalleMovimiento_Result>("Proc_DetalleMovimiento_O_IdDetalleMovimiento", idDetalleMovimientoParameter);
-        }
-    
         public virtual int Proc_Exception_A(Nullable<int> idException, Nullable<System.DateTime> fecha, Nullable<int> idUsuario, string nombreMetodo, string mensaje, string excepcionMensaje)
         {
             var idExceptionParameter = idException.HasValue ?
@@ -1179,431 +1164,6 @@ namespace Modelo
                 new ObjectParameter("IdPago", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Pago_O_IdPago_Result>("Proc_Pago_O_IdPago", idPagoParameter);
-        }
-    
-        public virtual int Proc_Persona_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
-        {
-            var idPersonaParameter = idPersona.HasValue ?
-                new ObjectParameter("IdPersona", idPersona) :
-                new ObjectParameter("IdPersona", typeof(int));
-    
-            var nombresParameter = nombres != null ?
-                new ObjectParameter("Nombres", nombres) :
-                new ObjectParameter("Nombres", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("FechaRegistro", fechaRegistro) :
-                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
-    
-            var fechaModificacionParameter = fechaModificacion.HasValue ?
-                new ObjectParameter("FechaModificacion", fechaModificacion) :
-                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
-    
-            var estadoParameter = estado != null ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
-        }
-    
-        public virtual int Proc_Persona_Cliente_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<int> idCliente, string razonSocial, string nitCi, string correoElectronico, byte[] fotoUbicacion)
-        {
-            var idPersonaParameter = idPersona.HasValue ?
-                new ObjectParameter("IdPersona", idPersona) :
-                new ObjectParameter("IdPersona", typeof(int));
-    
-            var nombresParameter = nombres != null ?
-                new ObjectParameter("Nombres", nombres) :
-                new ObjectParameter("Nombres", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("FechaRegistro", fechaRegistro) :
-                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
-    
-            var fechaModificacionParameter = fechaModificacion.HasValue ?
-                new ObjectParameter("FechaModificacion", fechaModificacion) :
-                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
-    
-            var estadoParameter = estado != null ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(string));
-    
-            var idClienteParameter = idCliente.HasValue ?
-                new ObjectParameter("IdCliente", idCliente) :
-                new ObjectParameter("IdCliente", typeof(int));
-    
-            var razonSocialParameter = razonSocial != null ?
-                new ObjectParameter("RazonSocial", razonSocial) :
-                new ObjectParameter("RazonSocial", typeof(string));
-    
-            var nitCiParameter = nitCi != null ?
-                new ObjectParameter("NitCi", nitCi) :
-                new ObjectParameter("NitCi", typeof(string));
-    
-            var correoElectronicoParameter = correoElectronico != null ?
-                new ObjectParameter("CorreoElectronico", correoElectronico) :
-                new ObjectParameter("CorreoElectronico", typeof(string));
-    
-            var fotoUbicacionParameter = fotoUbicacion != null ?
-                new ObjectParameter("FotoUbicacion", fotoUbicacion) :
-                new ObjectParameter("FotoUbicacion", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Cliente_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idClienteParameter, razonSocialParameter, nitCiParameter, correoElectronicoParameter, fotoUbicacionParameter);
-        }
-    
-        public virtual ObjectResult<Proc_Persona_Cliente_O_Result> Proc_Persona_Cliente_O()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Cliente_O_Result>("Proc_Persona_Cliente_O");
-        }
-    
-        public virtual ObjectResult<Proc_Persona_Cliente_O_Buscador_Result> Proc_Persona_Cliente_O_Buscador(string nombre)
-        {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Cliente_O_Buscador_Result>("Proc_Persona_Cliente_O_Buscador", nombreParameter);
-        }
-    
-        public virtual ObjectResult<Proc_Persona_Cliente_O_IdCliente_Result> Proc_Persona_Cliente_O_IdCliente(Nullable<int> idCliente)
-        {
-            var idClienteParameter = idCliente.HasValue ?
-                new ObjectParameter("IdCliente", idCliente) :
-                new ObjectParameter("IdCliente", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Cliente_O_IdCliente_Result>("Proc_Persona_Cliente_O_IdCliente", idClienteParameter);
-        }
-    
-        public virtual int Proc_Persona_Empleado_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<byte> idCargo, Nullable<System.DateTime> fechaNacimiento, string ci, Nullable<byte> idCiudad, Nullable<byte> lugarNacimiento, string telefonoRespaldo, string direccion, string estadoCivil, string nombresPadre, string primerApellidoPadre, string segundoApellidoPadre, string ocupacionPadre, string nombresMadre, string primerApellidoMadre, string segundoApellidoMadre, string ocupacionMadre, string ultimoCurso, string colegioUnidadEducativa, Nullable<System.DateTime> fechaInicioTrabajo, string garantia, byte[] fotografia)
-        {
-            var idPersonaParameter = idPersona.HasValue ?
-                new ObjectParameter("IdPersona", idPersona) :
-                new ObjectParameter("IdPersona", typeof(int));
-    
-            var nombresParameter = nombres != null ?
-                new ObjectParameter("Nombres", nombres) :
-                new ObjectParameter("Nombres", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("FechaRegistro", fechaRegistro) :
-                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
-    
-            var fechaModificacionParameter = fechaModificacion.HasValue ?
-                new ObjectParameter("FechaModificacion", fechaModificacion) :
-                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
-    
-            var estadoParameter = estado != null ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(string));
-    
-            var idCargoParameter = idCargo.HasValue ?
-                new ObjectParameter("IdCargo", idCargo) :
-                new ObjectParameter("IdCargo", typeof(byte));
-    
-            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
-                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
-                new ObjectParameter("FechaNacimiento", typeof(System.DateTime));
-    
-            var ciParameter = ci != null ?
-                new ObjectParameter("Ci", ci) :
-                new ObjectParameter("Ci", typeof(string));
-    
-            var idCiudadParameter = idCiudad.HasValue ?
-                new ObjectParameter("IdCiudad", idCiudad) :
-                new ObjectParameter("IdCiudad", typeof(byte));
-    
-            var lugarNacimientoParameter = lugarNacimiento.HasValue ?
-                new ObjectParameter("LugarNacimiento", lugarNacimiento) :
-                new ObjectParameter("LugarNacimiento", typeof(byte));
-    
-            var telefonoRespaldoParameter = telefonoRespaldo != null ?
-                new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
-                new ObjectParameter("TelefonoRespaldo", typeof(string));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
-            var estadoCivilParameter = estadoCivil != null ?
-                new ObjectParameter("EstadoCivil", estadoCivil) :
-                new ObjectParameter("EstadoCivil", typeof(string));
-    
-            var nombresPadreParameter = nombresPadre != null ?
-                new ObjectParameter("NombresPadre", nombresPadre) :
-                new ObjectParameter("NombresPadre", typeof(string));
-    
-            var primerApellidoPadreParameter = primerApellidoPadre != null ?
-                new ObjectParameter("PrimerApellidoPadre", primerApellidoPadre) :
-                new ObjectParameter("PrimerApellidoPadre", typeof(string));
-    
-            var segundoApellidoPadreParameter = segundoApellidoPadre != null ?
-                new ObjectParameter("SegundoApellidoPadre", segundoApellidoPadre) :
-                new ObjectParameter("SegundoApellidoPadre", typeof(string));
-    
-            var ocupacionPadreParameter = ocupacionPadre != null ?
-                new ObjectParameter("OcupacionPadre", ocupacionPadre) :
-                new ObjectParameter("OcupacionPadre", typeof(string));
-    
-            var nombresMadreParameter = nombresMadre != null ?
-                new ObjectParameter("NombresMadre", nombresMadre) :
-                new ObjectParameter("NombresMadre", typeof(string));
-    
-            var primerApellidoMadreParameter = primerApellidoMadre != null ?
-                new ObjectParameter("PrimerApellidoMadre", primerApellidoMadre) :
-                new ObjectParameter("PrimerApellidoMadre", typeof(string));
-    
-            var segundoApellidoMadreParameter = segundoApellidoMadre != null ?
-                new ObjectParameter("SegundoApellidoMadre", segundoApellidoMadre) :
-                new ObjectParameter("SegundoApellidoMadre", typeof(string));
-    
-            var ocupacionMadreParameter = ocupacionMadre != null ?
-                new ObjectParameter("OcupacionMadre", ocupacionMadre) :
-                new ObjectParameter("OcupacionMadre", typeof(string));
-    
-            var ultimoCursoParameter = ultimoCurso != null ?
-                new ObjectParameter("UltimoCurso", ultimoCurso) :
-                new ObjectParameter("UltimoCurso", typeof(string));
-    
-            var colegioUnidadEducativaParameter = colegioUnidadEducativa != null ?
-                new ObjectParameter("ColegioUnidadEducativa", colegioUnidadEducativa) :
-                new ObjectParameter("ColegioUnidadEducativa", typeof(string));
-    
-            var fechaInicioTrabajoParameter = fechaInicioTrabajo.HasValue ?
-                new ObjectParameter("FechaInicioTrabajo", fechaInicioTrabajo) :
-                new ObjectParameter("FechaInicioTrabajo", typeof(System.DateTime));
-    
-            var garantiaParameter = garantia != null ?
-                new ObjectParameter("Garantia", garantia) :
-                new ObjectParameter("Garantia", typeof(string));
-    
-            var fotografiaParameter = fotografia != null ?
-                new ObjectParameter("Fotografia", fotografia) :
-                new ObjectParameter("Fotografia", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Empleado_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idCargoParameter, fechaNacimientoParameter, ciParameter, idCiudadParameter, lugarNacimientoParameter, telefonoRespaldoParameter, direccionParameter, estadoCivilParameter, nombresPadreParameter, primerApellidoPadreParameter, segundoApellidoPadreParameter, ocupacionPadreParameter, nombresMadreParameter, primerApellidoMadreParameter, segundoApellidoMadreParameter, ocupacionMadreParameter, ultimoCursoParameter, colegioUnidadEducativaParameter, fechaInicioTrabajoParameter, garantiaParameter, fotografiaParameter);
-        }
-    
-        public virtual int Proc_Persona_Empleado_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<byte> idCargo, Nullable<System.DateTime> fechaNacimiento, string ci, Nullable<byte> idCiudad, Nullable<byte> lugarNacimiento, string telefonoRespaldo, string direccion, string estadoCivil, string nombresPadre, string primerApellidoPadre, string segundoApellidoPadre, string ocupacionPadre, string nombresMadre, string primerApellidoMadre, string segundoApellidoMadre, string ocupacionMadre, string ultimoCurso, string colegioUnidadEducativa, Nullable<System.DateTime> fechaInicioTrabajo, string garantia, byte[] fotografia)
-        {
-            var nombresParameter = nombres != null ?
-                new ObjectParameter("Nombres", nombres) :
-                new ObjectParameter("Nombres", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("FechaRegistro", fechaRegistro) :
-                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
-    
-            var fechaModificacionParameter = fechaModificacion.HasValue ?
-                new ObjectParameter("FechaModificacion", fechaModificacion) :
-                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
-    
-            var estadoParameter = estado != null ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(string));
-    
-            var idCargoParameter = idCargo.HasValue ?
-                new ObjectParameter("IdCargo", idCargo) :
-                new ObjectParameter("IdCargo", typeof(byte));
-    
-            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
-                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
-                new ObjectParameter("FechaNacimiento", typeof(System.DateTime));
-    
-            var ciParameter = ci != null ?
-                new ObjectParameter("Ci", ci) :
-                new ObjectParameter("Ci", typeof(string));
-    
-            var idCiudadParameter = idCiudad.HasValue ?
-                new ObjectParameter("IdCiudad", idCiudad) :
-                new ObjectParameter("IdCiudad", typeof(byte));
-    
-            var lugarNacimientoParameter = lugarNacimiento.HasValue ?
-                new ObjectParameter("LugarNacimiento", lugarNacimiento) :
-                new ObjectParameter("LugarNacimiento", typeof(byte));
-    
-            var telefonoRespaldoParameter = telefonoRespaldo != null ?
-                new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
-                new ObjectParameter("TelefonoRespaldo", typeof(string));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
-            var estadoCivilParameter = estadoCivil != null ?
-                new ObjectParameter("EstadoCivil", estadoCivil) :
-                new ObjectParameter("EstadoCivil", typeof(string));
-    
-            var nombresPadreParameter = nombresPadre != null ?
-                new ObjectParameter("NombresPadre", nombresPadre) :
-                new ObjectParameter("NombresPadre", typeof(string));
-    
-            var primerApellidoPadreParameter = primerApellidoPadre != null ?
-                new ObjectParameter("PrimerApellidoPadre", primerApellidoPadre) :
-                new ObjectParameter("PrimerApellidoPadre", typeof(string));
-    
-            var segundoApellidoPadreParameter = segundoApellidoPadre != null ?
-                new ObjectParameter("SegundoApellidoPadre", segundoApellidoPadre) :
-                new ObjectParameter("SegundoApellidoPadre", typeof(string));
-    
-            var ocupacionPadreParameter = ocupacionPadre != null ?
-                new ObjectParameter("OcupacionPadre", ocupacionPadre) :
-                new ObjectParameter("OcupacionPadre", typeof(string));
-    
-            var nombresMadreParameter = nombresMadre != null ?
-                new ObjectParameter("NombresMadre", nombresMadre) :
-                new ObjectParameter("NombresMadre", typeof(string));
-    
-            var primerApellidoMadreParameter = primerApellidoMadre != null ?
-                new ObjectParameter("PrimerApellidoMadre", primerApellidoMadre) :
-                new ObjectParameter("PrimerApellidoMadre", typeof(string));
-    
-            var segundoApellidoMadreParameter = segundoApellidoMadre != null ?
-                new ObjectParameter("SegundoApellidoMadre", segundoApellidoMadre) :
-                new ObjectParameter("SegundoApellidoMadre", typeof(string));
-    
-            var ocupacionMadreParameter = ocupacionMadre != null ?
-                new ObjectParameter("OcupacionMadre", ocupacionMadre) :
-                new ObjectParameter("OcupacionMadre", typeof(string));
-    
-            var ultimoCursoParameter = ultimoCurso != null ?
-                new ObjectParameter("UltimoCurso", ultimoCurso) :
-                new ObjectParameter("UltimoCurso", typeof(string));
-    
-            var colegioUnidadEducativaParameter = colegioUnidadEducativa != null ?
-                new ObjectParameter("ColegioUnidadEducativa", colegioUnidadEducativa) :
-                new ObjectParameter("ColegioUnidadEducativa", typeof(string));
-    
-            var fechaInicioTrabajoParameter = fechaInicioTrabajo.HasValue ?
-                new ObjectParameter("FechaInicioTrabajo", fechaInicioTrabajo) :
-                new ObjectParameter("FechaInicioTrabajo", typeof(System.DateTime));
-    
-            var garantiaParameter = garantia != null ?
-                new ObjectParameter("Garantia", garantia) :
-                new ObjectParameter("Garantia", typeof(string));
-    
-            var fotografiaParameter = fotografia != null ?
-                new ObjectParameter("Fotografia", fotografia) :
-                new ObjectParameter("Fotografia", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Empleado_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idCargoParameter, fechaNacimientoParameter, ciParameter, idCiudadParameter, lugarNacimientoParameter, telefonoRespaldoParameter, direccionParameter, estadoCivilParameter, nombresPadreParameter, primerApellidoPadreParameter, segundoApellidoPadreParameter, ocupacionPadreParameter, nombresMadreParameter, primerApellidoMadreParameter, segundoApellidoMadreParameter, ocupacionMadreParameter, ultimoCursoParameter, colegioUnidadEducativaParameter, fechaInicioTrabajoParameter, garantiaParameter, fotografiaParameter);
-        }
-    
-        public virtual ObjectResult<Proc_Persona_Empleado_O_Result> Proc_Persona_Empleado_O()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Empleado_O_Result>("Proc_Persona_Empleado_O");
-        }
-    
-        public virtual ObjectResult<Proc_Persona_Empleado_O_Buscador_Result> Proc_Persona_Empleado_O_Buscador(string nombre)
-        {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Empleado_O_Buscador_Result>("Proc_Persona_Empleado_O_Buscador", nombreParameter);
-        }
-    
-        public virtual ObjectResult<Proc_Persona_Empleado_O_IdEmpleado_Result> Proc_Persona_Empleado_O_IdEmpleado(Nullable<int> idEmpleado)
-        {
-            var idEmpleadoParameter = idEmpleado.HasValue ?
-                new ObjectParameter("IdEmpleado", idEmpleado) :
-                new ObjectParameter("IdEmpleado", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Empleado_O_IdEmpleado_Result>("Proc_Persona_Empleado_O_IdEmpleado", idEmpleadoParameter);
-        }
-    
-        public virtual int Proc_Persona_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
-        {
-            var nombresParameter = nombres != null ?
-                new ObjectParameter("Nombres", nombres) :
-                new ObjectParameter("Nombres", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("FechaRegistro", fechaRegistro) :
-                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
-    
-            var fechaModificacionParameter = fechaModificacion.HasValue ?
-                new ObjectParameter("FechaModificacion", fechaModificacion) :
-                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
-    
-            var estadoParameter = estado != null ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
-        }
-    
-        public virtual ObjectResult<Proc_Persona_O_Result> Proc_Persona_O()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_O_Result>("Proc_Persona_O");
-        }
-    
-        public virtual ObjectResult<Proc_Persona_O_IdPersona_Result> Proc_Persona_O_IdPersona(Nullable<int> idPersona)
-        {
-            var idPersonaParameter = idPersona.HasValue ?
-                new ObjectParameter("IdPersona", idPersona) :
-                new ObjectParameter("IdPersona", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_O_IdPersona_Result>("Proc_Persona_O_IdPersona", idPersonaParameter);
         }
     
         public virtual int Proc_PrecioSugerido_A(Nullable<int> idPrecioSugerido, Nullable<int> idProducto, Nullable<decimal> precio, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
@@ -2093,67 +1653,6 @@ namespace Modelo
                 new ObjectParameter("IdZona", typeof(byte));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Zona_O_IdZona_Result>("Proc_Zona_O_IdZona", idZonaParameter);
-        }
-    
-        public virtual int Proc_Persona_Cliente_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, string razonSocial, string nitCi, string correoElectronico, byte[] fotoUbicacion, string nombreDireccion, Nullable<decimal> latitud, Nullable<decimal> longitud)
-        {
-            var nombresParameter = nombres != null ?
-                new ObjectParameter("Nombres", nombres) :
-                new ObjectParameter("Nombres", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("FechaRegistro", fechaRegistro) :
-                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
-    
-            var fechaModificacionParameter = fechaModificacion.HasValue ?
-                new ObjectParameter("FechaModificacion", fechaModificacion) :
-                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
-    
-            var estadoParameter = estado != null ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(string));
-    
-            var razonSocialParameter = razonSocial != null ?
-                new ObjectParameter("RazonSocial", razonSocial) :
-                new ObjectParameter("RazonSocial", typeof(string));
-    
-            var nitCiParameter = nitCi != null ?
-                new ObjectParameter("NitCi", nitCi) :
-                new ObjectParameter("NitCi", typeof(string));
-    
-            var correoElectronicoParameter = correoElectronico != null ?
-                new ObjectParameter("CorreoElectronico", correoElectronico) :
-                new ObjectParameter("CorreoElectronico", typeof(string));
-    
-            var fotoUbicacionParameter = fotoUbicacion != null ?
-                new ObjectParameter("FotoUbicacion", fotoUbicacion) :
-                new ObjectParameter("FotoUbicacion", typeof(byte[]));
-    
-            var nombreDireccionParameter = nombreDireccion != null ?
-                new ObjectParameter("NombreDireccion", nombreDireccion) :
-                new ObjectParameter("NombreDireccion", typeof(string));
-    
-            var latitudParameter = latitud.HasValue ?
-                new ObjectParameter("Latitud", latitud) :
-                new ObjectParameter("Latitud", typeof(decimal));
-    
-            var longitudParameter = longitud.HasValue ?
-                new ObjectParameter("Longitud", longitud) :
-                new ObjectParameter("Longitud", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Cliente_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, razonSocialParameter, nitCiParameter, correoElectronicoParameter, fotoUbicacionParameter, nombreDireccionParameter, latitudParameter, longitudParameter);
         }
     
         public virtual ObjectResult<Proc_ControlSanitario_Reporte_Fecha_Result> Proc_ControlSanitario_Reporte_Fecha(Nullable<System.DateTime> fecha)
@@ -2757,11 +2256,6 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Movimiento_I", idClienteParameter, idUsuarioParameter, tipoMovimientoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Proc_Movimiento_O_Result> Proc_Movimiento_O()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Movimiento_O_Result>("Proc_Movimiento_O");
-        }
-    
         public virtual ObjectResult<Proc_Movimiento_O_Codigo_Result> Proc_Movimiento_O_Codigo(string codigo)
         {
             var codigoParameter = codigo != null ?
@@ -3206,110 +2700,6 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Produccion_O_IdProduccion_Result>("Proc_Produccion_O_IdProduccion", idProduccionParameter);
         }
     
-        public virtual int Proc_Persona_Proveedor_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<int> idProveedor, string direccion, string telefonoRespaldo)
-        {
-            var idPersonaParameter = idPersona.HasValue ?
-                new ObjectParameter("IdPersona", idPersona) :
-                new ObjectParameter("IdPersona", typeof(int));
-    
-            var nombresParameter = nombres != null ?
-                new ObjectParameter("Nombres", nombres) :
-                new ObjectParameter("Nombres", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("FechaRegistro", fechaRegistro) :
-                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
-    
-            var fechaModificacionParameter = fechaModificacion.HasValue ?
-                new ObjectParameter("FechaModificacion", fechaModificacion) :
-                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
-    
-            var estadoParameter = estado != null ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(string));
-    
-            var idProveedorParameter = idProveedor.HasValue ?
-                new ObjectParameter("IdProveedor", idProveedor) :
-                new ObjectParameter("IdProveedor", typeof(int));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
-            var telefonoRespaldoParameter = telefonoRespaldo != null ?
-                new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
-                new ObjectParameter("TelefonoRespaldo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Proveedor_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idProveedorParameter, direccionParameter, telefonoRespaldoParameter);
-        }
-    
-        public virtual int Proc_Persona_Proveedor_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, string direccion, string telefonoRespaldo)
-        {
-            var nombresParameter = nombres != null ?
-                new ObjectParameter("Nombres", nombres) :
-                new ObjectParameter("Nombres", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("FechaRegistro", fechaRegistro) :
-                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
-    
-            var fechaModificacionParameter = fechaModificacion.HasValue ?
-                new ObjectParameter("FechaModificacion", fechaModificacion) :
-                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
-    
-            var estadoParameter = estado != null ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(string));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
-            var telefonoRespaldoParameter = telefonoRespaldo != null ?
-                new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
-                new ObjectParameter("TelefonoRespaldo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Proveedor_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, direccionParameter, telefonoRespaldoParameter);
-        }
-    
-        public virtual ObjectResult<Proc_Persona_Proveedor_O_Result> Proc_Persona_Proveedor_O()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Proveedor_O_Result>("Proc_Persona_Proveedor_O");
-        }
-    
-        public virtual ObjectResult<Proc_Persona_Proveedor_O_IdProveedor_Result> Proc_Persona_Proveedor_O_IdProveedor(Nullable<int> idProveedor)
-        {
-            var idProveedorParameter = idProveedor.HasValue ?
-                new ObjectParameter("IdProveedor", idProveedor) :
-                new ObjectParameter("IdProveedor", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Proveedor_O_IdProveedor_Result>("Proc_Persona_Proveedor_O_IdProveedor", idProveedorParameter);
-        }
-    
         public virtual int Proc_MateriaPrima_A(Nullable<int> idMateriaPrima, string nombreMateriaPrima, string descripcionMateriaPrima, string unidadMedida, Nullable<int> cantidadMinima, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
         {
             var idMateriaPrimaParameter = idMateriaPrima.HasValue ?
@@ -3490,6 +2880,805 @@ namespace Modelo
                 new ObjectParameter("IdZona", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Proc_PuntoZona_O_IdZona_Puntos", idZonaParameter);
+        }
+    
+        public virtual int Proc_Persona_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
+        {
+            var idPersonaParameter = idPersona.HasValue ?
+                new ObjectParameter("IdPersona", idPersona) :
+                new ObjectParameter("IdPersona", typeof(int));
+    
+            var nombresParameter = nombres != null ?
+                new ObjectParameter("Nombres", nombres) :
+                new ObjectParameter("Nombres", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
+        }
+    
+        public virtual int Proc_Persona_Cliente_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<int> idCliente, string razonSocial, string nitCi, string correoElectronico, byte[] fotoUbicacion)
+        {
+            var idPersonaParameter = idPersona.HasValue ?
+                new ObjectParameter("IdPersona", idPersona) :
+                new ObjectParameter("IdPersona", typeof(int));
+    
+            var nombresParameter = nombres != null ?
+                new ObjectParameter("Nombres", nombres) :
+                new ObjectParameter("Nombres", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            var razonSocialParameter = razonSocial != null ?
+                new ObjectParameter("RazonSocial", razonSocial) :
+                new ObjectParameter("RazonSocial", typeof(string));
+    
+            var nitCiParameter = nitCi != null ?
+                new ObjectParameter("NitCi", nitCi) :
+                new ObjectParameter("NitCi", typeof(string));
+    
+            var correoElectronicoParameter = correoElectronico != null ?
+                new ObjectParameter("CorreoElectronico", correoElectronico) :
+                new ObjectParameter("CorreoElectronico", typeof(string));
+    
+            var fotoUbicacionParameter = fotoUbicacion != null ?
+                new ObjectParameter("FotoUbicacion", fotoUbicacion) :
+                new ObjectParameter("FotoUbicacion", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Cliente_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idClienteParameter, razonSocialParameter, nitCiParameter, correoElectronicoParameter, fotoUbicacionParameter);
+        }
+    
+        public virtual int Proc_Persona_Cliente_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, string razonSocial, string nitCi, string correoElectronico, byte[] fotoUbicacion, string nombreDireccion, Nullable<decimal> latitud, Nullable<decimal> longitud)
+        {
+            var nombresParameter = nombres != null ?
+                new ObjectParameter("Nombres", nombres) :
+                new ObjectParameter("Nombres", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var razonSocialParameter = razonSocial != null ?
+                new ObjectParameter("RazonSocial", razonSocial) :
+                new ObjectParameter("RazonSocial", typeof(string));
+    
+            var nitCiParameter = nitCi != null ?
+                new ObjectParameter("NitCi", nitCi) :
+                new ObjectParameter("NitCi", typeof(string));
+    
+            var correoElectronicoParameter = correoElectronico != null ?
+                new ObjectParameter("CorreoElectronico", correoElectronico) :
+                new ObjectParameter("CorreoElectronico", typeof(string));
+    
+            var fotoUbicacionParameter = fotoUbicacion != null ?
+                new ObjectParameter("FotoUbicacion", fotoUbicacion) :
+                new ObjectParameter("FotoUbicacion", typeof(byte[]));
+    
+            var nombreDireccionParameter = nombreDireccion != null ?
+                new ObjectParameter("NombreDireccion", nombreDireccion) :
+                new ObjectParameter("NombreDireccion", typeof(string));
+    
+            var latitudParameter = latitud.HasValue ?
+                new ObjectParameter("Latitud", latitud) :
+                new ObjectParameter("Latitud", typeof(decimal));
+    
+            var longitudParameter = longitud.HasValue ?
+                new ObjectParameter("Longitud", longitud) :
+                new ObjectParameter("Longitud", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Cliente_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, razonSocialParameter, nitCiParameter, correoElectronicoParameter, fotoUbicacionParameter, nombreDireccionParameter, latitudParameter, longitudParameter);
+        }
+    
+        public virtual ObjectResult<Proc_Persona_Cliente_O_Result> Proc_Persona_Cliente_O()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Cliente_O_Result>("Proc_Persona_Cliente_O");
+        }
+    
+        public virtual ObjectResult<Proc_Persona_Cliente_O_Buscador_Result> Proc_Persona_Cliente_O_Buscador(string nombre)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Cliente_O_Buscador_Result>("Proc_Persona_Cliente_O_Buscador", nombreParameter);
+        }
+    
+        public virtual ObjectResult<Proc_Persona_Cliente_O_IdCliente_Result> Proc_Persona_Cliente_O_IdCliente(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Cliente_O_IdCliente_Result>("Proc_Persona_Cliente_O_IdCliente", idClienteParameter);
+        }
+    
+        public virtual int Proc_Persona_Empleado_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<byte> idCargo, Nullable<System.DateTime> fechaNacimiento, string ci, Nullable<byte> idCiudad, Nullable<byte> lugarNacimiento, string telefonoRespaldo, string direccion, string estadoCivil, string nombresPadre, string primerApellidoPadre, string segundoApellidoPadre, string ocupacionPadre, string nombresMadre, string primerApellidoMadre, string segundoApellidoMadre, string ocupacionMadre, string ultimoCurso, string colegioUnidadEducativa, Nullable<System.DateTime> fechaInicioTrabajo, string garantia, byte[] fotografia)
+        {
+            var idPersonaParameter = idPersona.HasValue ?
+                new ObjectParameter("IdPersona", idPersona) :
+                new ObjectParameter("IdPersona", typeof(int));
+    
+            var nombresParameter = nombres != null ?
+                new ObjectParameter("Nombres", nombres) :
+                new ObjectParameter("Nombres", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var idCargoParameter = idCargo.HasValue ?
+                new ObjectParameter("IdCargo", idCargo) :
+                new ObjectParameter("IdCargo", typeof(byte));
+    
+            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
+                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("FechaNacimiento", typeof(System.DateTime));
+    
+            var ciParameter = ci != null ?
+                new ObjectParameter("Ci", ci) :
+                new ObjectParameter("Ci", typeof(string));
+    
+            var idCiudadParameter = idCiudad.HasValue ?
+                new ObjectParameter("IdCiudad", idCiudad) :
+                new ObjectParameter("IdCiudad", typeof(byte));
+    
+            var lugarNacimientoParameter = lugarNacimiento.HasValue ?
+                new ObjectParameter("LugarNacimiento", lugarNacimiento) :
+                new ObjectParameter("LugarNacimiento", typeof(byte));
+    
+            var telefonoRespaldoParameter = telefonoRespaldo != null ?
+                new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
+                new ObjectParameter("TelefonoRespaldo", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var estadoCivilParameter = estadoCivil != null ?
+                new ObjectParameter("EstadoCivil", estadoCivil) :
+                new ObjectParameter("EstadoCivil", typeof(string));
+    
+            var nombresPadreParameter = nombresPadre != null ?
+                new ObjectParameter("NombresPadre", nombresPadre) :
+                new ObjectParameter("NombresPadre", typeof(string));
+    
+            var primerApellidoPadreParameter = primerApellidoPadre != null ?
+                new ObjectParameter("PrimerApellidoPadre", primerApellidoPadre) :
+                new ObjectParameter("PrimerApellidoPadre", typeof(string));
+    
+            var segundoApellidoPadreParameter = segundoApellidoPadre != null ?
+                new ObjectParameter("SegundoApellidoPadre", segundoApellidoPadre) :
+                new ObjectParameter("SegundoApellidoPadre", typeof(string));
+    
+            var ocupacionPadreParameter = ocupacionPadre != null ?
+                new ObjectParameter("OcupacionPadre", ocupacionPadre) :
+                new ObjectParameter("OcupacionPadre", typeof(string));
+    
+            var nombresMadreParameter = nombresMadre != null ?
+                new ObjectParameter("NombresMadre", nombresMadre) :
+                new ObjectParameter("NombresMadre", typeof(string));
+    
+            var primerApellidoMadreParameter = primerApellidoMadre != null ?
+                new ObjectParameter("PrimerApellidoMadre", primerApellidoMadre) :
+                new ObjectParameter("PrimerApellidoMadre", typeof(string));
+    
+            var segundoApellidoMadreParameter = segundoApellidoMadre != null ?
+                new ObjectParameter("SegundoApellidoMadre", segundoApellidoMadre) :
+                new ObjectParameter("SegundoApellidoMadre", typeof(string));
+    
+            var ocupacionMadreParameter = ocupacionMadre != null ?
+                new ObjectParameter("OcupacionMadre", ocupacionMadre) :
+                new ObjectParameter("OcupacionMadre", typeof(string));
+    
+            var ultimoCursoParameter = ultimoCurso != null ?
+                new ObjectParameter("UltimoCurso", ultimoCurso) :
+                new ObjectParameter("UltimoCurso", typeof(string));
+    
+            var colegioUnidadEducativaParameter = colegioUnidadEducativa != null ?
+                new ObjectParameter("ColegioUnidadEducativa", colegioUnidadEducativa) :
+                new ObjectParameter("ColegioUnidadEducativa", typeof(string));
+    
+            var fechaInicioTrabajoParameter = fechaInicioTrabajo.HasValue ?
+                new ObjectParameter("FechaInicioTrabajo", fechaInicioTrabajo) :
+                new ObjectParameter("FechaInicioTrabajo", typeof(System.DateTime));
+    
+            var garantiaParameter = garantia != null ?
+                new ObjectParameter("Garantia", garantia) :
+                new ObjectParameter("Garantia", typeof(string));
+    
+            var fotografiaParameter = fotografia != null ?
+                new ObjectParameter("Fotografia", fotografia) :
+                new ObjectParameter("Fotografia", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Empleado_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idCargoParameter, fechaNacimientoParameter, ciParameter, idCiudadParameter, lugarNacimientoParameter, telefonoRespaldoParameter, direccionParameter, estadoCivilParameter, nombresPadreParameter, primerApellidoPadreParameter, segundoApellidoPadreParameter, ocupacionPadreParameter, nombresMadreParameter, primerApellidoMadreParameter, segundoApellidoMadreParameter, ocupacionMadreParameter, ultimoCursoParameter, colegioUnidadEducativaParameter, fechaInicioTrabajoParameter, garantiaParameter, fotografiaParameter);
+        }
+    
+        public virtual int Proc_Persona_Empleado_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<byte> idCargo, Nullable<System.DateTime> fechaNacimiento, string ci, Nullable<byte> idCiudad, Nullable<byte> lugarNacimiento, string telefonoRespaldo, string direccion, string estadoCivil, string nombresPadre, string primerApellidoPadre, string segundoApellidoPadre, string ocupacionPadre, string nombresMadre, string primerApellidoMadre, string segundoApellidoMadre, string ocupacionMadre, string ultimoCurso, string colegioUnidadEducativa, Nullable<System.DateTime> fechaInicioTrabajo, string garantia, byte[] fotografia)
+        {
+            var nombresParameter = nombres != null ?
+                new ObjectParameter("Nombres", nombres) :
+                new ObjectParameter("Nombres", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var idCargoParameter = idCargo.HasValue ?
+                new ObjectParameter("IdCargo", idCargo) :
+                new ObjectParameter("IdCargo", typeof(byte));
+    
+            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
+                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("FechaNacimiento", typeof(System.DateTime));
+    
+            var ciParameter = ci != null ?
+                new ObjectParameter("Ci", ci) :
+                new ObjectParameter("Ci", typeof(string));
+    
+            var idCiudadParameter = idCiudad.HasValue ?
+                new ObjectParameter("IdCiudad", idCiudad) :
+                new ObjectParameter("IdCiudad", typeof(byte));
+    
+            var lugarNacimientoParameter = lugarNacimiento.HasValue ?
+                new ObjectParameter("LugarNacimiento", lugarNacimiento) :
+                new ObjectParameter("LugarNacimiento", typeof(byte));
+    
+            var telefonoRespaldoParameter = telefonoRespaldo != null ?
+                new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
+                new ObjectParameter("TelefonoRespaldo", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var estadoCivilParameter = estadoCivil != null ?
+                new ObjectParameter("EstadoCivil", estadoCivil) :
+                new ObjectParameter("EstadoCivil", typeof(string));
+    
+            var nombresPadreParameter = nombresPadre != null ?
+                new ObjectParameter("NombresPadre", nombresPadre) :
+                new ObjectParameter("NombresPadre", typeof(string));
+    
+            var primerApellidoPadreParameter = primerApellidoPadre != null ?
+                new ObjectParameter("PrimerApellidoPadre", primerApellidoPadre) :
+                new ObjectParameter("PrimerApellidoPadre", typeof(string));
+    
+            var segundoApellidoPadreParameter = segundoApellidoPadre != null ?
+                new ObjectParameter("SegundoApellidoPadre", segundoApellidoPadre) :
+                new ObjectParameter("SegundoApellidoPadre", typeof(string));
+    
+            var ocupacionPadreParameter = ocupacionPadre != null ?
+                new ObjectParameter("OcupacionPadre", ocupacionPadre) :
+                new ObjectParameter("OcupacionPadre", typeof(string));
+    
+            var nombresMadreParameter = nombresMadre != null ?
+                new ObjectParameter("NombresMadre", nombresMadre) :
+                new ObjectParameter("NombresMadre", typeof(string));
+    
+            var primerApellidoMadreParameter = primerApellidoMadre != null ?
+                new ObjectParameter("PrimerApellidoMadre", primerApellidoMadre) :
+                new ObjectParameter("PrimerApellidoMadre", typeof(string));
+    
+            var segundoApellidoMadreParameter = segundoApellidoMadre != null ?
+                new ObjectParameter("SegundoApellidoMadre", segundoApellidoMadre) :
+                new ObjectParameter("SegundoApellidoMadre", typeof(string));
+    
+            var ocupacionMadreParameter = ocupacionMadre != null ?
+                new ObjectParameter("OcupacionMadre", ocupacionMadre) :
+                new ObjectParameter("OcupacionMadre", typeof(string));
+    
+            var ultimoCursoParameter = ultimoCurso != null ?
+                new ObjectParameter("UltimoCurso", ultimoCurso) :
+                new ObjectParameter("UltimoCurso", typeof(string));
+    
+            var colegioUnidadEducativaParameter = colegioUnidadEducativa != null ?
+                new ObjectParameter("ColegioUnidadEducativa", colegioUnidadEducativa) :
+                new ObjectParameter("ColegioUnidadEducativa", typeof(string));
+    
+            var fechaInicioTrabajoParameter = fechaInicioTrabajo.HasValue ?
+                new ObjectParameter("FechaInicioTrabajo", fechaInicioTrabajo) :
+                new ObjectParameter("FechaInicioTrabajo", typeof(System.DateTime));
+    
+            var garantiaParameter = garantia != null ?
+                new ObjectParameter("Garantia", garantia) :
+                new ObjectParameter("Garantia", typeof(string));
+    
+            var fotografiaParameter = fotografia != null ?
+                new ObjectParameter("Fotografia", fotografia) :
+                new ObjectParameter("Fotografia", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Empleado_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idCargoParameter, fechaNacimientoParameter, ciParameter, idCiudadParameter, lugarNacimientoParameter, telefonoRespaldoParameter, direccionParameter, estadoCivilParameter, nombresPadreParameter, primerApellidoPadreParameter, segundoApellidoPadreParameter, ocupacionPadreParameter, nombresMadreParameter, primerApellidoMadreParameter, segundoApellidoMadreParameter, ocupacionMadreParameter, ultimoCursoParameter, colegioUnidadEducativaParameter, fechaInicioTrabajoParameter, garantiaParameter, fotografiaParameter);
+        }
+    
+        public virtual ObjectResult<Proc_Persona_Empleado_O_Result> Proc_Persona_Empleado_O()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Empleado_O_Result>("Proc_Persona_Empleado_O");
+        }
+    
+        public virtual ObjectResult<Proc_Persona_Empleado_O_Buscador_Result> Proc_Persona_Empleado_O_Buscador(string nombre)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Empleado_O_Buscador_Result>("Proc_Persona_Empleado_O_Buscador", nombreParameter);
+        }
+    
+        public virtual ObjectResult<Proc_Persona_Empleado_O_IdEmpleado_Result> Proc_Persona_Empleado_O_IdEmpleado(Nullable<int> idEmpleado)
+        {
+            var idEmpleadoParameter = idEmpleado.HasValue ?
+                new ObjectParameter("IdEmpleado", idEmpleado) :
+                new ObjectParameter("IdEmpleado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Empleado_O_IdEmpleado_Result>("Proc_Persona_Empleado_O_IdEmpleado", idEmpleadoParameter);
+        }
+    
+        public virtual int Proc_Persona_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado)
+        {
+            var nombresParameter = nombres != null ?
+                new ObjectParameter("Nombres", nombres) :
+                new ObjectParameter("Nombres", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Proc_Persona_O_Result> Proc_Persona_O()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_O_Result>("Proc_Persona_O");
+        }
+    
+        public virtual ObjectResult<Proc_Persona_O_IdPersona_Result> Proc_Persona_O_IdPersona(Nullable<int> idPersona)
+        {
+            var idPersonaParameter = idPersona.HasValue ?
+                new ObjectParameter("IdPersona", idPersona) :
+                new ObjectParameter("IdPersona", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_O_IdPersona_Result>("Proc_Persona_O_IdPersona", idPersonaParameter);
+        }
+    
+        public virtual int Proc_Persona_Proveedor_A(Nullable<int> idPersona, string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<int> idProveedor, string direccion, string telefonoRespaldo)
+        {
+            var idPersonaParameter = idPersona.HasValue ?
+                new ObjectParameter("IdPersona", idPersona) :
+                new ObjectParameter("IdPersona", typeof(int));
+    
+            var nombresParameter = nombres != null ?
+                new ObjectParameter("Nombres", nombres) :
+                new ObjectParameter("Nombres", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var idProveedorParameter = idProveedor.HasValue ?
+                new ObjectParameter("IdProveedor", idProveedor) :
+                new ObjectParameter("IdProveedor", typeof(int));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var telefonoRespaldoParameter = telefonoRespaldo != null ?
+                new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
+                new ObjectParameter("TelefonoRespaldo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Proveedor_A", idPersonaParameter, nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, idProveedorParameter, direccionParameter, telefonoRespaldoParameter);
+        }
+    
+        public virtual int Proc_Persona_Proveedor_I(string nombres, string primerApellido, string segundoApellido, string telefono, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, string direccion, string telefonoRespaldo)
+        {
+            var nombresParameter = nombres != null ?
+                new ObjectParameter("Nombres", nombres) :
+                new ObjectParameter("Nombres", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var telefonoRespaldoParameter = telefonoRespaldo != null ?
+                new ObjectParameter("TelefonoRespaldo", telefonoRespaldo) :
+                new ObjectParameter("TelefonoRespaldo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Persona_Proveedor_I", nombresParameter, primerApellidoParameter, segundoApellidoParameter, telefonoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, direccionParameter, telefonoRespaldoParameter);
+        }
+    
+        public virtual ObjectResult<Proc_Persona_Proveedor_O_Result> Proc_Persona_Proveedor_O()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Proveedor_O_Result>("Proc_Persona_Proveedor_O");
+        }
+    
+        public virtual ObjectResult<Proc_Persona_Proveedor_O_IdProveedor_Result> Proc_Persona_Proveedor_O_IdProveedor(Nullable<int> idProveedor)
+        {
+            var idProveedorParameter = idProveedor.HasValue ?
+                new ObjectParameter("IdProveedor", idProveedor) :
+                new ObjectParameter("IdProveedor", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Persona_Proveedor_O_IdProveedor_Result>("Proc_Persona_Proveedor_O_IdProveedor", idProveedorParameter);
+        }
+    
+        public virtual int Proc_Cliente_Modificar_Razon_Nit_Foto(Nullable<int> idCliente, string razonSocial, string nitCi, byte[] fotoUbicacion)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            var razonSocialParameter = razonSocial != null ?
+                new ObjectParameter("RazonSocial", razonSocial) :
+                new ObjectParameter("RazonSocial", typeof(string));
+    
+            var nitCiParameter = nitCi != null ?
+                new ObjectParameter("NitCi", nitCi) :
+                new ObjectParameter("NitCi", typeof(string));
+    
+            var fotoUbicacionParameter = fotoUbicacion != null ?
+                new ObjectParameter("FotoUbicacion", fotoUbicacion) :
+                new ObjectParameter("FotoUbicacion", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Cliente_Modificar_Razon_Nit_Foto", idClienteParameter, razonSocialParameter, nitCiParameter, fotoUbicacionParameter);
+        }
+    
+        public virtual ObjectResult<Proc_DetalleMovimiento_O_Pedido_IdMovimiento_Result> Proc_DetalleMovimiento_O_Pedido_IdMovimiento(Nullable<int> idMovimiento)
+        {
+            var idMovimientoParameter = idMovimiento.HasValue ?
+                new ObjectParameter("IdMovimiento", idMovimiento) :
+                new ObjectParameter("IdMovimiento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_DetalleMovimiento_O_Pedido_IdMovimiento_Result>("Proc_DetalleMovimiento_O_Pedido_IdMovimiento", idMovimientoParameter);
+        }
+    
+        public virtual int Proc_Movimiento_I_ConFactura(Nullable<int> idCliente, Nullable<int> idUsuario, string tipoMovimiento, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<decimal> precioTotal, Nullable<int> idDosificacion, Nullable<int> nroMovimiento, string codigoControl, string razonSocial, string nitCi)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var tipoMovimientoParameter = tipoMovimiento != null ?
+                new ObjectParameter("TipoMovimiento", tipoMovimiento) :
+                new ObjectParameter("TipoMovimiento", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var precioTotalParameter = precioTotal.HasValue ?
+                new ObjectParameter("PrecioTotal", precioTotal) :
+                new ObjectParameter("PrecioTotal", typeof(decimal));
+    
+            var idDosificacionParameter = idDosificacion.HasValue ?
+                new ObjectParameter("IdDosificacion", idDosificacion) :
+                new ObjectParameter("IdDosificacion", typeof(int));
+    
+            var nroMovimientoParameter = nroMovimiento.HasValue ?
+                new ObjectParameter("NroMovimiento", nroMovimiento) :
+                new ObjectParameter("NroMovimiento", typeof(int));
+    
+            var codigoControlParameter = codigoControl != null ?
+                new ObjectParameter("CodigoControl", codigoControl) :
+                new ObjectParameter("CodigoControl", typeof(string));
+    
+            var razonSocialParameter = razonSocial != null ?
+                new ObjectParameter("RazonSocial", razonSocial) :
+                new ObjectParameter("RazonSocial", typeof(string));
+    
+            var nitCiParameter = nitCi != null ?
+                new ObjectParameter("NitCi", nitCi) :
+                new ObjectParameter("NitCi", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Movimiento_I_ConFactura", idClienteParameter, idUsuarioParameter, tipoMovimientoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, precioTotalParameter, idDosificacionParameter, nroMovimientoParameter, codigoControlParameter, razonSocialParameter, nitCiParameter);
+        }
+    
+        public virtual int Proc_Movimiento_I_SinFactura(Nullable<int> idCliente, Nullable<int> idUsuario, string tipoMovimiento, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> fechaModificacion, string estado, Nullable<decimal> precioTotal)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var tipoMovimientoParameter = tipoMovimiento != null ?
+                new ObjectParameter("TipoMovimiento", tipoMovimiento) :
+                new ObjectParameter("TipoMovimiento", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var precioTotalParameter = precioTotal.HasValue ?
+                new ObjectParameter("PrecioTotal", precioTotal) :
+                new ObjectParameter("PrecioTotal", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Movimiento_I_SinFactura", idClienteParameter, idUsuarioParameter, tipoMovimientoParameter, fechaRegistroParameter, fechaModificacionParameter, estadoParameter, precioTotalParameter);
+        }
+    
+        public virtual int Proc_Movimiento_Pedido_Cancelar(Nullable<int> idMovimiento, string motivo, Nullable<System.DateTime> fechaRegistro)
+        {
+            var idMovimientoParameter = idMovimiento.HasValue ?
+                new ObjectParameter("IdMovimiento", idMovimiento) :
+                new ObjectParameter("IdMovimiento", typeof(int));
+    
+            var motivoParameter = motivo != null ?
+                new ObjectParameter("Motivo", motivo) :
+                new ObjectParameter("Motivo", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_Movimiento_Pedido_Cancelar", idMovimientoParameter, motivoParameter, fechaRegistroParameter);
+        }
+    
+        public virtual int Proc_DireccionMovimiento_A(Nullable<int> idDireccionMovimiento, Nullable<int> idDireccion, Nullable<int> idMovimiento)
+        {
+            var idDireccionMovimientoParameter = idDireccionMovimiento.HasValue ?
+                new ObjectParameter("IdDireccionMovimiento", idDireccionMovimiento) :
+                new ObjectParameter("IdDireccionMovimiento", typeof(int));
+    
+            var idDireccionParameter = idDireccion.HasValue ?
+                new ObjectParameter("IdDireccion", idDireccion) :
+                new ObjectParameter("IdDireccion", typeof(int));
+    
+            var idMovimientoParameter = idMovimiento.HasValue ?
+                new ObjectParameter("IdMovimiento", idMovimiento) :
+                new ObjectParameter("IdMovimiento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_DireccionMovimiento_A", idDireccionMovimientoParameter, idDireccionParameter, idMovimientoParameter);
+        }
+    
+        public virtual int Proc_DireccionMovimiento_I(Nullable<int> idDireccion, Nullable<int> idMovimiento)
+        {
+            var idDireccionParameter = idDireccion.HasValue ?
+                new ObjectParameter("IdDireccion", idDireccion) :
+                new ObjectParameter("IdDireccion", typeof(int));
+    
+            var idMovimientoParameter = idMovimiento.HasValue ?
+                new ObjectParameter("IdMovimiento", idMovimiento) :
+                new ObjectParameter("IdMovimiento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_DireccionMovimiento_I", idDireccionParameter, idMovimientoParameter);
+        }
+    
+        public virtual ObjectResult<Proc_DireccionMovimiento_O_IdMovimiento_Result> Proc_DireccionMovimiento_O_IdMovimiento(Nullable<int> idMovimiento)
+        {
+            var idMovimientoParameter = idMovimiento.HasValue ?
+                new ObjectParameter("IdMovimiento", idMovimiento) :
+                new ObjectParameter("IdMovimiento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_DireccionMovimiento_O_IdMovimiento_Result>("Proc_DireccionMovimiento_O_IdMovimiento", idMovimientoParameter);
+        }
+    
+        public virtual ObjectResult<Proc_Movimiento_O_Result> Proc_Movimiento_O()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Movimiento_O_Result>("Proc_Movimiento_O");
+        }
+    
+        public virtual ObjectResult<Proc_DetalleMovimiento_O_Result> Proc_DetalleMovimiento_O()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_DetalleMovimiento_O_Result>("Proc_DetalleMovimiento_O");
+        }
+    
+        public virtual ObjectResult<Proc_DetalleMovimiento_O_IdDetalleMovimiento_Result> Proc_DetalleMovimiento_O_IdDetalleMovimiento(Nullable<int> idDetalleMovimiento)
+        {
+            var idDetalleMovimientoParameter = idDetalleMovimiento.HasValue ?
+                new ObjectParameter("IdDetalleMovimiento", idDetalleMovimiento) :
+                new ObjectParameter("IdDetalleMovimiento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_DetalleMovimiento_O_IdDetalleMovimiento_Result>("Proc_DetalleMovimiento_O_IdDetalleMovimiento", idDetalleMovimientoParameter);
+        }
+    
+        public virtual ObjectResult<Proc_DireccionMovimiento_O_Result> Proc_DireccionMovimiento_O()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_DireccionMovimiento_O_Result>("Proc_DireccionMovimiento_O");
+        }
+    
+        public virtual ObjectResult<Proc_Movimiento_O_Pedido_IdUsuario_Result> Proc_Movimiento_O_Pedido_IdUsuario(Nullable<int> idUsuario, Nullable<System.DateTime> fechaModificacion)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var fechaModificacionParameter = fechaModificacion.HasValue ?
+                new ObjectParameter("FechaModificacion", fechaModificacion) :
+                new ObjectParameter("FechaModificacion", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_Movimiento_O_Pedido_IdUsuario_Result>("Proc_Movimiento_O_Pedido_IdUsuario", idUsuarioParameter, fechaModificacionParameter);
         }
     }
 }

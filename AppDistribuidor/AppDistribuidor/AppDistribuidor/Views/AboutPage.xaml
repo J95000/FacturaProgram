@@ -31,7 +31,7 @@
                     <RowDefinition Height="50" />
                     <RowDefinition Height="50" />
                     <RowDefinition Height="50" />
-                    <RowDefinition Height="10" />
+                    <RowDefinition Height="0" />
                     <RowDefinition Height="50" />
                     <RowDefinition Height="260" />
                  
@@ -126,8 +126,8 @@
                        Grid.Column="1"
                        PlaceholderColor="#73879D"
                        Placeholder="Ingrese Teléfono"></Entry>
-                
-                
+
+
                 <Label Text=" Correo Elec.:"
                        TextColor="White"
                        Grid.Row="6"
@@ -145,42 +145,38 @@
                        PlaceholderColor="#73879D"
                        Placeholder="Ingrese Correo Elec."></Entry>
                 
-                
-                
-                
-                <Label Text="   Categoria:"
+                <Label Text=" Razon Social:"
                        TextColor="White"
                        Grid.Row="7"
                        Grid.Column="0"
                        FontSize="Micro"
-                       HorizontalOptions="Start"
-                       TranslationY="10" />
-          
-                    <Picker x:Name="DdlstCategoria"
-                        Grid.Column="1"
-                        TextColor="White"
-                        HeightRequest="50"
-                             FontSize="Body"
-                        Grid.Row="7"
-                        TitleColor="#73879D"
-                        Title="Seleccione categoria"
-                         />
-
-                <Label Text="           Zona:"
+                       HorizontalOptions="Start" 
+                       TranslationY="10"/>
+                <Entry x:Name="TxtRazon"
+                       TextColor="White"
+                       WidthRequest="100"
+                       HeightRequest="50"
+                       Keyboard="Text"
+                       Grid.Row="7"
+                       Grid.Column="1"
+                       PlaceholderColor="#73879D"
+                       Placeholder="Ingrese Razon Social"></Entry>
+                <Label Text=" Nit o Ci:"
                        TextColor="White"
                        Grid.Row="8"
                        Grid.Column="0"
                        FontSize="Micro"
-                       HorizontalOptions="Start"
-                       TranslationY="10" />
-                <Picker x:Name="DdlstZona"
-                        Grid.Column="1"
-                        Grid.Row="8"
-                        TextColor="White"
-                         FontSize="Body"
-                        HeightRequest="50"
-                        TitleColor="#73879D"
-                        Title="Seleccione zona" />
+                       HorizontalOptions="Start" 
+                       TranslationY="10"/>
+                <Entry x:Name="TxtNit"
+                       TextColor="White"
+                       WidthRequest="100"
+                       HeightRequest="50"
+                       Keyboard="Numeric"
+                       Grid.Row="8"
+                       Grid.Column="1"
+                       PlaceholderColor="#73879D"
+                       Placeholder="Ingrese Nit"></Entry>
                 <Label Text="  Fotografia:"
                        TextColor="White"
                        Grid.Row="10"
@@ -189,14 +185,15 @@
                        HorizontalOptions="Start"
                        TranslationY="10" />
                 <Button  x:Name="BtnCamara"
-                         Text="Activar Camara"
+                         Text="Tomar Foto"
                          Grid.Row="10"
                          ImageSource="https://i.ibb.co/j8nWdHQ/Nuevo-proyecto.png"
                          CornerRadius="10"
                          Command="{Binding CapturarComando}"
                          Grid.Column="1"
-                         HeightRequest="30"
-                         WidthRequest="30"
+                         HeightRequest="80"
+                         WidthRequest="200"
+                          HorizontalOptions="Start"
                          FontSize="Micro"
                          BackgroundColor="#043e80"
                           />
@@ -213,14 +210,17 @@
                      Text="REGISTRAR"
                      IsVisible="true"
                      TextColor="White"
-                     FontSize="Body"
+                     FontSize="Medium"
                      Margin="40, 20,40,30"
                      CornerRadius="10"
                      Padding="10,10,10,10"
+                     HeightRequest="80"
                      VerticalOptions="CenterAndExpand"
-                     BackgroundColor="#043e80"
+                     BackgroundColor="#043e88"
                      Clicked="BtnRegistrar_Clicked" />
-            <Button  x:Name="BtnConectar"
+          
+                
+                <Button  x:Name="BtnConectar"
                      IsVisible="false"
                      Text="Conectar"
                      BackgroundColor="#0499d9"

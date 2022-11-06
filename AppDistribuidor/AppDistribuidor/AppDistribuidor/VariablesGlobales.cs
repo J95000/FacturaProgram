@@ -20,5 +20,9 @@ namespace AppDistribuidor
         public static decimal TotalPrestamo { get; set; }
         public static byte idTipoGasto { get; set; }
 
+
+        public static byte TipoRegistroCliente = 0;
+        public static string NombreClienteRegistrado = "";
+
     }
 }

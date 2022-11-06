@@ -38,10 +38,11 @@ namespace AppDistribuidor
             base.OnAppearing();
 
             await splashImage.ScaleTo(1, 2000);
-            //await splashImage.ScaleTo(0.9, 500, Easing.Linear);
-            //await splashImage.ScaleTo(150, 200, Easing.Linear);
+
             Application.Current.MainPage = new Views.LoginPage();
-            // Time-consuming processes such as initialization
+
+           // Application.Current.MainPage = new Views.InicioPage();
+
 
 
 

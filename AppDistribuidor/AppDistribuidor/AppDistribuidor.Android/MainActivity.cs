@@ -16,27 +16,31 @@ namespace AppDistribuidor.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         Intent serviceIntent;
+        public static Activity CurrentActivity;
         private const int RequestCode = 5469;
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            TabLayoutResource = Resource.Layout.Tabbar;
+            ToolbarResource = Resource.Layout.Toolbar;
+            CurrentActivity = this;
             base.OnCreate(savedInstanceState);
 
 
             LocalNotificationCenter.CreateNotificationChannel();
 
-            CrossCurrentActivity.Current.Init(this, savedInstanceState);
+            //CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            serviceIntent = new Intent(this, typeof(AndroidLocationService));
-            SetServiceMethods();
+            //serviceIntent = new Intent(this, typeof(AndroidLocationService));
+            //SetServiceMethods();
 
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.M && !Android.Provider.Settings.CanDrawOverlays(this))
-            {
-                var intent = new Intent(Android.Provider.Settings.ActionManageOverlayPermission);
-                intent.SetFlags(ActivityFlags.NewTask);
-                this.StartActivity(intent);
-            }
+            //if (Build.VERSION.SdkInt >= BuildVersionCodes.M && !Android.Provider.Settings.CanDrawOverlays(this))
+            //{
+            //    var intent = new Intent(Android.Provider.Settings.ActionManageOverlayPermission);
+            //    intent.SetFlags(ActivityFlags.NewTask);
+            //    this.StartActivity(intent);
+            //}
 
             LoadApplication(new App());
         }
@@ -48,53 +52,53 @@ namespace AppDistribuidor.Droid
         }
 
 
-        void SetServiceMethods()
-        {
-            MessagingCenter.Subscribe<StartServiceMessage>(this, "ServicioInicio", message => {
-                if (!IsServiceRunning(typeof(AndroidLocationService)))
-                {
-                    if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
-                    {
-                        StartForegroundService(serviceIntent);
-                    }
-                    else
-                    {
-                        StartService(serviceIntent);
-                    }
-                }
-            });
+        //void SetServiceMethods()
+        //{
+        //    MessagingCenter.Subscribe<StartServiceMessage>(this, "ServicioInicio", message => {
+        //        if (!IsServiceRunning(typeof(AndroidLocationService)))
+        //        {
+        //            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
+        //            {
+        //                StartForegroundService(serviceIntent);
+        //            }
+        //            else
+        //            {
+        //                StartService(serviceIntent);
+        //            }
+        //        }
+        //    });
 
-            MessagingCenter.Subscribe<StopServiceMessage>(this, "ServicioCancelado", message => {
-                if (IsServiceRunning(typeof(AndroidLocationService)))
-                    StopService(serviceIntent);
-            });
-        }
+        //    MessagingCenter.Subscribe<StopServiceMessage>(this, "ServicioCancelado", message => {
+        //        if (IsServiceRunning(typeof(AndroidLocationService)))
+        //            StopService(serviceIntent);
+        //    });
+        //}
 
 
-        private bool IsServiceRunning(System.Type cls)
-        {
-            ActivityManager manager = (ActivityManager)GetSystemService(Context.ActivityService);
-            foreach (var service in manager.GetRunningServices(int.MaxValue))
-            {
-                if (service.Service.ClassName.Equals(Java.Lang.Class.FromType(cls).CanonicalName))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        //private bool IsServiceRunning(System.Type cls)
+        //{
+        //    ActivityManager manager = (ActivityManager)GetSystemService(Context.ActivityService);
+        //    foreach (var service in manager.GetRunningServices(int.MaxValue))
+        //    {
+        //        if (service.Service.ClassName.Equals(Java.Lang.Class.FromType(cls).CanonicalName))
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
 
-        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-        {
-            if (requestCode == RequestCode)
-            {
-                if (Android.Provider.Settings.CanDrawOverlays(this))
-                {
+        //protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        //{
+        //    if (requestCode == RequestCode)
+        //    {
+        //        if (Android.Provider.Settings.CanDrawOverlays(this))
+        //        {
 
-                }
-            }
+        //        }
+        //    }
 
-            base.OnActivityResult(requestCode, resultCode, data);
-        }
+        //    base.OnActivityResult(requestCode, resultCode, data);
+        //}
     }
 }

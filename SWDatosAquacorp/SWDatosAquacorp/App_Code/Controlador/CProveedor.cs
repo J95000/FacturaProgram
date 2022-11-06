@@ -20,16 +20,7 @@ public class CProveedor
             {
                 try
                 {
-                    db.Proc_Persona_Proveedor_I(
-                        eProveedorSimple.Nombres,
-                        eProveedorSimple.PrimerApellido,
-                        eProveedorSimple.SegundoApellido, 
-                        eProveedorSimple.Telefono,  
-                        eProveedorSimple.FechaRegistro,
-                        eProveedorSimple.FechaModificacion, 
-                        eProveedorSimple.Estado,
-                        eProveedorSimple.Direccion,
-                        eProveedorSimple.TelefonoRespaldo);
+                    db.Proc_Persona_Proveedor_I(eProveedorSimple.Nombres, eProveedorSimple.PrimerApellido, eProveedorSimple.SegundoApellido, eProveedorSimple.Telefono,  eProveedorSimple.FechaRegistro, eProveedorSimple.FechaModificacion, eProveedorSimple.Estado, eProveedorSimple.Direccion, eProveedorSimple.TelefonoRespaldo);
                     transaction.Commit();
                 }
                 catch (Exception ex)
@@ -51,18 +42,7 @@ public class CProveedor
             {
                 try
                 {
-                    db.Proc_Persona_Proveedor_A(
-                        eProveedorSimple.IdPersona, 
-                        eProveedorSimple.Nombres, 
-                        eProveedorSimple.PrimerApellido,
-                        eProveedorSimple.SegundoApellido, 
-                        eProveedorSimple.Telefono, 
-                        eProveedorSimple.FechaRegistro, 
-                        eProveedorSimple.FechaModificacion, 
-                        eProveedorSimple.Estado, 
-                        eProveedorSimple.IdProveedor,
-                        eProveedorSimple.Direccion,
-                        eProveedorSimple.TelefonoRespaldo);
+                    db.Proc_Persona_Proveedor_A(eProveedorSimple.IdPersona, eProveedorSimple.Nombres, eProveedorSimple.PrimerApellido, eProveedorSimple.SegundoApellido, eProveedorSimple.Telefono, eProveedorSimple.FechaRegistro, eProveedorSimple.FechaModificacion, eProveedorSimple.Estado, eProveedorSimple.IdProveedor, eProveedorSimple.Direccion, eProveedorSimple.TelefonoRespaldo);
                     transaction.Commit();
                 }
                 catch (Exception ex)
@@ -91,12 +71,13 @@ public class CProveedor
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
                         Telefono = p.Telefono,
-                        Direccion = p.Direccion,
+                       
                         FechaRegistro = p.FechaRegistro,
                         FechaModificacion = p.FechaModificacion,
                         Estado = p.Estado,
 
                         IdProveedor = p.IdProveedor,
+                        Direccion = p.Direccion,
                         TelefonoRespaldo = p.TelefonoRespaldo
                     };
                 }
@@ -128,12 +109,13 @@ public class CProveedor
                         PrimerApellido = p.PrimerApellido,
                         SegundoApellido = p.SegundoApellido,
                         Telefono = p.Telefono,
-                        Direccion = p.Direccion,
+                       
                         FechaRegistro = p.FechaRegistro,
                         FechaModificacion = p.FechaModificacion,
                         Estado = p.Estado,
 
                         IdProveedor = p.IdProveedor,
+                        Direccion = p.Direccion,
                         TelefonoRespaldo = p.TelefonoRespaldo
                     };
                     lstECProveedorSimple.Add(eProveedorSimple);

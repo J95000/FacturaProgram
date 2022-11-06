@@ -3,14 +3,17 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:AppDistribuidor.Views"
        Title="AppDistribuidor"
-       x:Class="AppDistribuidor.AppShell">
+       x:Class="AppDistribuidor.AppShell"
+       xmlns:controls="clr-namespace:AppDistribuidor.Controles"
+       FlyoutHeaderBehavior="CollapseOnScroll">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
     
         https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
     -->
-
+   
+    
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -73,34 +76,45 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    <Shell.FlyoutHeader>
+        <controls:FlyoutHeader />
+    </Shell.FlyoutHeader>
+
+
     <!-- 
         When the Flyout is visible this defines the content to display in the flyout.
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
-    <FlyoutItem Title="Clientes" Icon="clientes.png">
-        <ShellContent Route="Clientes" ContentTemplate="{DataTemplate local:AboutPage}"/>
+    <FlyoutItem Title="Menu Principal" Icon="men.png">
+        <ShellContent Route="Menu" ContentTemplate="{DataTemplate local:InicioPage}"/>
     </FlyoutItem>
     <FlyoutItem Title="Ventas" Icon="ventas.png">
         <ShellContent Route="Ventas" ContentTemplate="{DataTemplate local:ItemsPage}"/>
     </FlyoutItem>
-    <FlyoutItem Title="Prestamos"
-                Icon="prestamoss.png">
-        <ShellContent Route="Prestamos"
-                      ContentTemplate="{DataTemplate local:ItemsPage2}"/>
+    <FlyoutItem Title="Clientes" Icon="clientes.png">
+        <ShellContent Route="Clientes" ContentTemplate="{DataTemplate local:AboutPage}"/>
     </FlyoutItem>
-    <FlyoutItem Title="Gastos"
-                Icon="gastos.png">
-        <ShellContent Route="Gastos"
-                      ContentTemplate="{DataTemplate local:ItemPage3}"/>
+    <FlyoutItem Title="Pedidos" Icon="pedidos.png">
+        <ShellContent Route="Pedidos"  ContentTemplate="{DataTemplate local:ItemsPage2}"/>
     </FlyoutItem>
-    <FlyoutItem Title="Activar Dosificación"
-                Icon="ventas.png">
-        <ShellContent Route="Dosificacion"
-                      ContentTemplate="{DataTemplate local:DosificationPage}"/>
+    <FlyoutItem Title="Gastos"  Icon="gasto.png" >
+        <ShellContent Route="Gastos"   ContentTemplate="{DataTemplate local:ItemPage3}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Stock"  Icon="stock.png" >
+        <ShellContent Route="Stock"   ContentTemplate="{DataTemplate local:StockPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Activar Dosificación"   Icon="dosi.png">
+        <ShellContent Route="Dosificacion"   ContentTemplate="{DataTemplate local:DosificationPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Anulacion Factura"   Icon="anular.png">
+        <ShellContent Route="Anulacion"   ContentTemplate="{DataTemplate local:CancelInvoice}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Cambiar Contraseña"   Icon="cambio.png">
+        <ShellContent Route="Cambiar"   ContentTemplate="{DataTemplate local:PasswordChangePage}"/>
     </FlyoutItem>
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="Salir" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
+    <MenuItem Text="Salir" IconImageSource="salir.png" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
 
     <!--

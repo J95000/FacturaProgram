@@ -21,7 +21,7 @@ namespace AppDistribuidor.ViewModels
         public ObservableCollection<ProductoPrestamo> Productos { get; }
         public Command LoadProductosCommand { get; }
         public Command AddProductoCommand { get; }
-        public Command BorrarTodoCommand { get; }
+        public Command ActualizarCommand { get; }
         public Command<ProductoPrestamo> ProductoTapped { get; }
 
         public Command<ProductoPrestamo> ProductoEliminar { get; }
@@ -44,7 +44,7 @@ namespace AppDistribuidor.ViewModels
 
             ProductoEliminar = new Command<ProductoPrestamo>(OnProductoBorrar);
 
-            BorrarTodoCommand = new Command(BorrarTodo);
+            ActualizarCommand = new Command(ActualizarTodo);
 
 
 
@@ -105,7 +105,7 @@ namespace AppDistribuidor.ViewModels
             }
             return eClienteNombres;
         }
-        public async void BorrarTodo()
+        public async void ActualizarTodo()
         {
             VariablesGlobales.TotalPrestamo = 0;
             IsBusy = true;

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppDistribuidor.Views.InicioPage">
+    <ContentPage.Content>
+        <Grid  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="150" />
+                <RowDefinition Height="150" />
+                <RowDefinition Height="150" />
+                <RowDefinition Height="100" />
+              
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition  Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition  Width="50" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.RowSpan="6"
+               Grid.ColumnSpan="4"
+               Aspect="AspectFill"
+               HorizontalOptions="FillAndExpand"
+               Source="https://i.ibb.co/cDwxJJh/7.png" />
+            
+            <StackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" >
+            <Image Source="https://i.ibb.co/GnyftJz/logo-San-Antonio.png"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+
+
+            <ImageButton x:Name="BtnClientes" Source="https://i.ibb.co/5xfrybk/CLIE.png" BackgroundColor="#6000207B"  Grid.Row="2" Grid.Column="1" Margin="7"   CornerRadius="20" Clicked="BtnClientes_Clicked" />
+            <ImageButton x:Name="BtnPedidos" Source="https://i.ibb.co/PFnhbRL/PEDI.png" BackgroundColor="#6000207B"  Grid.Row="2" Grid.Column="2" Margin="7"   CornerRadius="20" Clicked="BtnPedidos_Clicked" />
+            <ImageButton x:Name="BtnGastos"  Source="https://i.ibb.co/gwDnZKZ/GAST.png" BackgroundColor="#6000207B"   Grid.Row="3" Grid.Column="1"  Margin="7"  CornerRadius="20" Clicked="BtnGastos_Clicked" />
+            <ImageButton x:Name="BtnStock" Source="https://i.ibb.co/tCfwhF2/sto.png" BackgroundColor="#6000207B"  Grid.Row="3" Grid.Column="2"  Margin="7"  CornerRadius="20" Clicked="BtnStock_Clicked" />
+            <ImageButton x:Name="BtnVentas" Source="https://i.ibb.co/TcScgB8/VE.png" BackgroundColor="#90002071"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"  Margin="7"  CornerRadius="20" Clicked="BtnVentas_Clicked"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

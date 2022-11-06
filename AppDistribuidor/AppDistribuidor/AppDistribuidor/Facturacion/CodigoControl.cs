@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
+
 namespace AppDistribuidor.Facturacion
 {
     public static class CodigoControl

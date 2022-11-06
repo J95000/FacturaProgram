@@ -26,7 +26,8 @@ public class EDetalleMovimientoSimple
     public DateTime FechaModificacion { get; set; }
     [DataMember]
     public string Estado { get; set; }
-
+    [DataMember]
+    public decimal? SubTotal { get; set; }
 
     /// <summary>
     /// 
@@ -41,6 +42,6 @@ public class EDetalleMovimientoSimple
         FechaRegistro = DateTime.Now;
         FechaModificacion = DateTime.Now;
         Estado = string.Empty;
-
+        SubTotal = null;
     }
 }

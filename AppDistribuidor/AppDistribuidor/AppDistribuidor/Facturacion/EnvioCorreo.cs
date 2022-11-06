@@ -25,7 +25,7 @@ namespace AppDistribuidor.Facturacion
             SmtpServer.EnableSsl = true;
             SmtpServer.UseDefaultCredentials = false;
             SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
-            SmtpServer.Credentials = new System.Net.NetworkCredential(emisor, "oelyxylccweptydo");
+            SmtpServer.Credentials = new System.Net.NetworkCredential(emisor, "nrcvynqcxyzvycfl");
 
             SmtpServer.Send(mail);
         }

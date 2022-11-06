@@ -8,7 +8,7 @@ namespace AppDistribuidor.Services
     {
         Task<bool> AddProductoAsync(T producto);
         Task<bool> UpdateProductoAsync(T producto);
-        Task<bool> DeleteProductoAsync(int id);
+        Task<bool> DeleteProductoAsync(int id , decimal precio);
         Task<T> GetProductoAsync(int id);
         Task<IEnumerable<T>> GetProductosAsync(bool forceRefresh = false);
 

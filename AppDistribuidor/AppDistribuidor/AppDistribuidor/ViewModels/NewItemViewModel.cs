@@ -1,4 +1,5 @@
 ﻿using AppDistribuidor.Models;
+using Plugin.Toast;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -62,29 +63,47 @@ namespace AppDistribuidor.ViewModels
         }
         private async void GenerarVenta()
         {
-            //Realizar Venta
-
-
             await Shell.Current.GoToAsync("..");
         }
         private async void OnSave()
         {
-            int conti = VariablesGlobales.Conta + 1;
-           
-
-            ProductoVenta newItem = new ProductoVenta()
+            if (isInt32(Cantidad))
             {
-                IdProducto = int.Parse(IdProdu),
-                NombreProducto=producto,
-                Precio = decimal.Parse(Precio),
-                Cantidad = byte.Parse(Cantidad),
-            };
-            VariablesGlobales.Conta = conti;
-            VariablesGlobales.Total += decimal.Parse(Precio) * byte.Parse(Cantidad);
-            await DataStore.AddProductoAsync(newItem);
-            
+                int conti = VariablesGlobales.Conta + 1;
+
+
+                ProductoVenta newItem = new ProductoVenta()
+                {
+                    IdProducto = int.Parse(IdProdu),
+                    NombreProducto = producto,
+                    Precio = decimal.Parse(Precio),
+                    Cantidad = byte.Parse(Cantidad),
+                };
+                VariablesGlobales.Conta = conti;
+                VariablesGlobales.Total += decimal.Parse(Precio) * byte.Parse(Cantidad);
+                await DataStore.AddProductoAsync(newItem);
+                await Shell.Current.GoToAsync("..");
+            }
+            else
+            {
+                CrossToastPopUp.Current.ShowToastMessage("Cantidad no valida ");
+            }
            // This will pop the current page off the navigation stack
-           await Shell.Current.GoToAsync("..");
+          // await Shell.Current.GoToAsync("..");
         }
+
+        public bool isInt32(String num)
+        {
+            try
+            {
+                Int32.Parse(num);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }

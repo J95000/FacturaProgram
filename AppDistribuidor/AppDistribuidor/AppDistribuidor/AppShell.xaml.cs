@@ -15,6 +15,7 @@ namespace AppDistribuidor
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(NewItemPage2), typeof(NewItemPage2));
             Routing.RegisterRoute(nameof(NuevoGastoPage), typeof(NuevoGastoPage));
+            Routing.RegisterRoute(nameof(InicioPage), typeof(InicioPage));
         }
         
         private async void OnMenuItemClicked(object sender, EventArgs e)

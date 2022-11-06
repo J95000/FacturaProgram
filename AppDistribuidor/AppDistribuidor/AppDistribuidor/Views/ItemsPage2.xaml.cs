@@ -108,20 +108,20 @@ namespace AppDistribuidor.Views
         }
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(busca.Text))
-            {
-                //ListarClientes();
-                searchResults.IsVisible = true;
-                searchResults.BeginRefresh();
-                // searchResults.ItemsSource = clientes.Where(i => i.ToUpper().StartsWith(e.NewTextValue.ToUpper()));
-                //searchResults.ItemsSource = clientes;
-                searchResults.ItemsSource = _viewModel.Clientess.Where(i => i.NombreCompleto.ToUpper().StartsWith(e.NewTextValue.ToUpper()));
-                searchResults.EndRefresh();
-            }
-            else
-            {
-                searchResults.IsVisible = false;
-            }
+            //if (!String.IsNullOrWhiteSpace(busca.Text))
+            //{
+            //    //ListarClientes();
+            //    searchResults.IsVisible = true;
+            //    searchResults.BeginRefresh();
+            //    // searchResults.ItemsSource = clientes.Where(i => i.ToUpper().StartsWith(e.NewTextValue.ToUpper()));
+            //    //searchResults.ItemsSource = clientes;
+            //    searchResults.ItemsSource = _viewModel.Clientess.Where(i => i.NombreCompleto.ToUpper().StartsWith(e.NewTextValue.ToUpper()));
+            //    searchResults.EndRefresh();
+            //}
+            //else
+            //{
+            //    searchResults.IsVisible = false;
+            //}
 
 
         }
@@ -134,7 +134,14 @@ namespace AppDistribuidor.Views
                 _viewModel.NombreCliente = listsd.NombreCompleto;
 
                 //busca.Text = listsd.NombreCompleto;
-                searchResults.IsVisible = false;
+
+
+
+                //searchResults.IsVisible = false;
+
+
+
+
                 //SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
                 //SWNegocio.EClienteCompleja clienteCompleja = cliente.Obtener_Cliente_Buscador_NombreCompleto(listsd);
 
@@ -218,108 +225,108 @@ namespace AppDistribuidor.Views
                 if (CheckConexion())
                 {
 
-                    if (!String.IsNullOrWhiteSpace(busca.Text))
-                    {
-                        if (_viewModel.Productos.Count > 0)
-                        {
+                    //if (!String.IsNullOrWhiteSpace(busca.Text))
+                    //{
+                    //    if (_viewModel.Productos.Count > 0)
+                    //    {
 
-                            EMovimiento eMovimientoCompleja = new EMovimiento()
-                            {
+                    //        EMovimiento eMovimientoCompleja = new EMovimiento()
+                    //        {
 
-                                Codigo = "",
-                                Cont = 1,
-                                Estado = "HA",
-                                FechaModificacion = DateTime.Now,
-                                FechaRegistro = DateTime.Now,
-                                IdCliente = idCliente,
-                                IdMovimiento = 1,
-                                IdUsuario = VariablesGlobales.IdUsuario,
-                                NombreCliente = "",
-                                NombreUsuario = "",
-                                TipoMovimiento = "PRESTAMO"
-
-
-                            };
+                    //            Codigo = "",
+                    //            Cont = 1,
+                    //            Estado = "HA",
+                    //            FechaModificacion = DateTime.Now,
+                    //            FechaRegistro = DateTime.Now,
+                    //            IdCliente = idCliente,
+                    //            IdMovimiento = 1,
+                    //            IdUsuario = VariablesGlobales.IdUsuario,
+                    //            NombreCliente = "",
+                    //            NombreUsuario = "",
+                    //            TipoMovimiento = "PRESTAMO"
 
 
-
-                            //sWNegocioAquacorpClient.Insertar_Movimiento(eMovimientoCompleja);
-                            bool res = await Insertar_Movimiento(eMovimientoCompleja);
-
-                            if (res)
-                            {
-                                int idMovi = await Obtener_Ultimo_IdMovimiento();
-                                //int idMovi = sWNegocioAquacorpClient.Obtener_Ultimo_IdMovimiento();
-
-                                var itt = _viewModel.Productos;
-                                foreach (var item in itt)
-                                {
-                                    //SWNegocio.EDetalleMovimientoCompleja eDetalleMovimientoCompleja = new SWNegocio.EDetalleMovimientoCompleja()
-                                    //{
-                                    //    IdMovimiento = idMovi,
-                                    //    IdProducto = item.IdProducto,
-                                    //    PrecioUnitario = item.Precio,
-                                    //    Cantidad = item.Cantidad,
-                                    //    FechaRegistro = DateTime.Now,
-                                    //    FechaModificacion = DateTime.Now,
-                                    //    Estado = "HA"
-
-                                    //};
-                                    //sWNegocioAquacorpClient.Insertar_DetalleMovimiento(eDetalleMovimientoCompleja);
-
-                                    EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
-                                    {
-
-                                        Cantidad = item.Cantidad,
-                                        Cont = 1,
-                                        Estado = "HA",
-                                        IdDetalleMovimiento = 1,
-                                        IdMovimiento = idMovi,
-                                        IdProducto = item.IdProducto,
-                                        NombreProducto = "",
-                                        PrecioUnitario = item.Precio,
-                                        FechaModificacion = DateTime.Now,
-                                        FechaRegistro = DateTime.Now,
-
-                                    };
-
-                                    bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
-
-                                    if (ress)
-                                    {
-                                        await DisplayAlert("Prestamo", "Prestamo Registrado con exito.", "Ok");
-                                    }
-                                    else
-                                    {
-                                        new Exception();
-                                    }
-                                }
+                    //        };
 
 
-                            }
-                            else
-                            {
-                                await DisplayAlert("Prestamo", "Problema al registrar Prestamo.", "Ok");
-                            }
-                            // DisplayAlert("Prestamo", "Prestamo Registrado con exito.", "Ok");
-                            BindingContext = null;
-                            // InitializeComponent();
 
-                            //ListarClientes();
-                            busca.Text = String.Empty;
-                            _viewModel.Productos.Clear();
-                            _viewModel.BorrarTodo();
-                            BindingContext = _viewModel = new ItemsViewModelPrestamo();
-                        }
-                        else
-                        {
-                            await DisplayAlert("Prestamo", "Seleccione un producto para Prestamo.", "Ok");
-                        }
-                    }
-                    else
-                    {
-                        await DisplayAlert("Cliente", "Seleccione un cliente.", "Ok");
-                    }
+                    //        //sWNegocioAquacorpClient.Insertar_Movimiento(eMovimientoCompleja);
+                    //        bool res = await Insertar_Movimiento(eMovimientoCompleja);
+
+                    //        if (res)
+                    //        {
+                    //            int idMovi = await Obtener_Ultimo_IdMovimiento();
+                    //            //int idMovi = sWNegocioAquacorpClient.Obtener_Ultimo_IdMovimiento();
+
+                    //            var itt = _viewModel.Productos;
+                    //            foreach (var item in itt)
+                    //            {
+                    //                //SWNegocio.EDetalleMovimientoCompleja eDetalleMovimientoCompleja = new SWNegocio.EDetalleMovimientoCompleja()
+                    //                //{
+                    //                //    IdMovimiento = idMovi,
+                    //                //    IdProducto = item.IdProducto,
+                    //                //    PrecioUnitario = item.Precio,
+                    //                //    Cantidad = item.Cantidad,
+                    //                //    FechaRegistro = DateTime.Now,
+                    //                //    FechaModificacion = DateTime.Now,
+                    //                //    Estado = "HA"
+
+                    //                //};
+                    //                //sWNegocioAquacorpClient.Insertar_DetalleMovimiento(eDetalleMovimientoCompleja);
+
+                    //                EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
+                    //                {
+
+                    //                    Cantidad = item.Cantidad,
+                    //                    Cont = 1,
+                    //                    Estado = "HA",
+                    //                    IdDetalleMovimiento = 1,
+                    //                    IdMovimiento = idMovi,
+                    //                    IdProducto = item.IdProducto,
+                    //                    NombreProducto = "",
+                    //                    PrecioUnitario = item.Precio,
+                    //                    FechaModificacion = DateTime.Now,
+                    //                    FechaRegistro = DateTime.Now,
+
+                    //                };
+
+                    //                bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
+
+                    //                if (ress)
+                    //                {
+                    //                    await DisplayAlert("Prestamo", "Prestamo Registrado con exito.", "Ok");
+                    //                }
+                    //                else
+                    //                {
+                    //                    new Exception();
+                    //                }
+                    //            }
+
+
+                    //        }
+                    //        else
+                    //        {
+                    //            await DisplayAlert("Prestamo", "Problema al registrar Prestamo.", "Ok");
+                    //        }
+                    //        // DisplayAlert("Prestamo", "Prestamo Registrado con exito.", "Ok");
+                    //        BindingContext = null;
+                    //        // InitializeComponent();
+
+                    //        //ListarClientes();
+                    //        busca.Text = String.Empty;
+                    //        _viewModel.Productos.Clear();
+                    //        _viewModel.BorrarTodo();
+                    //        BindingContext = _viewModel = new ItemsViewModelPrestamo();
+                    //    }
+                    //    else
+                    //    {
+                    //        await DisplayAlert("Prestamo", "Seleccione un producto para Prestamo.", "Ok");
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    await DisplayAlert("Cliente", "Seleccione un cliente.", "Ok");
+                    //}
                 }
             }
             catch (Exception ex)

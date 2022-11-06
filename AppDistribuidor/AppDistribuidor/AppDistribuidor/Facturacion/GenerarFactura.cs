@@ -27,7 +27,7 @@ namespace AppDistribuidor.Facturacion
 {
     public class GenerarFactura
     {
-        public byte[] GenerarPdf(ObservableCollection<ProductoVenta> Productos, EMovimiento eMovimientoCompleja, EDetalleMovimiento eDetalleMovimientoCompleja)
+        public byte[] GenerarPdf(ObservableCollection<ProductoVenta> Productos, EMovimiento eMovimientoCompleja, EDetalleMovimiento eDetalleMovimientoCompleja, EDosificacionCompleja eDosificacionCompleja)
         {
 
             using (MemoryStream stream = new MemoryStream())
@@ -42,8 +42,8 @@ namespace AppDistribuidor.Facturacion
                 Image image = new Image(imageData);
 
                 //DATOS A MOSTRAR EN LA FACTURA
-                Paragraph datosEmpresa = new Paragraph("San Antonio\nCASA MATRIZ: Avenida Perú #349\nTeléfono: 44378234\nCochabamba - Bolivia").SetFontSize(9);
-                Paragraph datosFactura = new Paragraph("NIT: 7456347832\nNo FACTURA: " + eMovimientoCompleja.NroMovimiento.ToString() + "\nNo AUTORIZACIÓN: 296401900006126\nFEC EMISIÓN: " + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(9);
+                Paragraph datosEmpresa = new Paragraph("Aquacorp Srl\nCASA MATRIZ: Avenida Perú #349\nTeléfono: 44378234\nCochabamba - Bolivia").SetFontSize(9);
+                Paragraph datosFactura = new Paragraph("NIT: 395410026\nNo FACTURA: " + eMovimientoCompleja.NroMovimiento.ToString() + "\nNo AUTORIZACIÓN: " + eDosificacionCompleja.NroAutorizacion + "\nFEC EMISIÓN: " + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(9);
                 Paragraph datosCliente = new Paragraph(" NOMBRE / RAZÓN SOCIAL: " + eMovimientoCompleja.RazonSocial + "\n NIT/CI: " + eMovimientoCompleja.NitCi).SetFontSize(10);
 
                 Paragraph codigoControl = new Paragraph("CÓDIGO DE CONTROL: " + eMovimientoCompleja.CodigoControl).SetFontSize(10);
@@ -92,7 +92,7 @@ namespace AppDistribuidor.Facturacion
 
 
                 //PIE
-                string dataQR = "7456347832|" + eMovimientoCompleja.NroMovimiento + "|296401900006126|" + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy") + "|" + eMovimientoCompleja.PrecioTotal.ToString("0.00") + "|" + eMovimientoCompleja.PrecioTotal.ToString("0.00") + "|" + eMovimientoCompleja.CodigoControl + "|" + eMovimientoCompleja.NitCi + "|0|0|0|0";
+                string dataQR = "395410026|" + eMovimientoCompleja.NroMovimiento + "|" + eDosificacionCompleja.NroAutorizacion + "|" + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy") + "|" + eMovimientoCompleja.PrecioTotal.ToString("0.00") + "|" + eMovimientoCompleja.PrecioTotal.ToString("0.00") + "|" + eMovimientoCompleja.CodigoControl + "|" + eMovimientoCompleja.NitCi + "|0|0|0|0";
                 byte[] qr = generaQR(dataQR);
                 ImageData imageDataQR = ImageDataFactory.Create(qr);
                 Image imageQR = new Image(imageDataQR).ScaleToFit(80f, 80f);

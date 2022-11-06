@@ -24,6 +24,5 @@ namespace AppDistribuidor.Models
         public string CodigoControl { get; set; }
         public string RazonSocial { get; set; }
         public string NitCi { get; set; }
-
     }
 }

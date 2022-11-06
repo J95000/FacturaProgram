@@ -42,7 +42,7 @@ namespace AppDistribuidor.Facturacion
                 Image image = new Image(imageData);
 
                 //DATOS A MOSTRAR EN LA FACTURA
-                Paragraph datosEmpresa = new Paragraph("Aquacorp Srl\nCASA MATRIZ: Avenida Perú #349\nTeléfono: 44378234\nCochabamba - Bolivia").SetFontSize(9);
+                Paragraph datosEmpresa = new Paragraph("AQUACORP S.R.L.\nCASA MATRIZ: Calle Gral. Jose Ballivian \nNro. S/n\nTeléfono: 4245055-48360300\nCochabamba - Bolivia").SetFontSize(9);
                 Paragraph datosFactura = new Paragraph("NIT: 395410026\nNo FACTURA: " + eMovimientoCompleja.NroMovimiento.ToString() + "\nNo AUTORIZACIÓN: " + eDosificacionCompleja.NroAutorizacion + "\nFEC EMISIÓN: " + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(9);
                 Paragraph datosCliente = new Paragraph(" NOMBRE / RAZÓN SOCIAL: " + eMovimientoCompleja.RazonSocial + "\n NIT/CI: " + eMovimientoCompleja.NitCi).SetFontSize(10);
 
@@ -52,7 +52,7 @@ namespace AppDistribuidor.Facturacion
                 Paragraph saltoLinea = new Paragraph(new Text("\n"));
 
                 //CABECERA
-                float[] pointColumnWidths = { 80F, 150F, 200F, 150F };
+                float[] pointColumnWidths = { 80F, 200F, 150F, 150F };
                 Table tablaCabecera = new Table(pointColumnWidths);
                 tablaCabecera.AddCell(new Cell().SetBorder(Border.NO_BORDER).Add(image.ScaleAbsolute(70, 70)));
                 tablaCabecera.AddCell(new Cell().SetBorder(Border.NO_BORDER).Add(datosEmpresa));

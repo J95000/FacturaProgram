@@ -404,17 +404,19 @@ namespace AppDistribuidor.Views
             {
                 if (CheckConexion())
                 {
+                    //Preguntar si un cliente fue seleccionado
                     if (!String.IsNullOrWhiteSpace(busca.Text))
                     {
+                        //Preguntar si el número de productos seleccionados son mas que 0
                         if (_viewModel.Productos.Count > 0)
                         {
-
+                            //Llenando la instancia de cliente con los datos recibidos del metodo Obtener_Cliente_Buscador_NombreCompleto
                             clienteCompleja = Task.Run(() => Obtener_Cliente_Buscador_NombreCompleto(NombreCliente)).GetAwaiter().GetResult();
-
+                            //Preguntar al usuario si va a requerir una factura
                             string factura = await DisplayActionSheet("Facturación", "Si", "No", "Se requiere factura?.");
-
+                            //Escribir en consola la respuesta del usuario
                             Console.WriteLine("Action:::::::::::: " + factura);
-
+                            //Entra al if si requiere factura
                             if (factura == "Si")
                             {
                                 //Instancia de la clase EDosificacionCompleja
@@ -424,16 +426,17 @@ namespace AppDistribuidor.Views
 
                                 string razon = clienteCompleja.RazonSocial;
                                 string nit = clienteCompleja.NitCi;
+                                //Entra al if si hay una dosificacion vigente
                                 if (eDosificacionCompleja.IdDosificacion != 0 && eDosificacionCompleja.FechaLimite > DateTime.Now)
                                 {
+                                    //Preguntar al usuario si va a requerir modificar la razon social y NIT del cliente
                                     string RazonNit = await DisplayActionSheet("Datos Para factura", "Si", "Modificar", "Razon Social : " + razon + " \n NitCi : " + nit);
-
-
+                                    //Entra al if si no requiere modificar
                                     if (RazonNit == "Si")
                                     {
                                         //Se incrementa el nroFinalFactura
                                         eDosificacionCompleja.NroFinalFactura++;
-
+                                        //Crear un objeto basado en la clase cliente
                                         EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
                                         {
                                             FotoUbicacion = clienteCompleja.FotoUbicacion,
@@ -441,16 +444,14 @@ namespace AppDistribuidor.Views
                                             NitCi = nit,
                                             IdCliente = clienteCompleja.IdCliente
                                         };
-
+                                        //Actualizar los datos de cliente
                                         bool actualizaCli = await InsertarActualizarCliente(clienteCorta);
-
-
+                                        //Entra al if si se actualiza cliente
                                         if (actualizaCli)
                                         {
-                                            //SE REGISTRA CON LOS DATOS ACTUALES
+                                            //Creación del objeto "movimiento"
                                             EMovimiento eMovimientoCompleja = new EMovimiento()
                                             {
-
                                                 Codigo = "",
                                                 Cont = 1,
                                                 Estado = "HA",
@@ -469,17 +470,19 @@ namespace AppDistribuidor.Views
                                                 RazonSocial = razon,
                                                 NitCi = nit
                                             };
-
+                                            //Se registra el movimiento con los datos actuales
                                             bool res = await Insertar_Movimiento_ConFactura(eMovimientoCompleja);
-
+                                            //Entra al if si se registra la venta
                                             if (res)
                                             {
+                                                //Obtener el movimiento recien insertado para agarrar su ID y adjuntarlo a DetalleMovimiento
                                                 int idMovi = await Obtener_Ultimo_IdMovimiento();
-
+                                                //Recorrer los productos registrados para la venta
                                                 var indice = 1;
                                                 var itt = _viewModel.Productos;
                                                 foreach (var item in itt)
                                                 {
+                                                    //Creación del objeto "detalle movimiento"
                                                     EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
                                                     {
 
@@ -494,12 +497,12 @@ namespace AppDistribuidor.Views
                                                         FechaRegistro = DateTime.Now,
                                                         SubTotal = (item.Cantidad * item.Precio)
                                                     };
-
+                                                    //Se registra el detalle movimiento con los datos actuales
                                                     bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
-
-
+                                                    //Entra al if si se registra el detalle venta
                                                     if (ress)
                                                     {
+                                                        //Entrar al if si es el último producto registrado para la venta
                                                         if (itt.Count == indice)
                                                         {
                                                             //Instancia de las clases para la generacion de la factura y el posterior envio del correo
@@ -510,59 +513,50 @@ namespace AppDistribuidor.Views
                                                             string correo = clienteCompleja.CorreoElectronico;
                                                             await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
                                                             envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
-
                                                         }
                                                     }
+                                                    //Entra al else si no se registró el detalle venta
                                                     else
                                                     {
                                                         await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
                                                         // new Exception();
                                                     }
                                                     indice++;
-
                                                 }
-
-
                                             }
+                                            //Entra al else si no se registra la venta
                                             else
                                             {
                                                 await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
                                             }
                                         }
+                                        //Entra al else si no se actualizó el cliente
                                         else
                                         {
                                             await DisplayAlert("Cliente", "Problema al actualizar datos de cliente.", "Ok");
                                         }
-
-
                                     }
+                                    //Entra al else si se requiere modificar
                                     else
                                     {
-                                        //Llenando la instancia con los datos recibidos del metodo Obtener_Dosificacion_Habilitado
-                                        eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
                                         //Se incrementa el nroFinalFactura
                                         eDosificacionCompleja.NroFinalFactura++;
-
+                                        //Crear un objeto basado en la clase cliente
                                         string nuevoRazonSocial = await DisplayPromptAsync("Nueva Razon Social", "");
                                         string nuevoNit = await DisplayPromptAsync("Nuevo Nit o Ci", "");
-
-
-
                                         EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
                                         {
                                             FotoUbicacion = clienteCompleja.FotoUbicacion,
                                             RazonSocial = nuevoRazonSocial,
                                             NitCi = nuevoNit,
                                             IdCliente = clienteCompleja.IdCliente
-
                                         };
-
+                                        //Actualizar los datos de cliente
                                         bool actualizaCli = await InsertarActualizarCliente(clienteCorta);
-
-
+                                        //Entra al if si se actualiza cliente
                                         if (actualizaCli)
                                         {
-                                            //SE REGISTRA CON LOS DATOS ACTUALES
+                                            //Creación del objeto "movimiento"
                                             EMovimiento eMovimientoCompleja = new EMovimiento()
                                             {
 
@@ -584,20 +578,21 @@ namespace AppDistribuidor.Views
                                                 RazonSocial = nuevoRazonSocial,
                                                 NitCi = nuevoNit
                                             };
-
+                                            //Se registra el movimiento con los datos actuales
                                             bool res = await Insertar_Movimiento_ConFactura(eMovimientoCompleja);
-
+                                            //Entra al if si se registra la venta
                                             if (res)
                                             {
+                                                //Obtener el movimiento recien insertado para agarrar su ID y adjuntarlo a DetalleMovimiento
                                                 int idMovi = await Obtener_Ultimo_IdMovimiento();
-
+                                                //Recorrer los productos registrados para la venta
                                                 var indice = 1;
                                                 var itt = _viewModel.Productos;
                                                 foreach (var item in itt)
                                                 {
+                                                    //Creación del objeto "detalle movimiento"
                                                     EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
                                                     {
-
                                                         Cantidad = item.Cantidad,
                                                         Cont = 1,
                                                         Estado = "HA",
@@ -609,10 +604,9 @@ namespace AppDistribuidor.Views
                                                         FechaRegistro = DateTime.Now,
                                                         SubTotal = (item.Cantidad * item.Precio)
                                                     };
-
+                                                    //Se registra el detalle movimiento con los datos actuales
                                                     bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
-
-
+                                                    //Entra al if si se registra el detalle venta
                                                     if (ress)
                                                     {
                                                         if (itt.Count == indice)
@@ -623,50 +617,46 @@ namespace AppDistribuidor.Views
                                                             //Se genera la factura y se declara el correo del receptor
                                                             byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
                                                             string correo = clienteCompleja.CorreoElectronico;
+                                                            //Mostrar un mensaje que ya se realizó la venta
                                                             await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
+                                                            //Enviar el correo
                                                             envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
-
                                                         }
                                                     }
+                                                    //Entra al else si no se registra la venta
                                                     else
                                                     {
                                                         await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
                                                         // new Exception();
                                                     }
                                                     indice++;
-
                                                 }
-
-
                                             }
+                                            //Entra al if si no se registra la venta
                                             else
                                             {
                                                 await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
                                             }
                                         }
+                                        //Entra al else si no se actualizó el cliente
                                         else
                                         {
                                             await DisplayAlert("Cliente", "Problema al actualizar datos de cliente.", "Ok");
                                         }
-
-
                                     }
-
-
                                 }
-                                //si no hay dosificacion
+                                //Entra al else si no hay dosificacion o si su fecha limite ya caducó
                                 else
                                 {
                                     await DisplayAlert("Venta No Realizada", "No Existe Una Dosificación Vigente", "Ok");
                                 }
-
                             }
+                            //Entra al else si no requiere factura
                             else
                             {
-                                //SE REGISTRA SIN FACTURA
+                                //Creación del objeto "movimiento"
                                 EMovimiento eMovimientoCompleja = new EMovimiento()
                                 {
-
                                     Codigo = "",
                                     Cont = 1,
                                     Estado = "HA",
@@ -685,20 +675,20 @@ namespace AppDistribuidor.Views
                                     RazonSocial = "",
                                     NitCi = ""
                                 };
-
+                                //Se registra el movimiento con los datos actuales y sin factura
                                 bool res = await Insertar_Movimiento_SinFactura(eMovimientoCompleja);
-
-
+                                //Entra al if si se registró el movimiento
                                 if (res)
                                 {
+                                    //Obtener el movimiento recien insertado para agarrar su ID y adjuntarlo a DetalleMovimiento
                                     int idMovi = await Obtener_Ultimo_IdMovimiento();
-
+                                    //Recorrer los productos registrados para la venta
                                     var itt = _viewModel.Productos;
                                     foreach (var item in itt)
                                     {
+                                        //Creación del objeto "detalle movimiento"
                                         EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
                                         {
-
                                             Cantidad = item.Cantidad,
                                             Cont = 1,
                                             Estado = "HA",
@@ -710,31 +700,28 @@ namespace AppDistribuidor.Views
                                             FechaRegistro = DateTime.Now,
                                             SubTotal = (item.Cantidad * item.Precio)
                                         };
-
+                                        //Se registra el detalle movimiento con los datos actuales
                                         bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
-
+                                        //Entra al if si se registra el detalle venta
                                         if (ress)
                                         {
                                             await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
                                         }
+                                        //Entra al else si no se registra el detalle venta
                                         else
                                         {
                                             await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
                                         }
                                     }
-
-
                                 }
+                                //Entra al else si hubo problemas al registrar la venta
                                 else
                                 {
                                     await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
                                 }
                             }
 
-
                             // BindingContext = null;
-
-
 
                             busca.Text = String.Empty;
                             Console.WriteLine($"-----BUCAR CLIENTE LIMPIAR-----");
@@ -743,13 +730,14 @@ namespace AppDistribuidor.Views
                             _viewModel.BorrarTodo();
                             Console.WriteLine($"-----BORRAR TODO  LIMPIAR-----");
                             // BindingContext = _viewModel = new ItemsViewModel();
-
                         }
+                        //Lanzar mensaje si no se seleccionó ni un producto
                         else
                         {
                             await DisplayAlert("Productos", "Seleccione un producto para venta.", "Ok");
                         }
                     }
+                    //Lanzar mensaje si no se seleccionó el cliente
                     else
                     {
                         //PARA HACER MODEL CON MENU
@@ -764,18 +752,11 @@ namespace AppDistribuidor.Views
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
-
                 await DisplayAlert("Venta", "Problema al registrar venta.\n " + ex.Message, "Ok");
             }
         }
-
-
-
-
     }
-
 }

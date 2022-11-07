@@ -11,9 +11,9 @@ namespace AppDistribuidor.Facturacion
         /// <summary>
         /// Metodo que realiza el envio de correos mediante GMAIL
         /// </summary>
-        /// <param name="emisor"></param>
-        /// <param name="receptor"></param>
-        /// <param name="document"></param>
+        /// <param name="emisor">Emisor del Correo</param>
+        /// <param name="receptor">Receptor del Correo</param>
+        /// <param name="document">PDF que se adjuntará al Correo</param>
         public void EnviarCorreo(string emisor, string receptor, byte[] document)
         {
             //Declaramos las instancias a utilizar para la generacion del correo
@@ -25,7 +25,6 @@ namespace AppDistribuidor.Facturacion
             mail.Body = "Estimado cliente, a continuación se le adjunta la factura de la compra realizada.\nGracias por su preferencia.";
             mail.Attachments.Add(new Attachment(new MemoryStream(document), "factura.pdf", "application/pdf"));
 
-            
             SmtpServer.Port = 587;
             SmtpServer.Host = "smtp.gmail.com";
             SmtpServer.EnableSsl = true;

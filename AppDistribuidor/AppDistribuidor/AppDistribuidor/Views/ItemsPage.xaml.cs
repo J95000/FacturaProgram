@@ -428,8 +428,11 @@ namespace AppDistribuidor.Views
 
                                 if (RazonNit == "Si")
                                 {
+                                    //Instancia de la clase EDosificacionCompleja
                                     EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
+                                    //Llenando la instancia con los datos recibidos del metodo Obtener_Dosificacion_Habilitado
                                     eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
+                                    //Se incrementa el nroFinalFactura
                                     eDosificacionCompleja.NroFinalFactura++;
 
                                     EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
@@ -460,15 +463,12 @@ namespace AppDistribuidor.Views
                                             NombreCliente = "",
                                             NombreUsuario = "",
                                             TipoMovimiento = "VENTA",
-
                                             PrecioTotal = VariablesGlobales.Total,
-                                            ///////////////////////////////////////////////////
                                             IdDosificacion = eDosificacionCompleja.IdDosificacion,
                                             NroMovimiento = eDosificacionCompleja.NroFinalFactura,
                                             CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
                                             RazonSocial = razon,
                                             NitCi = nit
-                                            //////////////////////////////////////////////////////
                                         };
                                         
                                         bool res = await Insertar_Movimiento_ConFactura(eMovimientoCompleja);
@@ -503,8 +503,10 @@ namespace AppDistribuidor.Views
                                                 {
                                                     if (itt.Count == indice)
                                                     {
+                                                        //Instancia de las clases para la generacion de la factura y el posterior envio del correo
                                                         generarFactura = new GenerarFactura();
                                                         envioCorreo = new EnvioCorreo();
+                                                        //Se genera la factura y se declara el correo del receptor
                                                         byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
                                                         string correo = clienteCompleja.CorreoElectronico;
                                                         await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
@@ -535,8 +537,11 @@ namespace AppDistribuidor.Views
                                 }
                                 else
                                 {
+                                    //Instancia de la clase EDosificacionCompleja
                                     EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
+                                    //Llenando la instancia con los datos recibidos del metodo Obtener_Dosificacion_Habilitado
                                     eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
+                                    //Se incrementa el nroFinalFactura
                                     eDosificacionCompleja.NroFinalFactura++;
 
                                     string nuevoRazonSocial = await DisplayPromptAsync("Nueva Razon Social", "");
@@ -573,15 +578,12 @@ namespace AppDistribuidor.Views
                                             NombreCliente = "",
                                             NombreUsuario = "",
                                             TipoMovimiento = "VENTA",
-
                                             PrecioTotal = VariablesGlobales.Total,
-                                            ///////////////////////////////////////////////////
                                             IdDosificacion = eDosificacionCompleja.IdDosificacion,
                                             NroMovimiento = eDosificacionCompleja.NroFinalFactura,
                                             CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
                                             RazonSocial = nuevoRazonSocial,
                                             NitCi = nuevoNit
-                                            //////////////////////////////////////////////////////
                                         };
 
                                         bool res = await Insertar_Movimiento_ConFactura(eMovimientoCompleja);
@@ -616,8 +618,10 @@ namespace AppDistribuidor.Views
                                                 {
                                                     if (itt.Count == indice)
                                                     {
+                                                        //Instancia de la clase EDosificacionCompleja
                                                         generarFactura = new GenerarFactura();
                                                         envioCorreo = new EnvioCorreo();
+                                                        //Se genera la factura y se declara el correo del receptor
                                                         byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
                                                         string correo = clienteCompleja.CorreoElectronico;
                                                         await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
@@ -667,7 +671,6 @@ namespace AppDistribuidor.Views
                                     NombreCliente = "",
                                     NombreUsuario = "",
                                     TipoMovimiento = "VENTA",
-
                                     PrecioTotal = VariablesGlobales.Total,
                                     IdDosificacion = 0,
                                     NroMovimiento = 0,

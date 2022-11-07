@@ -22,55 +22,68 @@ using Image = iText.Layout.Element.Image;
 using Cell = iText.Layout.Element.Cell;
 using System.IO;
 using System.Collections.ObjectModel;
+using iText.Kernel.Colors;
+using Color = iText.Kernel.Colors.Color;
 
 namespace AppDistribuidor.Facturacion
 {
     public class GenerarFactura
     {
+        /// <summary>
+        /// Metodo que genera un PDF recibiendo cuatro parametros
+        /// </summary>
+        /// <param name="Productos"></param>
+        /// <param name="eMovimientoCompleja"></param>
+        /// <param name="eDetalleMovimientoCompleja"></param>
+        /// <param name="eDosificacionCompleja"></param>
+        /// <returns>Retorna un arreglo de bytes para su posterior envio mediante correo</returns>
         public byte[] GenerarPdf(ObservableCollection<ProductoVenta> Productos, EMovimiento eMovimientoCompleja, EDetalleMovimiento eDetalleMovimientoCompleja, EDosificacionCompleja eDosificacionCompleja)
         {
-
+            //Creamos un flujo de memoria para el PDF
             using (MemoryStream stream = new MemoryStream())
             {
+                //Creamos instancia de los objetos necesarios para construir la estructura del PDF
                 PdfWriter writer = new PdfWriter(stream);
                 PdfDocument pdf = new PdfDocument(writer);
                 Document document = new Document(pdf, PageSize.A4);
                 PdfFont font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.HELVETICA);
+                PdfFont fontTitulo = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.TIMES_ROMAN);
 
-                //LOGO EMPRESA
+                //Instancia del logo de la empresa
                 ImageData imageData = ImageDataFactory.Create("https://i.pinimg.com/564x/e6/2a/60/e62a60c30bfeca030d9fbaecf1b0bbca.jpg");
                 Image image = new Image(imageData);
 
-                //DATOS A MOSTRAR EN LA FACTURA
+                //Datos de la empresa, factura y del cliente a mostrar
                 Paragraph datosEmpresa = new Paragraph("AQUACORP S.R.L.\nCASA MATRIZ: Calle Gral. Jose Ballivian \nNro. S/n\nTeléfono: 4245055-48360300\nCochabamba - Bolivia").SetFontSize(9);
-                Paragraph datosFactura = new Paragraph("NIT: 395410026\nNo FACTURA: " + eMovimientoCompleja.NroMovimiento.ToString() + "\nNo AUTORIZACIÓN: " + eDosificacionCompleja.NroAutorizacion + "\nFEC EMISIÓN: " + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(9);
-                Paragraph datosCliente = new Paragraph(" NOMBRE / RAZÓN SOCIAL: " + eMovimientoCompleja.RazonSocial + "\n NIT/CI: " + eMovimientoCompleja.NitCi).SetFontSize(10);
+                Paragraph datosFactura = new Paragraph("NIT: 395410026\nNo FACTURA: " + eMovimientoCompleja.NroMovimiento.ToString() + "\nNo AUTORIZACIÓN: " + eDosificacionCompleja.NroAutorizacion).SetFontSize(9);
+                Paragraph tituloFactura = new Paragraph("FACTURA\n(Con Derecho a Crédito Fiscal)").SetFont(fontTitulo).SetFontSize(13).SetTextAlignment(TextAlignment.CENTER);
+                Paragraph datosCliente = new Paragraph(" NOMBRE / RAZÓN SOCIAL: " + eMovimientoCompleja.RazonSocial + "\n NIT/CI: " + eMovimientoCompleja.NitCi + "\nFECHA EMISIÓN: "+ eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(10);
+                Paragraph codigoControl = new Paragraph("CÓDIGO DE CONTROL: " + eMovimientoCompleja.CodigoControl + "\nFECHA LÍMITE EMISIÓN: " + eDosificacionCompleja.FechaLimite.ToString("dd/MM/yyyy")).SetFontSize(10);
 
-                Paragraph codigoControl = new Paragraph("CÓDIGO DE CONTROL: " + eMovimientoCompleja.CodigoControl).SetFontSize(10);
-
-                //LINE BREAK
+                //Instancia de salto de linea
                 Paragraph saltoLinea = new Paragraph(new Text("\n"));
 
-                //CABECERA
-                float[] pointColumnWidths = { 80F, 200F, 150F, 150F };
+                //Cabecera del PDF
+                float[] pointColumnWidths = { 80F, 260F, 100F, 150F };
                 Table tablaCabecera = new Table(pointColumnWidths);
                 tablaCabecera.AddCell(new Cell().SetBorder(Border.NO_BORDER).Add(image.ScaleAbsolute(70, 70)));
                 tablaCabecera.AddCell(new Cell().SetBorder(Border.NO_BORDER).Add(datosEmpresa));
                 tablaCabecera.AddCell(new Cell().SetBorder(Border.NO_BORDER));
                 tablaCabecera.AddCell(new Cell().SetBorder(Border.NO_BORDER).Add(datosFactura));
 
-                //CUERPO(CLIENTE)
+                //Cuerpo del PDF (datos del cliente)
                 Table tablaCliente = new Table(1).UseAllAvailableWidth();
-                tablaCliente.AddCell(new Cell().Add(datosCliente).SetPadding(7));
+                tablaCliente.AddCell(new Cell().Add(datosCliente).SetPadding(7).SetBorder(Border.NO_BORDER));
 
-                //CUERPO(ARTICULOS DE VENTA)
+                //Cuerpo del PDF(articulos de la venta)
+                Color bgColour = new DeviceRgb(240, 240, 240);
                 float[] pointColumnWidths2 = { 10F, 150F, 10F, 90F, 50F };
                 Table tablaArticulosVenta = new Table(pointColumnWidths2).UseAllAvailableWidth();
-                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("#")).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
-                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("Descripción")).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
-                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("Cantidad")).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
-                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("Precio Unitario")).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
-                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("SubTotal")).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
+                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("#")).SetBackgroundColor(bgColour).SetBorder(Border.NO_BORDER).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
+                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("Descripción")).SetBackgroundColor(bgColour).SetBorder(Border.NO_BORDER).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
+                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("Cantidad")).SetBackgroundColor(bgColour).SetBorder(Border.NO_BORDER).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
+                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("Precio Unitario")).SetBackgroundColor(bgColour).SetBorder(Border.NO_BORDER).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
+                tablaArticulosVenta.AddCell(new Cell().Add(new Paragraph("SubTotal")).SetBackgroundColor(bgColour).SetBorder(Border.NO_BORDER).SetPadding(2).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
 
                 var itt = Productos;
                 int indice = 1;
@@ -85,13 +98,11 @@ namespace AppDistribuidor.Facturacion
                 }
 
 
-                //TOTAL
-                Paragraph total = new Paragraph("TOTAL EN BOLIVIANOS: " + eMovimientoCompleja.PrecioTotal.ToString("0.00")).SetFontSize(11).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
+                //Total de la venta en valor numerico y texto
                 string totalNumeroALetras = NumeroALetras(eMovimientoCompleja.PrecioTotal);
-                Paragraph totalEnLetras = new Paragraph("Son: " + totalNumeroALetras).SetFontSize(11);
-
-
-                //PIE
+                Paragraph total = new Paragraph("TOTAL EN BOLIVIANOS: " + eMovimientoCompleja.PrecioTotal.ToString("0.00") + "\n\nSon: " + totalNumeroALetras).SetBackgroundColor(bgColour).SetFontSize(11).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT);
+                
+                //Pie del PDF (codigo de control y otros textos)
                 string dataQR = "395410026|" + eMovimientoCompleja.NroMovimiento + "|" + eDosificacionCompleja.NroAutorizacion + "|" + eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy") + "|" + eMovimientoCompleja.PrecioTotal.ToString("0.00") + "|" + eMovimientoCompleja.PrecioTotal.ToString("0.00") + "|" + eMovimientoCompleja.CodigoControl + "|" + eMovimientoCompleja.NitCi + "|0|0|0|0";
                 byte[] qr = generaQR(dataQR);
                 ImageData imageDataQR = ImageDataFactory.Create(qr);
@@ -102,14 +113,14 @@ namespace AppDistribuidor.Facturacion
                 tablaPie.AddCell(new Cell().Add(new Paragraph("\"ESTA FACTURA CONTRIBUYE AL DESARROLLO DEL PAÍS, EL USO ÍLICITO DE ÉSTA SERÁ SANCIONADO DE ACUERDO A LA LEY\"\n" +
                                                               "Ley N° 453: Tienes derecho a un trato equitativo sin discriminación en la oferta de servicios").SetFontSize(11).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)));
 
+                //Contruccion del PDF
                 document.Add(tablaCabecera);
-                document.Add(saltoLinea);
+                document.Add(tituloFactura);
                 document.Add(tablaCliente);
                 document.Add(saltoLinea);
                 document.Add(tablaArticulosVenta);
                 document.Add(saltoLinea);
                 document.Add(total);
-                document.Add(totalEnLetras);
                 document.Add(saltoLinea);
                 document.Add(codigoControl);
                 document.Add(tablaPie);
@@ -120,8 +131,14 @@ namespace AppDistribuidor.Facturacion
             }
         }
 
+        /// <summary>
+        /// Metodo que genera el QR recibiendo la data a convertir
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Retorna el QR en arreglo de bytes</returns>
         public byte[] generaQR(string data)
         {
+            //Instancia de los objetos a utilizar para crear el QR
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
             PngByteQRCode qRCode = new PngByteQRCode(qrCodeData);
@@ -129,6 +146,11 @@ namespace AppDistribuidor.Facturacion
             return qrCodeBytes;
         }
 
+        /// <summary>
+        /// Metodo que retorna un valor numerico en formato de texto
+        /// </summary>
+        /// <param name="numberAsString"></param>
+        /// <returns>Retorna la cadena de texto del valor numerico</returns>
         public string NumeroALetras(decimal numberAsString)
         {
             var entero = Convert.ToInt64(Math.Truncate(numberAsString));
@@ -138,6 +160,11 @@ namespace AppDistribuidor.Facturacion
             return res;
         }
 
+        /// <summary>
+        /// Metodo que evalua el numero que recibe para convertirlo a texto
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Retorna el valor numerico en formato textual</returns>
         private string NumeroALetras(double value)
         {
             string num2Text;

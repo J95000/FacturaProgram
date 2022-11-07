@@ -37,7 +37,7 @@ namespace AppDistribuidor.Droid
                     dialog.SetMessage("Se Anuló la Factura");
                     dialog.SetPositiveButton("Aceptar", (sender, e) =>
                     {
-
+                        
                     });
                     dialog.Show();
                 }

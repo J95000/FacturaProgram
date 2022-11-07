@@ -58,7 +58,7 @@ namespace AppDistribuidor.Facturacion
                 Paragraph datosFactura = new Paragraph("NIT: 395410026\nNo FACTURA: " + eMovimientoCompleja.NroMovimiento.ToString() + "\nNo AUTORIZACIÓN: " + eDosificacionCompleja.NroAutorizacion).SetFontSize(9);
                 Paragraph tituloFactura = new Paragraph("FACTURA\n(Con Derecho a Crédito Fiscal)").SetFont(fontTitulo).SetFontSize(13).SetTextAlignment(TextAlignment.CENTER);
                 Paragraph datosCliente = new Paragraph(" NOMBRE / RAZÓN SOCIAL: " + eMovimientoCompleja.RazonSocial + "\n NIT/CI: " + eMovimientoCompleja.NitCi + "\nFECHA EMISIÓN: "+ eMovimientoCompleja.FechaRegistro.ToString("dd/MM/yyyy")).SetFontSize(10);
-                Paragraph codigoControl = new Paragraph("CÓDIGO DE CONTROL: " + eMovimientoCompleja.CodigoControl).SetFontSize(10);
+                Paragraph codigoControl = new Paragraph("CÓDIGO DE CONTROL: " + eMovimientoCompleja.CodigoControl + "\nFECHA LÍMITE EMISIÓN: " + eDosificacionCompleja.FechaLimite.ToString("dd/MM/yyyy")).SetFontSize(10);
 
                 //Instancia de salto de linea
                 Paragraph saltoLinea = new Paragraph(new Text("\n"));

@@ -510,7 +510,7 @@ namespace AppDistribuidor.Views
                                                         byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
                                                         string correo = clienteCompleja.CorreoElectronico;
                                                         await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
-                                                        envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", "axel20ayalam@gmail.com", pdf);
+                                                        envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
 
                                                     }
                                                 }

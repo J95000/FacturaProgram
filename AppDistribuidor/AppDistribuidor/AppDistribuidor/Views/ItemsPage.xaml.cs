@@ -1,20 +1,17 @@
-﻿using AppDistribuidor.Models;
+﻿using AppDistribuidor.Facturacion;
+using AppDistribuidor.Models;
 using AppDistribuidor.ViewModels;
+using Newtonsoft.Json;
 using Plugin.Connectivity;
-using AppDistribuidor.Views;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using System.Collections.ObjectModel;
-using AppDistribuidor.Facturacion;
 
 
 namespace AppDistribuidor.Views
@@ -41,7 +38,7 @@ namespace AppDistribuidor.Views
         {
             base.OnAppearing();
             _viewModel.OnAppearing();
-           // byte valor = VariablesGlobales.TipoRegistroCliente;
+            // byte valor = VariablesGlobales.TipoRegistroCliente;
             LlenarClienteRegistrado();
             clienteCompleja = new ECliente();
         }
@@ -50,10 +47,10 @@ namespace AppDistribuidor.Views
         {
             if (VariablesGlobales.TipoRegistroCliente == 1)
             {
-                busca.Text= VariablesGlobales.NombreClienteRegistrado;
+                busca.Text = VariablesGlobales.NombreClienteRegistrado;
             }
         }
-  
+
         public static async Task<ECliente> Obtener_Cliente_Buscador_NombreCompleto(string nombre)
         {
             var client = new HttpClient();
@@ -66,7 +63,7 @@ namespace AppDistribuidor.Views
             return eUsuarioCompleja;
 
         }
-        public  List<EClienteCorta> Obtener_Cliente()
+        public List<EClienteCorta> Obtener_Cliente()
         {
             var client = new HttpClient();
             var responseString = client.GetStringAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_Cliente");
@@ -126,9 +123,9 @@ namespace AppDistribuidor.Views
             List<EClienteBuscador> listClientes = new List<EClienteBuscador>();
             var client = new HttpClient();
             HttpResponseMessage responseString = await client.GetAsync("http://www.aquacorpmovil.somee.com/SWNegocioMovil.svc/Obtener_Cliente_Buscador" + "/" + nombre);
-            
+
             DoIndependentWork();
-          
+
 
             if (responseString.IsSuccessStatusCode)
             {
@@ -146,7 +143,7 @@ namespace AppDistribuidor.Views
             //string resp = Convert.ToString(responseString);
             //var obj = JsonConvert.DeserializeObject<object>(resp);
             //string data = Convert.ToString(obj);
-           
+
             //listClientes = JsonConvert.DeserializeObject<List<EClienteBuscador>>(data);
             //return listClientes;
 
@@ -195,7 +192,7 @@ namespace AppDistribuidor.Views
                     {
                         NombreCompleto = item.Nombrecompleto
                     };
-                    eClienteNombres.Add(eClienteNombres1); 
+                    eClienteNombres.Add(eClienteNombres1);
                 }
                 searchResults.IsVisible = true;
                 searchResults.BeginRefresh();
@@ -240,24 +237,24 @@ namespace AppDistribuidor.Views
 
         private void searchResults_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            if(CheckConexion())
+            if (CheckConexion())
             {
 
 
-         
-            EClienteNombres listsd = e.Item as EClienteNombres;
-            _viewModel.NombreCliente = listsd.NombreCompleto;
-                NombreCliente= listsd.NombreCompleto;
+
+                EClienteNombres listsd = e.Item as EClienteNombres;
+                _viewModel.NombreCliente = listsd.NombreCompleto;
+                NombreCliente = listsd.NombreCompleto;
                 //busca.Text = listsd.NombreCompleto;
                 searchResults.IsVisible = false;
-            //SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
-            //SWNegocio.EClienteCompleja clienteCompleja = cliente.Obtener_Cliente_Buscador_NombreCompleto(listsd);
+                //SWNegocio.SWNegocioAquacorpClient cliente = new SWNegocio.SWNegocioAquacorpClient(SWNegocio.SWNegocioAquacorpClient.EndpointConfiguration.BasicHttpBinding_ISWNegocioAquacorp);
+                //SWNegocio.EClienteCompleja clienteCompleja = cliente.Obtener_Cliente_Buscador_NombreCompleto(listsd);
 
-            ECliente clienteCompleja = Task.Run(() => Obtener_Cliente_Buscador_NombreCompleto(listsd.NombreCompleto)).GetAwaiter().GetResult();
-            idCliente = clienteCompleja.IdCliente;
-            
-            
-            ((ListView)sender).SelectedItem = null;
+                ECliente clienteCompleja = Task.Run(() => Obtener_Cliente_Buscador_NombreCompleto(listsd.NombreCompleto)).GetAwaiter().GetResult();
+                idCliente = clienteCompleja.IdCliente;
+
+
+                ((ListView)sender).SelectedItem = null;
 
             }
 
@@ -415,242 +412,252 @@ namespace AppDistribuidor.Views
                             clienteCompleja = Task.Run(() => Obtener_Cliente_Buscador_NombreCompleto(NombreCliente)).GetAwaiter().GetResult();
 
                             string factura = await DisplayActionSheet("Facturación", "Si", "No", "Se requiere factura?.");
-                           
+
                             Console.WriteLine("Action:::::::::::: " + factura);
 
                             if (factura == "Si")
                             {
-                               string razon = clienteCompleja.RazonSocial;
-                               string nit = clienteCompleja.NitCi;
+                                //Instancia de la clase EDosificacionCompleja
+                                EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
+                                //Llenando la instancia con los datos recibidos del metodo Obtener_Dosificacion_Habilitado
+                                eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
 
-                                string RazonNit = await DisplayActionSheet("Datos Para factura", "Si", "Modificar", "Razon Social : " + razon + " \n NitCi : " + nit);
-
-
-                                if (RazonNit == "Si")
+                                string razon = clienteCompleja.RazonSocial;
+                                string nit = clienteCompleja.NitCi;
+                                if (eDosificacionCompleja.IdDosificacion != 0 && eDosificacionCompleja.FechaLimite > DateTime.Now)
                                 {
-                                    //Instancia de la clase EDosificacionCompleja
-                                    EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
-                                    //Llenando la instancia con los datos recibidos del metodo Obtener_Dosificacion_Habilitado
-                                    eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
-                                    //Se incrementa el nroFinalFactura
-                                    eDosificacionCompleja.NroFinalFactura++;
+                                    string RazonNit = await DisplayActionSheet("Datos Para factura", "Si", "Modificar", "Razon Social : " + razon + " \n NitCi : " + nit);
 
-                                    EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
+
+                                    if (RazonNit == "Si")
                                     {
-                                        FotoUbicacion = clienteCompleja.FotoUbicacion,
-                                        RazonSocial = razon,
-                                        NitCi = nit,
-                                        IdCliente = clienteCompleja.IdCliente
-                                    };
+                                        //Se incrementa el nroFinalFactura
+                                        eDosificacionCompleja.NroFinalFactura++;
 
-                                    bool actualizaCli = await InsertarActualizarCliente(clienteCorta);
-
-
-                                    if (actualizaCli)
-                                    {
-                                        //SE REGISTRA CON LOS DATOS ACTUALES
-                                        EMovimiento eMovimientoCompleja = new EMovimiento()
+                                        EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
                                         {
-
-                                            Codigo = "",
-                                            Cont = 1,
-                                            Estado = "HA",
-                                            FechaModificacion = DateTime.Now,
-                                            FechaRegistro = DateTime.Now,
-                                            IdCliente = idCliente,
-                                            IdMovimiento = 1,
-                                            IdUsuario = VariablesGlobales.IdUsuario,
-                                            NombreCliente = "",
-                                            NombreUsuario = "",
-                                            TipoMovimiento = "VENTA",
-                                            PrecioTotal = VariablesGlobales.Total,
-                                            IdDosificacion = eDosificacionCompleja.IdDosificacion,
-                                            NroMovimiento = eDosificacionCompleja.NroFinalFactura,
-                                            CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
+                                            FotoUbicacion = clienteCompleja.FotoUbicacion,
                                             RazonSocial = razon,
-                                            NitCi = nit
+                                            NitCi = nit,
+                                            IdCliente = clienteCompleja.IdCliente
                                         };
-                                        
-                                        bool res = await Insertar_Movimiento_ConFactura(eMovimientoCompleja);
 
-                                        if (res)
+                                        bool actualizaCli = await InsertarActualizarCliente(clienteCorta);
+
+
+                                        if (actualizaCli)
                                         {
-                                            int idMovi = await Obtener_Ultimo_IdMovimiento();
-
-                                            var indice = 1;
-                                            var itt = _viewModel.Productos;
-                                            foreach (var item in itt)
+                                            //SE REGISTRA CON LOS DATOS ACTUALES
+                                            EMovimiento eMovimientoCompleja = new EMovimiento()
                                             {
-                                                EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
+
+                                                Codigo = "",
+                                                Cont = 1,
+                                                Estado = "HA",
+                                                FechaModificacion = DateTime.Now,
+                                                FechaRegistro = DateTime.Now,
+                                                IdCliente = idCliente,
+                                                IdMovimiento = 1,
+                                                IdUsuario = VariablesGlobales.IdUsuario,
+                                                NombreCliente = "",
+                                                NombreUsuario = "",
+                                                TipoMovimiento = "VENTA",
+                                                PrecioTotal = VariablesGlobales.Total,
+                                                IdDosificacion = eDosificacionCompleja.IdDosificacion,
+                                                NroMovimiento = eDosificacionCompleja.NroFinalFactura,
+                                                CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
+                                                RazonSocial = razon,
+                                                NitCi = nit
+                                            };
+
+                                            bool res = await Insertar_Movimiento_ConFactura(eMovimientoCompleja);
+
+                                            if (res)
+                                            {
+                                                int idMovi = await Obtener_Ultimo_IdMovimiento();
+
+                                                var indice = 1;
+                                                var itt = _viewModel.Productos;
+                                                foreach (var item in itt)
                                                 {
-
-                                                    Cantidad = item.Cantidad,
-                                                    Cont = 1,
-                                                    Estado = "HA",
-                                                    IdDetalleMovimiento = 1,
-                                                    IdMovimiento = idMovi,
-                                                    IdProducto = item.IdProducto,
-                                                    PrecioUnitario = item.Precio,
-                                                    FechaModificacion = DateTime.Now,
-                                                    FechaRegistro = DateTime.Now,
-                                                    SubTotal = (item.Cantidad * item.Precio)
-                                                };
-
-                                                bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
-
-
-                                                if (ress)
-                                                {
-                                                    if (itt.Count == indice)
+                                                    EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
                                                     {
-                                                        //Instancia de las clases para la generacion de la factura y el posterior envio del correo
-                                                        generarFactura = new GenerarFactura();
-                                                        envioCorreo = new EnvioCorreo();
-                                                        //Se genera la factura y se declara el correo del receptor
-                                                        byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
-                                                        string correo = clienteCompleja.CorreoElectronico;
-                                                        await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
-                                                        envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
 
+                                                        Cantidad = item.Cantidad,
+                                                        Cont = 1,
+                                                        Estado = "HA",
+                                                        IdDetalleMovimiento = 1,
+                                                        IdMovimiento = idMovi,
+                                                        IdProducto = item.IdProducto,
+                                                        PrecioUnitario = item.Precio,
+                                                        FechaModificacion = DateTime.Now,
+                                                        FechaRegistro = DateTime.Now,
+                                                        SubTotal = (item.Cantidad * item.Precio)
+                                                    };
+
+                                                    bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
+
+
+                                                    if (ress)
+                                                    {
+                                                        if (itt.Count == indice)
+                                                        {
+                                                            //Instancia de las clases para la generacion de la factura y el posterior envio del correo
+                                                            generarFactura = new GenerarFactura();
+                                                            envioCorreo = new EnvioCorreo();
+                                                            //Se genera la factura y se declara el correo del receptor
+                                                            byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
+                                                            string correo = clienteCompleja.CorreoElectronico;
+                                                            await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
+                                                            envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
+
+                                                        }
                                                     }
+                                                    else
+                                                    {
+                                                        await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
+                                                        // new Exception();
+                                                    }
+                                                    indice++;
+
                                                 }
-                                                else
-                                                {
-                                                    await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
-                                                    // new Exception();
-                                                }
-                                                indice++;
+
 
                                             }
-
-
+                                            else
+                                            {
+                                                await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
+                                            }
                                         }
                                         else
                                         {
-                                            await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
+                                            await DisplayAlert("Cliente", "Problema al actualizar datos de cliente.", "Ok");
                                         }
+
+
                                     }
                                     else
                                     {
-                                        await DisplayAlert("Cliente", "Problema al actualizar datos de cliente.", "Ok");
+                                        //Llenando la instancia con los datos recibidos del metodo Obtener_Dosificacion_Habilitado
+                                        eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
+                                        //Se incrementa el nroFinalFactura
+                                        eDosificacionCompleja.NroFinalFactura++;
+
+                                        string nuevoRazonSocial = await DisplayPromptAsync("Nueva Razon Social", "");
+                                        string nuevoNit = await DisplayPromptAsync("Nuevo Nit o Ci", "");
+
+
+
+                                        EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
+                                        {
+                                            FotoUbicacion = clienteCompleja.FotoUbicacion,
+                                            RazonSocial = nuevoRazonSocial,
+                                            NitCi = nuevoNit,
+                                            IdCliente = clienteCompleja.IdCliente
+
+                                        };
+
+                                        bool actualizaCli = await InsertarActualizarCliente(clienteCorta);
+
+
+                                        if (actualizaCli)
+                                        {
+                                            //SE REGISTRA CON LOS DATOS ACTUALES
+                                            EMovimiento eMovimientoCompleja = new EMovimiento()
+                                            {
+
+                                                Codigo = "",
+                                                Cont = 1,
+                                                Estado = "HA",
+                                                FechaModificacion = DateTime.Now,
+                                                FechaRegistro = DateTime.Now,
+                                                IdCliente = idCliente,
+                                                IdMovimiento = 1,
+                                                IdUsuario = VariablesGlobales.IdUsuario,
+                                                NombreCliente = "",
+                                                NombreUsuario = "",
+                                                TipoMovimiento = "VENTA",
+                                                PrecioTotal = VariablesGlobales.Total,
+                                                IdDosificacion = eDosificacionCompleja.IdDosificacion,
+                                                NroMovimiento = eDosificacionCompleja.NroFinalFactura,
+                                                CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
+                                                RazonSocial = nuevoRazonSocial,
+                                                NitCi = nuevoNit
+                                            };
+
+                                            bool res = await Insertar_Movimiento_ConFactura(eMovimientoCompleja);
+
+                                            if (res)
+                                            {
+                                                int idMovi = await Obtener_Ultimo_IdMovimiento();
+
+                                                var indice = 1;
+                                                var itt = _viewModel.Productos;
+                                                foreach (var item in itt)
+                                                {
+                                                    EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
+                                                    {
+
+                                                        Cantidad = item.Cantidad,
+                                                        Cont = 1,
+                                                        Estado = "HA",
+                                                        IdDetalleMovimiento = 1,
+                                                        IdMovimiento = idMovi,
+                                                        IdProducto = item.IdProducto,
+                                                        PrecioUnitario = item.Precio,
+                                                        FechaModificacion = DateTime.Now,
+                                                        FechaRegistro = DateTime.Now,
+                                                        SubTotal = (item.Cantidad * item.Precio)
+                                                    };
+
+                                                    bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
+
+
+                                                    if (ress)
+                                                    {
+                                                        if (itt.Count == indice)
+                                                        {
+                                                            //Instancia de la clase EDosificacionCompleja
+                                                            generarFactura = new GenerarFactura();
+                                                            envioCorreo = new EnvioCorreo();
+                                                            //Se genera la factura y se declara el correo del receptor
+                                                            byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
+                                                            string correo = clienteCompleja.CorreoElectronico;
+                                                            await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
+                                                            envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
+
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
+                                                        // new Exception();
+                                                    }
+                                                    indice++;
+
+                                                }
+
+
+                                            }
+                                            else
+                                            {
+                                                await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            await DisplayAlert("Cliente", "Problema al actualizar datos de cliente.", "Ok");
+                                        }
+
+
                                     }
+
+
                                 }
+                                //si no hay dosificacion
                                 else
                                 {
-                                    //Instancia de la clase EDosificacionCompleja
-                                    EDosificacionCompleja eDosificacionCompleja = new EDosificacionCompleja();
-                                    //Llenando la instancia con los datos recibidos del metodo Obtener_Dosificacion_Habilitado
-                                    eDosificacionCompleja = Task.Run(() => Obtener_Dosificacion_Habilitado()).GetAwaiter().GetResult();
-                                    //Se incrementa el nroFinalFactura
-                                    eDosificacionCompleja.NroFinalFactura++;
-
-                                    string nuevoRazonSocial = await DisplayPromptAsync("Nueva Razon Social", "");
-                                    string nuevoNit = await DisplayPromptAsync("Nuevo Nit o Ci", "");
-
-
-
-                                    EClienteActualizarCorta clienteCorta = new EClienteActualizarCorta()
-                                    {
-                                        FotoUbicacion = clienteCompleja.FotoUbicacion,
-                                        RazonSocial = nuevoRazonSocial,
-                                        NitCi = nuevoNit,
-                                        IdCliente = clienteCompleja.IdCliente
-
-                                    };
-
-                                    bool actualizaCli = await InsertarActualizarCliente(clienteCorta);
-
-
-                                    if (actualizaCli)
-                                    {
-                                        //SE REGISTRA CON LOS DATOS ACTUALES
-                                        EMovimiento eMovimientoCompleja = new EMovimiento()
-                                        {
-
-                                            Codigo = "",
-                                            Cont = 1,
-                                            Estado = "HA",
-                                            FechaModificacion = DateTime.Now,
-                                            FechaRegistro = DateTime.Now,
-                                            IdCliente = idCliente,
-                                            IdMovimiento = 1,
-                                            IdUsuario = VariablesGlobales.IdUsuario,
-                                            NombreCliente = "",
-                                            NombreUsuario = "",
-                                            TipoMovimiento = "VENTA",
-                                            PrecioTotal = VariablesGlobales.Total,
-                                            IdDosificacion = eDosificacionCompleja.IdDosificacion,
-                                            NroMovimiento = eDosificacionCompleja.NroFinalFactura,
-                                            CodigoControl = CodigoControl.generateControlCode(eDosificacionCompleja.NroAutorizacion, eDosificacionCompleja.NroFinalFactura.ToString(), "8934674", DateTime.Now.ToString("yyyyMMdd"), VariablesGlobales.Total.ToString("0.00"), eDosificacionCompleja.LlaveDosificacion),
-                                            RazonSocial = nuevoRazonSocial,
-                                            NitCi = nuevoNit
-                                        };
-
-                                        bool res = await Insertar_Movimiento_ConFactura(eMovimientoCompleja);
-
-                                        if (res)
-                                        {
-                                            int idMovi = await Obtener_Ultimo_IdMovimiento();
-
-                                            var indice = 1;
-                                            var itt = _viewModel.Productos;
-                                            foreach (var item in itt)
-                                            {
-                                                EDetalleMovimiento eDetalleMovimientoCompleja = new EDetalleMovimiento()
-                                                {
-
-                                                    Cantidad = item.Cantidad,
-                                                    Cont = 1,
-                                                    Estado = "HA",
-                                                    IdDetalleMovimiento = 1,
-                                                    IdMovimiento = idMovi,
-                                                    IdProducto = item.IdProducto,
-                                                    PrecioUnitario = item.Precio,
-                                                    FechaModificacion = DateTime.Now,
-                                                    FechaRegistro = DateTime.Now,
-                                                    SubTotal = (item.Cantidad * item.Precio)
-                                                };
-
-                                                bool ress = await InsertarDetalleMovimiento(eDetalleMovimientoCompleja);
-
-
-                                                if (ress)
-                                                {
-                                                    if (itt.Count == indice)
-                                                    {
-                                                        //Instancia de la clase EDosificacionCompleja
-                                                        generarFactura = new GenerarFactura();
-                                                        envioCorreo = new EnvioCorreo();
-                                                        //Se genera la factura y se declara el correo del receptor
-                                                        byte[] pdf = generarFactura.GenerarPdf(itt, eMovimientoCompleja, eDetalleMovimientoCompleja, eDosificacionCompleja);
-                                                        string correo = clienteCompleja.CorreoElectronico;
-                                                        await DisplayAlert("Venta", "Venta Registrada con exito.", "Ok");
-                                                        envioCorreo.EnviarCorreo("AquacorpSanAntonioSRL@gmail.com", correo, pdf);
-
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
-                                                    // new Exception();
-                                                }
-                                                indice++;
-
-                                            }
-
-
-                                        }
-                                        else
-                                        {
-                                            await DisplayAlert("Venta", "Problema al registrar venta.", "Ok");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        await DisplayAlert("Cliente", "Problema al actualizar datos de cliente.", "Ok");
-                                    }
-
-
+                                    await DisplayAlert("Venta No Realizada", "No Existe Una Dosificación Vigente", "Ok");
                                 }
 
                             }
@@ -746,18 +753,18 @@ namespace AppDistribuidor.Views
                     else
                     {
                         //PARA HACER MODEL CON MENU
-                       string action = await DisplayActionSheet("Cliente", "Seleccionar", "Registrar Nuevo", "Se requiere un cliente.");
-                       
-                         Console.WriteLine("Action:::::::::::: " + action);
+                        string action = await DisplayActionSheet("Cliente", "Seleccionar", "Registrar Nuevo", "Se requiere un cliente.");
+
+                        Console.WriteLine("Action:::::::::::: " + action);
                         if (action == "Registrar Nuevo")
                         {
                             VariablesGlobales.TipoRegistroCliente = 1;
                             await Navigation.PushAsync(new AboutPage());
-                           
+
                         }
                     }
                 }
-            
+
             }
             catch (Exception ex)
             {
@@ -767,7 +774,7 @@ namespace AppDistribuidor.Views
         }
 
 
-       
+
 
     }
 

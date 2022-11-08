@@ -21,7 +21,6 @@ namespace AppDistribuidor.Facturacion
         public static String generateControlCode(String authorizationNumber, String invoiceNumber, String nitci,
                            String dateOfTransaction, String transactionAmount, String dosageKey)
         {
-
             //redondea monto de transaccion 
             transactionAmount = roundUp(transactionAmount);
             /* ========== PASO 1 ============= */

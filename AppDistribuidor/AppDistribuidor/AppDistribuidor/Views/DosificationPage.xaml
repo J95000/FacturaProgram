@@ -64,7 +64,8 @@
                             
                         </StackLayout>
                     </Frame>
-                    <Label HorizontalOptions="Center" Text="* Recuerda renovar la dosificación cada 90 dias" FontSize="Micro" TextColor="#ffffff"/>
+                    <Label x:Name="mensajeAlertaError" HorizontalOptions="Center" Text="" TextColor="#ffffff"/>
+                    <Label HorizontalOptions="Center" Text="* Recuerda renovar la dosificación cada 90 días" FontSize="Micro" TextColor="#ffffff"/>
                 </StackLayout>
             </ScrollView>
         </Grid>
